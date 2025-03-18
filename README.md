@@ -1,7 +1,13 @@
 # SF-Boxfresh-app
 A mini app built in my Salesforce dev Org for my old small gardening business.
 
-## [Changelog here](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/docs/Changelog.md)
+#Navigation:
+## [Changelog](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/docs/Changelog.md)
+## Docs
+## --- Schema ERP Diagrams
+## --- Flow Diagrams
+## --- Reports & Dashboards
+## --- Additional Documentation
 
 ## 🌿BoxFresh Gardens
 Automated Service Scheduling, Inventory & Resource Management, and Customer Communication
