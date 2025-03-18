@@ -3,15 +3,15 @@ A mini app built in my Salesforce dev Org for my old small gardening business.
 
 ## [Changelog here](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/docs/Changelog.md)
 
-## 🌿BoxFresh Gardens
+## [🌿BoxFresh Gardens]
 Automated Service Scheduling, Inventory & Resource Management, and Customer Communication
 A showcase of ADM201 Salesforce Administration skills: Service Cloud, Flow Automation, Data Management & Security.
 
-## 🏵️ Overview
+## [🏵️ Overview]
 This project is a Salesforce native prototype for a app designed to demonstrate the skills gained ADM certification and independent problem solving ability.
 It simulates a end-to-end service planning system. Optimizing workflow using elegant Schema design, Flow automation, Reports & Dashbords, following best practices.
 
-### Why? let's recap what happened on the previous episode of 'Ruben is a stubborn goat..." Or if you want [Skip the cutscene](## 🔶 Scenario)
+### Why? let's recap what happened on the previous episode of 'Ruben is a stubborn goat..." Or if you want [Skip the cutscene](🔶 Scenario)
 I had a dream: Working outdoors, basking in the sun amongst nature, grafting away to my heart's content. 
 Being based in the centre of London should've been a clear indicator that this would be an uphill battle (fun fact: London is considered a forest from the amount of trees in it).
 I was given, breathing room, a chance to try it out with some savings after COVID, so I did.
@@ -41,7 +41,7 @@ In my curiosity I read Atul Gawande's [Checklist Manifesto](https://atulgawande.
 If I start listing all the books I ravaged in my naive years I will lose the plot. The point is I had been somehow aiming unconsciously towards a discipline centered in the concept of systems and organisation. Something I was actually horrible at. At the people around me also sucked miserably at it - I witness the moments of frustration from mediocre systems, causing these people to vent blindly at other people rather than opening their eyes, admiting that things should work better, and get working at making things work better.
 
 
-## 🔶 Scenario
+## [🔶 Scenario]
 A small service-based business (Boxfresh Gardens) needs a Salesforce-powered service management system that automates inventory & resource management, job assignment, and reporting. This prototype solves that problem using a declarative based Salesforce customization, ensuring a scalable, effective CRM solution.
 
 ## Features & Capabilities
