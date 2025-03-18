@@ -12,7 +12,7 @@ This project is a Salesforce native prototype for a app designed to demonstrate 
 It simulates a end-to-end service planning system. Optimizing workflow using elegant Schema design, Flow automation, Reports & Dashbords, following best practices.
 
 ### Why? let's recap what happened on the previous episode of 'Ruben is a stubborn goat..."
-I had a dream: Working outdoors, basking in the sun amongst nature, grafting away to my heart's content, was suddenly curbed. 
+I had a dream: Working outdoors, basking in the sun amongst nature, grafting away to my heart's content. 
 Being based in the centre of London should've been a clear indicator that this would be an uphill battle (fun fact: London is considered a forest from the amount of trees in it).
 I was given, breathing room, a chance to try it out with some savings after COVID, so I did.
 
