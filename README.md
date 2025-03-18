@@ -41,7 +41,7 @@ In my curiosity I read Atul Gawande's [Checklist Manifesto](https://atulgawande.
 If I start listing all the books I ravaged in my naive years I will lose the plot. The point is I had been somehow aiming unconsciously towards a discipline centered in the concept of systems and organisation. Something I was actually horrible at. At the people around me also sucked miserably at it - I witness the moments of frustration from mediocre systems, causing these people to vent blindly at other people rather than opening their eyes, admiting that things should work better, and get working at making things work better.
 
 
-## [#🔶 Scenario]
+## [🔶 Scenario]
 A small service-based business (Boxfresh Gardens) needs a Salesforce-powered service management system that automates inventory & resource management, job assignment, and reporting. This prototype solves that problem using a declarative based Salesforce customization, ensuring a scalable, effective CRM solution.
 
 ## Features & Capabilities
