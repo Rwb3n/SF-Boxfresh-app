@@ -12,15 +12,15 @@ This project is a Salesforce native prototype for a app designed to demonstrate 
 It simulates a end-to-end service planning system. Optimizing workflow using elegant Schema design, Flow automation, Reports & Dashbords, following best practices.
 
 ### Why? let's recap what happened on the previous episode of:
-### 'Ruben is a stubborn goat..." Or if you want [Skip the Cutscene](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/README.md#-scenario)
+### 'Ruben is a stubborn goat..." Or if you're impatient [Skip the Cutscene](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/README.md#-scenario)
 
-I had a dream: Working outdoors, basking in the sun amongst nature, grafting away to my heart's content. 
+I had a dream: **Working outdoors, basking in the sun amongst nature, grafting away to my heart's content.**
 Being based in the centre of London should've been a clear indicator that this would be an uphill battle (fun fact: London is considered a forest from the amount of trees in it).
-I was given, breathing room, a chance to try it out with some savings after COVID, so I did.
+I was given breathing room, a chance to try it out with some savings after COVID. So I did.
 
 I started freelance gardening private properties, middle-upper class families where one partner would be out getting the bacon, while the other took care of HQ. 
 In these classic units, the stay at home member of the team is tested with their own challenges. 
-They are usually the chief executive, manager, supervisor, and hands-on operative of the busyness. 
+They are usually the chief executive, manager, supervisor, and hands-on operative in the business of running a household. 
 At some point they realise that outsourcing the more technical, and physically demanding, activities to sub-contractors is a essential energy-saving tactic.
 
 ### *Enter Ruben. Gardening cowboy, stinging nettles' worst nightmare, the secateur wielding spectre of topiary.*
@@ -31,18 +31,30 @@ While I was hacking away at hedges, inneficiencies were slicing through my margi
 
 **Then came the turning point.**
 
-The visionary in me wasn't happy with the grind forever, I was driven by ambitions of big contracts, gated residencies, commercial spaces, business parks! 
-The itch for bigger fried fish wasn't being tickled. So I looked in the mirror, and accepted my limitations. Or so I thought. Little did I know I was about to a financial and emotional disaster (again!).
+The visionary in me wasn't happy with the forever grind. I was driven by ambitions of Big Contracts. Gated Residentials. Commercial Spaces. Business Parks! 
+The itch for bigger fried fish wasn't being tickled. 
+
+So I looked in the mirror, and accepted my limitations. Or so I thought. "You're not as sharp as you think, young padawan. Keep seeking help."
+
+Little did I know I was about to a financial and emotional disaster (again!).
 
 **This is what happened...**
 
-Systems were needed, the systems being used had to be developed. Years of self-directed studying were finally being tested. Rewind a few years, I stumbled across [Process Street](https://www.process.st/). 
+Systems were needed, the systems being used had to be developed. Years of self-directed studying were finally being tested. 
+
+### Rewind a few years back...
+
+I stumbled across [Process Street](https://www.process.st/). 
 In my curiosity I read Atul Gawande's [Checklist Manifesto](https://atulgawande.com/book/the-checklist-manifesto/). Aircraft pilots and brain surgeons use checklists, no matter the complexity, the humble checklist was a powerful tool.
 - [37 Signal's Rework](https://basecamp.com/books#rework) explained the need to "KEEP IT SIMPLE..."(stupid)...
 
 Listing all the books I thought would give me an edge would be a distraction. My point is the skills I should've focused on were always being suggested in the places I looked. These were systems, automation, organisation, etc.. thing I'm terrible at these things!
 
-What really affected me was watching my bosses, the individuals I appointed as my mentors. Because of the broken systems they built and were blind to, were constantly driven to frustration at themselves and others around them! Instead of sitting down and looking for the root cause, they would vent their anger and the nearest target, and refuse to admit that things could work better. But I always. ALWAYS. knew they could.
+What really affected me was watching my bosses, the individuals I appointed as my mentors. Because of the broken systems they built and were blind to, were constantly driven to frustration at themselves and others around them! Instead of sitting down and looking for the root cause, they would vent their anger and the nearest target, and refuse to admit that things could work better. But I always. **ALWAYS**. knew they could.
+
+So in that present moment, I reached for what I was familiar with. In the hustle between restaurant, door to door sales gigs I had always strived to improve my community. I worked under charities, tenant managed associations, NHS researchers, local gyms, cafes. Everywhere and Anywhere. During those periods of hustle I would use 'Airtable' because Excel was too lame. I was like a magpie - attracted to the shiniest entry on **Product Hunt**.
+
+With Airtable and Zapier I set up a basic automation system to keep track my hours and expenses back in the day. So i brought that forward to
 
 
 ## 🔶 [Scenario]
