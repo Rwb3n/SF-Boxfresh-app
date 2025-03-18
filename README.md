@@ -11,6 +11,25 @@ A showcase of ADM201 Salesforce Administration skills: Service Cloud, Flow Autom
 This project is a Salesforce native prototype for a app designed to demonstrate the skills gained ADM certification and independent problem solving ability.
 It simulates a end-to-end service planning system. Optimizing workflow using elegant Schema design, Flow automation, Reports & Dashbords, following best practices.
 
+### Why? let's recap what happened on the previous episode of 'Ruben is a stubborn goat..."
+I had a dream: Working outdoors, basking in the sun amongst nature, grafting away to my heart's content, was suddenly curbed. 
+Being based in the centre of London should've been a clear indicator that this would be an uphill battle (fun fact: London is considered a forest from the amount of trees in it).
+I was given, breathing room, a chance to try it out with some savings after COVID, so I did.
+
+I started freelance gardening private properties, middle-upper class families where on partner would be out getting the bacon, while the other took care of the HQ. 
+In these classic units of society, the stay at home member of the team is tested with their own challenges. 
+They are usually the chief executive, manager, supervisor, and hands-on operative of the busyness. 
+At some point they realise that outsourcing the more technical, and physically demanding, activities to sub-contractors is a essential energy-saving tactic.
+
+Enter Ruben, gardening cowboy, stinging nettle's worst nightmare, the secateur wielding spectre of topiary.
+
+But while I was hacking away at hedges, inneficiencies were slicing through my margins!
+Then came the turning point. The visionary in me wasn't happy with the grind forever, I was driven by ambitions of big contracts, gated residencies, commercial spaces, business parks! 
+The itch for bigger fried fish wasn't being tickled. So I looked in the mirror, and accepted my limitations. Or so I thought. Little did I know I was about to a financial and emotional disaster (again!).
+
+This is what happened...
+
+
 ## 🔶 Scenario
 A small service-based business (Boxfresh Gardens) needs a Salesforce-powered service management system that automates inventory & resource management, job assignment, and reporting. This prototype solves that problem using a declarative based Salesforce customization, ensuring a scalable, effective CRM solution.
 
