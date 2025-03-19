@@ -25,7 +25,7 @@
 # 4. Operational Patterns
 ## Team Composition
 - Clear hierarchical breakdown and role-specific frameworks for Value Delivery
-## Resource Stewardship
+## Resource Management
 - Risk Management
 - Resource Allocation
 - Dispatch model, quality inspection, issue escalation, and approval processes.
