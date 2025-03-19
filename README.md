@@ -6,6 +6,9 @@ A mini app built in my Salesforce dev Org for my old small gardening business.
 
 Documentation:
 ```
+--- The Beginning # The clueless phase, first struggles and first attempts
+|----- How I started
+|----- ( More TBA) 
 --- Diagrams
 |----- ERD_Diagrams
 |----- Flow_diagrams
@@ -47,7 +50,7 @@ If I want to stand out, I need something real—something that proves I can buil
 So I’ll do this: I’ll go back. Back to BoxFresh Gardens, my old business, where I lost the game because I lacked systems. And I’ll rebuild it—not in the real world, but in Salesforce. 
 Everything I was missing, every blind spot, every inefficiency that choked my margins—I’ll fix it.
 
-If I had this back then, would I have survived? Maybe. But that’s not the point. The point is, I’ll prove I can do what actually matters in this space: Build. Solve. Execute.
+If I had this back then, would I have survived? Maybe. But that’s not the point. The point is, I’ll prove I can do what actually matters in this space: Design. Build. Solve. Execute.
 
 ---
 
