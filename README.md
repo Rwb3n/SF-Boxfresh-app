@@ -32,9 +32,10 @@ A showcase of ADM201 Salesforce Administration skills: Service Cloud, Flow Autom
 This project is a Salesforce-native prototype designed to showcase the skills gained from my ADM certification and my independent problem-solving ability. It optimizes workflow through elegant schema design, flow automation, and real-time reporting, following Salesforce best practices.
 
 ### Why
+
 I set out to build a life in the sun, hands in the earth, scaling from private gardens to high-end contracts. I recruited a team of workhorses who took me further than ever before, but my grip wasn’t strong enough. Systems failed, cracks widened, and I collapsed under the weight of my own ambition. This project is my autopsy, a reconstruction of what was missing—structured automation, resource control, and precision execution. My failures sharpened my insights, and now, this portfolio is proof of the value I bring to ambitious teams in the Salesforce space.
----
-This is how it began: 
+
+#### This is how it began: 
 ###"Alright. I finished ADM201. Now what?"
 
 I see people applying for Salesforce roles with stacked credentials—papers that don’t really reflect their ability, but they prove commitment. 
