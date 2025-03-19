@@ -1,5 +1,10 @@
 ## Latest Schema Overview
 Below is the latest schema. I've labeleld each batch of objects based on their collective function.
+
+---
+1. Inventory | 2. Contract Assignments | 3. Core Contract | 4. Resources
+---
+
   ### 1. Inventory
   #### - Material_SKU__c
   The catalogue of unique stock items, these include records like *"Large Compost Bag"*, *"Small Compost Bag"*, *"Mahonia 'Soft Caress'"*, etc...
