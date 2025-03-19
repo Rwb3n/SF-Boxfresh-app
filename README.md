@@ -58,9 +58,13 @@ Everything I was missing, every blind spot, every inefficiency that choked my ma
 
 If I had this back then, would I have survived? Maybe. But that’s not the point. The point is, I’ll prove I can do what actually matters in this space: Design. Build. Solve. Execute.
 
-### Rewind...
+### Let's rewind for a moment...
 
-I set out to build a life in the sun, hands in the earth, scaling from private gardens to high-end contracts. I recruited a team of workhorses who took me further than ever before, but my grip wasn’t strong enough. Systems failed, cracks widened, and I collapsed under the weight of my own ambition. This project is my autopsy, a reconstruction of what was missing—structured automation, resource control, and precision execution. My failures sharpened my insights, and now, this portfolio is proof of the value I bring to ambitious teams in the Salesforce space.
+I set out to build a life in the sun, hands in the earth, scaling from private gardens to high-end contracts. 
+I recruited a team of workhorses who took me further than ever before, but my grip wasn’t strong enough. Systems failed, cracks widened, and I collapsed under the weight of my own ambition. 
+
+This project is my autopsy, a reconstruction of what was missing—structured automation, resource control, and precision execution. 
+My failures sharpened my insights, and now, this portfolio is proof of the value I bring to ambitious teams in the Salesforce space.
 
 ---
 
