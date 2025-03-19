@@ -18,6 +18,9 @@ The problem was that there were gaps in bridging this document with the previous
   - i.e: must reduce x time per day/week. stakeholders must not have to do x admin activities anymore.
 - Include training considerations. address the risks adressed in the BRD.
 
+### Conclusion
+All things considered, this was the least explored phase of the process. and it shows later on....
+
 ---
 
 ## **System Design & Specification**
