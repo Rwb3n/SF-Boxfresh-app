@@ -41,12 +41,12 @@ A digital solution is essential to overcome these barriers and position the comp
 
 | **System Component**     | **Requirement**                 | **Description**                                                                  | **Priority** |
 | ------------------------ | ------------------------------- | -------------------------------------------------------------------------------- | ------------ |
-| **Job Management**       | - Auto-assign work orders       | System assigns jobs to teams based on availability.                              | High         |
-|                          | - Track job completion          | Real-time status updates and completion timestamps.                              | High         |
-| **Inventory Tracking**   | - Alert low stock               | Automatic notifications for low inventory levels.                                | High         |
-|                          | - Prevent duplicate orders      | Approval workflows to verify and authorize stock requests.                       | High         |
-| **Client Communication** | - Automated service reports     | Automated emails with before/after photos sent post-job.                         | Medium       |
-| **Expense Tracking**     | - Track and report jobs         | Capture job operating expenses and generate reports.                             | High         |
+| **Job Management**       | Auto-assign work orders       | System assigns jobs to teams based on availability.                              | High         |
+|                          | Track job completion          | Real-time status updates and completion timestamps.                              | High         |
+| **Inventory Tracking**   | Alert low stock               | Automatic notifications for low inventory levels.                                | High         |
+|                          | Prevent duplicate orders      | Approval workflows to verify and authorize stock requests.                       | High         |
+| **Client Communication** | Automated service reports     | Automated emails with before/after photos sent post-job.                         | Medium       |
+| **Expense Tracking**     | Track and report jobs         | Capture job operating expenses and generate reports.                             | High         |
 
 ## **4. Traceability Matrix**
 
