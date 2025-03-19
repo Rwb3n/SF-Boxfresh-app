@@ -7,7 +7,7 @@ A mini app built in my Salesforce dev Org for my old small gardening business.
 Documentation Navigation:
 ```
 --- The Beginning # The clueless phase, first struggles and first attempts
-|----- How I started
+|----- Start Here # How I started, by capturing a bunch of information, and structuring it
 |----- ( More TBA) 
 --- Diagrams
 |----- ERD_Diagrams
