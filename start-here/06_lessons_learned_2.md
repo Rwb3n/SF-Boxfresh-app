@@ -4,6 +4,20 @@ I decided to draft another formal document. Calling it the 'System and Design Sp
 The problem was that there were gaps in bridging this document with the previous Business Requirements Doc. I also went off tangent as the project progressed.
 **Lesson Learned**: Ensure the document makes sense - i.e enough to behonored as a map for developing the app.
 
+**What I'll do next time I'm drafting a SDS**
+- Have specific references to previous documents (BRD), which means that the documents must all have a structure that's globally aligned.... somehow...
+- I'll add a success metrics section where I reference the BRD's metrics to each technical implementation.
+  - i.e: automation of scheduling: from estimated 5 hours per week to under 2 hours.
+- Include risk mitigation strategies.
+  - for each technical implementation, ensure a risk mitigation subheader is included. referencing the risks from the BRD.
+  - i.e: if incorrect job scheduling, include supervisor override ability via......
+- MAP THE IMPLEMENTATION - try to list in order what's going to be built first.
+- Data migration! Consider that data will need to be migrated into this new system. address the state of current data and how it'll be migrated.
+- Include what you think each view for each stakeholder will look like.
+- Add test criteria, tie this in with the BRD.
+  - i.e: must reduce x time per day/week. stakeholders must not have to do x admin activities anymore.
+- Include training considerations. address the risks adressed in the BRD.
+
 ---
 
 ## **System Design & Specification**
