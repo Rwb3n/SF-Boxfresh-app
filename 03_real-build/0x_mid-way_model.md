@@ -2,7 +2,7 @@
 Below is the latest schema. I've labeleld each batch of objects based on their collective function.
 
 ---
-1. Inventory | 2. Contract Assignments | 3. Core Contract | 4. Resources
+1. Inventory | 2. Contract Assignments | 3. Core Contract | 4. Execution Objects | 5. Resources
 ---
 
   ### 1. Inventory
