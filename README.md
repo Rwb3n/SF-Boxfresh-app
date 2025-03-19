@@ -7,10 +7,13 @@ A mini app built in my Salesforce dev Org for my old small gardening business.
 Documentation Navigation:
 ```
 --- Start Here # The clueless phase, first struggles and first attempts
-|----- 01. information capture framework # This document to help me go through the initial data capture from interviews.
-|----- 02. initial information capture # Here is detailed as much information as I could to map the picture of the business.
-|----- 03. structured analysis # This document distills the information into a structure that is solution oriented.
-|----- 04. business requirement document # Finally, a formal document to reference.
+|----- You'll find my first initial information capture, my analysis and the business requirement document
+|----- A system design and specification skeleton document is also there.
+|----- This folder mostly covers my initial attempts at initing a technical project in salesforce
+--- Diving In # Where I started to see the gaps
+|----- This folder showcases my initial attemps at mapping out the custom objects
+|----- A lot of the objects evolved over time as I grappled with the Salesforce Schema
+|----- I would return to the drawing board more then once...
 --- Diagrams
 |----- ERD_Diagrams
 |----- Flow_diagrams
