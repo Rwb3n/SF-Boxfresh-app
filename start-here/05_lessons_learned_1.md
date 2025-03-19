@@ -13,7 +13,7 @@ Key points:
 My initial systems were imprecise.
 key points:
 - Spent a lot of time on the documentation before execution.
-- My perfectionism streak fell easily into procrastination territory.
+- My perfectionism streak fell easily into procrastination territory. Too many times I was duplicating effort.
 - Moving forward; focus on a minimum viable system, magnify on a specific function and build it entirely.
 - I **severely** underestimated system complexity, my information capture was not enough.
 - As soon as I began designing, followed by building the schema, I understood the importance of an important philosophy:
