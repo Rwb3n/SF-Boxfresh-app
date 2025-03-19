@@ -38,8 +38,7 @@ This project is a Salesforce-native prototype designed to showcase the skills ga
 **This is how it began:** 
 ### "Alright. I finished ADM201. Now what?"
 
-I see people applying for Salesforce roles with stacked credentials—papers that don’t really reflect their ability, but they prove commitment. 
-And I get it. If nothing else, those certs show tenacity. So how do I counter that? I need to prove the same thing—but in my own way.
+I see people applying for Salesforce roles with stacked credentials—papers. I get it. If nothing else, those certs show tenacity. So how do I counter that? I need to prove the same thing—but in my own way.
 
 A portfolio? Fine. But not just some vague automation flow. That won’t show initiative. That won’t show grit.
 If I want to stand out, I need something real—something that proves I can build, problem-solve, and execute.
