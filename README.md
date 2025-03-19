@@ -46,7 +46,7 @@ This project is a Salesforce-native prototype designed to showcase the skills ga
 
 ### Why
 **This is how it began:** 
-### "Alright. I finished ADM201. Now what?"
+### "Alright. I passed ADM201. Now what?"
 
 I see people applying for Salesforce roles with stacked credentials—papers. I get it. If nothing else, those certs show tenacity. So how do I counter that? I need to prove the same thing—but in my own way.
 
