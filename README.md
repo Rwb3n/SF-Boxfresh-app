@@ -7,18 +7,18 @@ A mini app built in my Salesforce dev Org for my old small gardening business.
 Documentation:
 ```
 --- Diagrams
------- ERD_Diagrams
------- Flow_diagrams
+|----- ERD_Diagrams
+|----- Flow_diagrams
 --- Reports
------- Job_Performance_Report
------- Inventory_Usage_Report
+|----- Job_Performance_Report
+|----- Inventory_Usage_Report
 --- Reference_Docs
------- Security_Model
------- Automation_Design
+|----- Security_Model
+|----- Automation_Design
 --- Config
------- Objects
------- Flows
------- Permission_Sets
+|----- Objects
+|----- Flows
+|----- Permission_Sets
 ```
 
 # Readme Sections:
