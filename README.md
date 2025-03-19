@@ -72,17 +72,17 @@ My failures sharpened my insights, and now, this portfolio is proof of the value
 A small service-based business (Boxfresh Gardens) needs a Salesforce-powered service management system that automates inventory & resource management, job assignment, and reporting. This prototype solves that problem using a declarative based Salesforce customization, ensuring a scalable, effective CRM solution.
 
 ## [Features & Capabilities]
-✅ Service Cloud Configuration – Custom Case Lifecycle, automated status tracking
-✅ Flow Automation – Automatically assigns requests to resource units based on availability
-✅ Reports & Dashboards – Provides real-time insights into job tracking, inventory, and performance analysis
-✅ User & Data Security – Custom profiles, permission sets, and sharing rules
-✅ Lightning UI Customization – Page layouts, paths, quick actions, and record types
+- ✅ Service Cloud Configuration – Custom Case Lifecycle, automated status tracking
+- ✅ Flow Automation – Automatically assigns requests to resource units based on availability
+- ✅ Reports & Dashboards – Provides real-time insights into job tracking, inventory, and performance analysis
+- ✅ User & Data Security – Custom profiles, permission sets, and sharing rules
+- ✅ Lightning UI Customization – Page layouts, paths, quick actions, and record types
 
 ## 🔨 [Technical Breakdown]
 This POC includes Salesforce-native features without custom code:
 ### 🔹 Custom Schema
     - Custom Objects: Material SKU, Inventory, Custom Contract, 
-    Resource, Asset, Resource Unit, Assignment, Work Order
+      Resource, Asset, Resource Unit, Assignment, Work Order
     - Standard Objects Used: Case, Account, Contact
 ### 🔹 Automation
     - Flow Builder: Case Routing Flow, Escalation Flow
