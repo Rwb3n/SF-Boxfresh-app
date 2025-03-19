@@ -10,19 +10,24 @@ Documentation Navigation:
 |----- You'll find my first initial information capture, my analysis and the business requirement document
 |----- A system design and specification skeleton document is also there.
 |----- This folder mostly covers my initial attempts at initing a technical project in salesforce
+
 --- Diving In # Where I started to see the gaps
 |----- This folder showcases my initial attemps at mapping out the custom objects
 |----- A lot of the objects evolved over time as I grappled with the Salesforce Schema
 |----- I would return to the drawing board more then once...
+
 --- Diagrams
 |----- ERD_Diagrams
 |----- Flow_diagrams
+
 --- Reports
 |----- Job_Performance_Report
 |----- Inventory_Usage_Report
+
 --- Reference_Docs
 |----- Security_Model
 |----- Automation_Design
+
 --- Config
 |----- Objects
 |----- Flows
