@@ -22,7 +22,7 @@ Documentation:
 ```
 
 # Readme Sections:
-# Overview | Scenario | Features & Capabilities | Technical Breakdown | Roadmap
+### Overview | Scenario | Features & Capabilities | Technical Breakdown | Roadmap
 
 ## 🌿BoxFresh Gardens
 Automated Service Scheduling, Inventory & Resource Management, and Customer Communication
