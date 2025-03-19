@@ -6,4 +6,4 @@ Below is the latest schema. I've labeleld each batch of objects based on their c
     - Inventory__c - Is for managing capacity limits of the purchased stock. It is a sort of "container" that each **Material_Stock** will be allocated.
                      it will be allocated to a **Resource_Asset** record that has the field boolean **hasStorage** as **TRUE**
 
-[Latest Schema](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/img/19-3-25-latest.png)
+![Latest Schema](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/img/19-3-25-latest.png)
