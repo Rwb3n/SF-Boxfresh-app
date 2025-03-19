@@ -3,20 +3,22 @@ A mini app built in my Salesforce dev Org for my old small gardening business.
 
 # Navigation:
 ## [Changelog](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/docs/Changelog.md)
-## Documentation:
-## --- Diagrams
-## ------ ERD_Diagrams
-## ------ Flow_diagrams
-## --- Reports
-## ------ Job_Performance_Report
-## ------ Inventory_Usage_Report
-## --- Reference_Docs
-## ------ Security_Model
-## ------ Automation_Design
-## --- Config
-## ------ Objects
-## ------ Flows
-## ------ Permission_Sets
+```
+Documentation:
+--- Diagrams
+------ ERD_Diagrams
+------ Flow_diagrams
+--- Reports
+------ Job_Performance_Report
+------ Inventory_Usage_Report
+--- Reference_Docs
+------ Security_Model
+------ Automation_Design
+--- Config
+------ Objects
+------ Flows
+------ Permission_Sets
+```
 
 # Readme Sections:
 # Overview | Scenario | Features & Capabilities | Technical Breakdown | Roadmap
