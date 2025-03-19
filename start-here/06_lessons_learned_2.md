@@ -4,7 +4,8 @@ I decided to draft another formal document. Calling it the 'System and Design Sp
 The problem was that there were gaps in bridging this document with the previous Business Requirements Doc. I also went off tangent as the project progressed.
 **Lesson Learned**: Ensure the document makes sense - i.e enough to behonored as a map for developing the app.
 
-```
+---
+
 ## **System Design & Specification**
 This phase ensures that the **functional requirements** outlined in the BRD are **mapped to system features, architecture, and workflows**.
 
