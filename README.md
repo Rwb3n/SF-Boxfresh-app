@@ -24,7 +24,7 @@ Documentation:
 # Readme Sections:
 ### Overview | Scenario | Features & Capabilities | Technical Breakdown | Roadmap
 
-## 🌿BoxFresh Gardens
+## 🌿[BoxFresh Gardens]
 Automated Service Scheduling, Inventory & Resource Management, and Customer Communication
 A showcase of ADM201 Salesforce Administration skills: Service Cloud, Flow Automation, Data Management & Security.
 
