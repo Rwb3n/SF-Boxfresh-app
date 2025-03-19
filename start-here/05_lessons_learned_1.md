@@ -21,7 +21,8 @@ key points:
   - I learned a important, high value, paradigm for the future - Systems Resillience. Build systems for graceful failure, and recovery.
   - feedback is important (in this case my own), and I had to consider automation from the start.
 
-Below is the diagram to help me visualise what I was doing at the start:
+### Below is the diagram to help me visualise what I was doing at the start:
+
 ![Initial Capture Diagram](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/img/initial-workflow.png)
 
 
