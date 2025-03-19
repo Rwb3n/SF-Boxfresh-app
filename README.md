@@ -48,23 +48,22 @@ This project is a Salesforce-native prototype designed to showcase the skills ga
 **This is how it began:** 
 ### "Alright. I passed ADM201. Now what?"
 
-I see people applying for Salesforce roles with stacked credentials—papers. I get it. If nothing else, those certs show tenacity. So how do I counter that? I need to prove the same thing—but in my own way.
+I see people applying for Salesforce roles with stacked credentials—papers. I get it. If nothing else, those certs show tenacity. So how do I counter that? I need to prove the same thing—but in my own way, I have no choice.
 
-A portfolio? Fine. But not just some vague automation flow. That won’t show initiative. That won’t show grit.
-If I want to stand out, I need something real—something that proves I can build, problem-solve, and execute.
+A portfolio. But not just some vague automation flow. That won’t show initiative. If I want to stand out, I need something real—something that proves I can build, problem-solve, and execute.
 
-So I’ll do this: I’ll go back. Back to BoxFresh Gardens, my old business, where I lost the game because I lacked systems. And I’ll rebuild it—not in the real world, but in Salesforce. 
-Everything I was missing, every blind spot, every inefficiency that choked my margins—I’ll attempt to fix it.
+So I’ll do this: I’ll go back. Back to BoxFresh Gardens, my old business, where I lost the game because I lacked systems, amongst other aspects. And I’ll rebuild it—not in the real world, but in Salesforce. 
+Everything I think was missing, every blind spot, every inefficiency—I’ll attempt to fix it.
 
-If I had this back then, would I have survived? Maybe. But that’s not the point. The point is, I’ll prove I can do what actually matters in this space: Design. Build. Solve. Execute.
+If I had this back then, would I have survived? Maybe. That’s not the point. The point is, I’ll prove I can do what actually matters in this space: Design. Build. Solve. Execute. Get hired!
 
 ### Let's rewind for a moment...
 
-I set out to build a life in the sun, hands in the earth, scaling from private gardens to high-end contracts. 
+Back then I set out to build a life in the sun, hands in the earth, scaling from private gardens to high-end contracts. 
 I recruited a team of workhorses who took me further than ever before, but my grip wasn’t strong enough. Systems failed, cracks widened, and I collapsed under the weight of my own ambition. 
 
 This project is my autopsy, a reconstruction of what was missing—structured automation, resource control, and precision execution. 
-My failures sharpened my insights, and now, this portfolio is proof of the value I bring to ambitious teams in the Salesforce space.
+My failures sharpened my insights, and now, this portfolio is proof of the value I might bring to ambitious teams in the Salesforce space.🚀
 
 ---
 
