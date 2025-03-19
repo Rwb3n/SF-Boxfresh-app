@@ -33,6 +33,22 @@ This project is a Salesforce-native prototype designed to showcase the skills ga
 
 ### Why
 I set out to build a life in the sun, hands in the earth, scaling from private gardens to high-end contracts. I recruited a team of workhorses who took me further than ever before, but my grip wasn’t strong enough. Systems failed, cracks widened, and I collapsed under the weight of my own ambition. This project is my autopsy, a reconstruction of what was missing—structured automation, resource control, and precision execution. My failures sharpened my insights, and now, this portfolio is proof of the value I bring to ambitious teams in the Salesforce space.
+---
+This is how it began: 
+###"Alright. I finished ADM201. Now what?"
+
+I see people applying for Salesforce roles with stacked credentials—papers that don’t really reflect their ability, but they prove commitment. 
+And I get it. If nothing else, those certs show commitment. So how do I counter that? I need to prove the same thing—but in my own way.
+
+A portfolio? Fine. But not just some vague automation flow. That won’t show initiative. That won’t show grit.
+If I want to stand out, I need something real—something that proves I can build, problem-solve, and execute.
+
+So I’ll do this: I’ll go back. Back to BoxFresh Gardens, my old business, where I lost the game because I lacked systems. And I’ll rebuild it—not in the real world, but in Salesforce. 
+Everything I was missing, every blind spot, every inefficiency that choked my margins—I’ll fix it.
+
+If I had this back then, would I have survived? Maybe. But that’s not the point. The point is, I’ll prove I can do what actually matters in this space: Build. Solve. Execute.
+
+---
 
 ## 🔶 [Scenario]
 A small service-based business (Boxfresh Gardens) needs a Salesforce-powered service management system that automates inventory & resource management, job assignment, and reporting. This prototype solves that problem using a declarative based Salesforce customization, ensuring a scalable, effective CRM solution.
