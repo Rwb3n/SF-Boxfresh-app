@@ -1,5 +1,6 @@
 # 🌳☑️SF-Boxfresh-app☑️🌳
-A mini app built in my Salesforce dev Org for my old small gardening business.
+- A mini app built in my Salesforce dev Org for my old small gardening business.
+- Trailhead is great to learn in, but I don't get to "figure it out". This is an exercise in discovering and defining unknown unknowns. In my journey through the 'Salesforce'
 
 # 🚧Under construction🚧
 ## [Changelog](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/docs/Changelog.md)
