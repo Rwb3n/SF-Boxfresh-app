@@ -8,6 +8,7 @@ Below is the latest schema. I've labeleld each batch of objects based on their c
   ### 1. Inventory
   #### - Material_SKU__c
   The catalogue of unique stock items, these include records like *"Large Compost Bag"*, *"Small Compost Bag"*, *"Mahonia 'Soft Caress'"*, etc...
+  
   #### - Material_Stock__c 
   This object looks up a **Material_SKU** record, and is used to record the quantity of each item batch, a capacity unit of measure is calculated from the **quantity + units of measure**
   #### - Inventory__c 
