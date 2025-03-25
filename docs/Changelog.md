@@ -2,10 +2,13 @@
 
 [Back to ReadMe](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/README.md)
 
+#### 25/03/25
+- More additions to the process documentation. Took a break to spruce up on Service Cloud - After the custom inventory schema I'll use the standard service objects.
 #### 19/03/25 
 - I'm going to start on this repo now, take a break from the building of the app, time is of the essense and I want to be able to showcase the work I've done **so far**.
 - Created "start here" folder, uploaded and refined documents from the first batch of logs
 - Uploaded and fixed  up the initial docs I drafted. Continued with development of the app
+- Uploaded 'latest schema' and began writing the overview
 #### 18/03/25
 - Polishing up more parts of the overall boxfresh app design.
 - 'Custom_Contract' custom object is now broken into modular sub-objects:
