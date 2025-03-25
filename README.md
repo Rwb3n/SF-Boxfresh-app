@@ -3,7 +3,6 @@
 - Trailhead is great to learn in, but I don't get to "figure it out". This is an exercise in discovering and defining unknown unknowns. In my journey through the 'Salesforce'
 # 🚧Under construction🚧
 ## [Changelog](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/docs/Changelog.md)
----
 
 # Navigation:
 ### - [Start Here](https://github.com/Rwb3n/SF-Boxfresh-app/tree/main/01_start-here) # The clueless phase, first struggles and first attempts
