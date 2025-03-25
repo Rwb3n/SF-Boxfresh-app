@@ -1,8 +1,9 @@
 ## Latest Schema Overview
 Below is the latest schema. I've labeleld each batch of objects based on their collective function.
+The idea here is to start with the Objects most closely related to the operatives, the service layer, and then build around it.
 
 ---
-1. Inventory | 2. Contract Assignments | 3. Core Contract | 4. Execution Objects | 5. Resources
+1. Inventory Objects | 2. **Proposed** Contract Element Objects | 3. Core Contract Objects | 4. Execution Layer Objects | 5. Resource & Asset Objects
 ---
 
   ### 1. Inventory
