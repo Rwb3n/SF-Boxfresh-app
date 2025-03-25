@@ -11,7 +11,7 @@
 #### - [Structured Analysis](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/01_start-here/03_structured_analysis.md)
 #### - [Initial Business Requirements Document](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/01_start-here/04_business_requirements_document.md)
 #### - [Lessons Learned 1](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/01_start-here/05_lessons_learned_1.md)
-#### - [Lessones Learned 2](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/01_start-here/06_lessons_learned_2.md)
+#### - [Lessons Learned 2](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/01_start-here/06_lessons_learned_2.md)
 
 ### Coming Soon:
 ```
