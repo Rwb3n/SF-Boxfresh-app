@@ -1,650 +1,601 @@
 ---
 layout: default
-title: "Reporting Tools"
+title: "Reporting System"
 parent: "Utility Function"
-nav_order: 3
+nav_order: 2
 ---
 
-# Reporting Tools
+# Reporting System
 
-The BoxFresh App includes utility functions for generating reports and analytics. These functions provide insights into business performance and resource utilization.
+The BoxFresh App includes a comprehensive reporting system that provides insights into business operations, customer trends, and service delivery metrics.
 
-## Performance Metrics
+## Reporting Architecture
 
-### generate_performance_report
+The reporting system follows a modular design with standardized components:
 
-Generates a performance report for a specified time period.
-
-```apex
-public static PerformanceReport generate_performance_report(Date startDate, Date endDate) {
-    // Calculate job statistics
-    List<AggregateResult> jobStats = [
-        SELECT COUNT(Id) jobCount, Status__c
-        FROM Order__c
-        WHERE Service_Date__c >= :startDate 
-        AND Service_Date__c <= :endDate
-        GROUP BY Status__c
-    ];
-    
-    Integer totalJobs = 0;
-    Integer completedJobs = 0;
-    Integer cancelledJobs = 0;
-    
-    for (AggregateResult ar : jobStats) {
-        String status = (String)ar.get('Status__c');
-        Integer count = (Integer)ar.get('jobCount');
-        totalJobs += count;
-        
-        if (status == 'Completed') {
-            completedJobs = count;
-        } else if (status == 'Cancelled') {
-            cancelledJobs = count;
-        }
-    }
-    
-    // Calculate average job completion time
-    List<AggregateResult> timeStats = [
-        SELECT AVG(Actual_Duration__c) avgDuration, 
-               AVG(Planned_Duration__c) avgPlanned
-        FROM Assignment__c
-        WHERE Completion_Date__c >= :startDate 
-        AND Completion_Date__c <= :endDate
-        AND Status__c = 'Completed'
-    ];
-    
-    Decimal avgDuration = 0;
-    Decimal avgPlanned = 0;
-    Decimal timeEfficiency = 0;
-    
-    if (!timeStats.isEmpty()) {
-        avgDuration = (Decimal)timeStats[0].get('avgDuration') ?? 0;
-        avgPlanned = (Decimal)timeStats[0].get('avgPlanned') ?? 0;
-        timeEfficiency = avgPlanned > 0 ? avgPlanned / avgDuration : 0;
-    }
-    
-    // Calculate resource utilization
-    List<AggregateResult> resourceStats = [
-        SELECT Resource_Unit__c, 
-               COUNT(Id) assignmentCount,
-               SUM(Actual_Duration__c) totalHours
-        FROM Assignment__c
-        WHERE Start_Time__c >= :startDate 
-        AND Start_Time__c <= :endDate
-        GROUP BY Resource_Unit__c
-    ];
-    
-    // Get all resource units for the period
-    List<Resource_Unit__c> allResources = [
-        SELECT Id, Name
-        FROM Resource_Unit__c
-        WHERE Is_Active__c = true
-    ];
-    
-    Map<Id, ResourceStatistics> resourceStatistics = new Map<Id, ResourceStatistics>();
-    
-    // Initialize statistics for all resources
-    for (Resource_Unit__c unit : allResources) {
-        resourceStatistics.put(unit.Id, new ResourceStatistics(
-            unit.Id,
-            unit.Name,
-            0,
-            0
-        ));
-    }
-    
-    // Update statistics for resources with assignments
-    for (AggregateResult ar : resourceStats) {
-        Id resourceId = (Id)ar.get('Resource_Unit__c');
-        Integer assignmentCount = (Integer)ar.get('assignmentCount');
-        Decimal totalHours = (Decimal)ar.get('totalHours') ?? 0;
-        
-        if (resourceStatistics.containsKey(resourceId)) {
-            ResourceStatistics stats = resourceStatistics.get(resourceId);
-            stats.assignmentCount = assignmentCount;
-            stats.totalHours = totalHours;
-        }
-    }
-    
-    // Calculate material usage
-    List<AggregateResult> materialStats = [
-        SELECT Material_SKU__c, Material_SKU__r.Name,
-               SUM(Quantity_Used__c) totalUsed
-        FROM Material_Usage__c
-        WHERE Usage_Date__c >= :startDate 
-        AND Usage_Date__c <= :endDate
-        GROUP BY Material_SKU__c, Material_SKU__r.Name
-    ];
-    
-    Map<Id, MaterialUsage> materialUsage = new Map<Id, MaterialUsage>();
-    
-    for (AggregateResult ar : materialStats) {
-        Id materialId = (Id)ar.get('Material_SKU__c');
-        String materialName = (String)ar.get('Material_SKU__r.Name');
-        Decimal totalUsed = (Decimal)ar.get('totalUsed') ?? 0;
-        
-        materialUsage.put(materialId, new MaterialUsage(
-            materialId,
-            materialName,
-            totalUsed
-        ));
-    }
-    
-    // Calculate customer satisfaction
-    List<AggregateResult> satisfactionStats = [
-        SELECT AVG(Customer_Rating__c) avgRating
-        FROM Assignment__c
-        WHERE Completion_Date__c >= :startDate 
-        AND Completion_Date__c <= :endDate
-        AND Customer_Rating__c != null
-    ];
-    
-    Decimal avgCustomerRating = 0;
-    
-    if (!satisfactionStats.isEmpty()) {
-        avgCustomerRating = (Decimal)satisfactionStats[0].get('avgRating') ?? 0;
-    }
-    
-    // Create the performance report
-    return new PerformanceReport(
-        startDate,
-        endDate,
-        totalJobs,
-        completedJobs,
-        cancelledJobs,
-        avgDuration,
-        avgPlanned,
-        timeEfficiency,
-        resourceStatistics.values(),
-        materialUsage.values(),
-        avgCustomerRating
-    );
-}
+```mermaid
+graph TD
+    A[Data Sources] -->|Extract| B[Data Collectors]
+    B -->|Transform| C[Data Processors]
+    C -->|Load| D[Report Storage]
+    D --> E[Report Generators]
+    E --> F[Report Renderers]
+    F -->|Deliver| G[Report Consumers]
+    H[Scheduling Service] -->|Trigger| B
 ```
 
-### generate_resource_efficiency_report
+## Core Report Types
 
-Generates an efficiency report for resources.
+### 1. Operational Reports
+
+Reports focusing on day-to-day operational metrics:
 
 ```apex
-public static List<ResourceEfficiency> generate_resource_efficiency_report(Date startDate, Date endDate) {
-    // Query assignment data
+/**
+ * Generate daily operations summary
+ */
+public static Map<String, Object> generateDailyOperationsSummary(Date reportDate) {
+    Map<String, Object> report = new Map<String, Object>();
+    
+    // Get assignments for the day
     List<Assignment__c> assignments = [
-        SELECT Id, Resource_Unit__c, Resource_Unit__r.Name,
-               Start_Time__c, End_Time__c, 
-               Actual_Duration__c, Planned_Duration__c,
-               Customer_Rating__c
+        SELECT Id, Status__c, Resource_Unit__r.Name, 
+               Start_Time__c, End_Time__c, Order__r.Service_Type__c
         FROM Assignment__c
-        WHERE Completion_Date__c >= :startDate 
-        AND Completion_Date__c <= :endDate
-        AND Status__c = 'Completed'
+        WHERE Service_Date__c = :reportDate
     ];
     
-    // Group assignments by resource
-    Map<Id, List<Assignment__c>> assignmentsByResource = new Map<Id, List<Assignment__c>>();
+    // Calculate key metrics
+    Integer totalAssignments = assignments.size();
+    Integer completedAssignments = 0;
+    Integer cancelledAssignments = 0;
+    Integer scheduledAssignments = 0;
+    Integer inProgressAssignments = 0;
+    
+    // Service type distribution
+    Map<String, Integer> serviceTypeCount = new Map<String, Integer>();
+    
+    // Technician assignment count
+    Map<String, Integer> technicianAssignmentCount = new Map<String, Integer>();
     
     for (Assignment__c assignment : assignments) {
-        Id resourceId = assignment.Resource_Unit__c;
-        
-        if (!assignmentsByResource.containsKey(resourceId)) {
-            assignmentsByResource.put(resourceId, new List<Assignment__c>());
+        // Count by status
+        if (assignment.Status__c == 'Completed') {
+            completedAssignments++;
+        } else if (assignment.Status__c == 'Cancelled') {
+            cancelledAssignments++;
+        } else if (assignment.Status__c == 'Scheduled') {
+            scheduledAssignments++;
+        } else if (assignment.Status__c == 'In Progress' || 
+                   assignment.Status__c == 'En Route' || 
+                   assignment.Status__c == 'On Site') {
+            inProgressAssignments++;
         }
         
-        assignmentsByResource.get(resourceId).add(assignment);
-    }
-    
-    // Calculate efficiency metrics for each resource
-    List<ResourceEfficiency> results = new List<ResourceEfficiency>();
-    
-    for (Id resourceId : assignmentsByResource.keySet()) {
-        List<Assignment__c> resourceAssignments = assignmentsByResource.get(resourceId);
-        String resourceName = resourceAssignments[0].Resource_Unit__r.Name;
-        
-        Decimal totalActualHours = 0;
-        Decimal totalPlannedHours = 0;
-        Decimal sumRatings = 0;
-        Integer ratingCount = 0;
-        
-        for (Assignment__c assignment : resourceAssignments) {
-            if (assignment.Actual_Duration__c != null) {
-                totalActualHours += assignment.Actual_Duration__c;
-            }
-            
-            if (assignment.Planned_Duration__c != null) {
-                totalPlannedHours += assignment.Planned_Duration__c;
-            }
-            
-            if (assignment.Customer_Rating__c != null) {
-                sumRatings += assignment.Customer_Rating__c;
-                ratingCount++;
-            }
+        // Count by service type
+        String serviceType = assignment.Order__r.Service_Type__c;
+        if (serviceTypeCount.containsKey(serviceType)) {
+            serviceTypeCount.put(serviceType, serviceTypeCount.get(serviceType) + 1);
+        } else {
+            serviceTypeCount.put(serviceType, 1);
         }
         
-        // Calculate metrics
-        Decimal timeEfficiency = totalPlannedHours > 0 ? totalActualHours / totalPlannedHours : 0;
-        Decimal avgRating = ratingCount > 0 ? sumRatings / ratingCount : 0;
-        Integer assignmentCount = resourceAssignments.size();
-        
-        // Add to results
-        results.add(new ResourceEfficiency(
-            resourceId,
-            resourceName,
-            assignmentCount,
-            totalActualHours,
-            timeEfficiency,
-            avgRating
-        ));
+        // Count by technician
+        String techName = assignment.Resource_Unit__r.Name;
+        if (technicianAssignmentCount.containsKey(techName)) {
+            technicianAssignmentCount.put(techName, 
+                                          technicianAssignmentCount.get(techName) + 1);
+        } else {
+            technicianAssignmentCount.put(techName, 1);
+        }
     }
     
-    // Sort by efficiency (highest to lowest)
-    results.sort((a, b) => a.timeEfficiency > b.timeEfficiency ? -1 : 1);
-    
-    return results;
-}
-```
-
-## Financial Reports
-
-### generate_revenue_report
-
-Generates a revenue report for a specified time period.
-
-```apex
-public static RevenueReport generate_revenue_report(Date startDate, Date endDate) {
-    // Query order data
-    List<Order__c> orders = [
-        SELECT Id, Total_Amount__c, Service_Date__c,
-               Core_Contract__r.Account__c, Core_Contract__r.Account__r.Name
+    // Revenue calculations
+    AggregateResult[] revenueResults = [
+        SELECT SUM(Total_Amount__c) totalRevenue
         FROM Order__c
-        WHERE Service_Date__c >= :startDate 
-        AND Service_Date__c <= :endDate
+        WHERE Service_Date__c = :reportDate
         AND Status__c = 'Completed'
     ];
     
-    // Calculate total revenue
+    Decimal totalRevenue = (Decimal)revenueResults[0].get('totalRevenue');
+    if (totalRevenue == null) totalRevenue = 0;
+    
+    // Material usage
+    AggregateResult[] materialResults = [
+        SELECT Inventory_Item__r.Name itemName, 
+               SUM(Quantity__c) totalQuantity
+        FROM Material_Usage__c
+        WHERE Assignment__r.Service_Date__c = :reportDate
+        GROUP BY Inventory_Item__r.Name
+    ];
+    
+    Map<String, Decimal> materialUsage = new Map<String, Decimal>();
+    for (AggregateResult ar : materialResults) {
+        materialUsage.put((String)ar.get('itemName'), 
+                          (Decimal)ar.get('totalQuantity'));
+    }
+    
+    // Build report data
+    report.put('reportDate', reportDate);
+    report.put('totalAssignments', totalAssignments);
+    report.put('completedAssignments', completedAssignments);
+    report.put('cancelledAssignments', cancelledAssignments);
+    report.put('scheduledAssignments', scheduledAssignments);
+    report.put('inProgressAssignments', inProgressAssignments);
+    report.put('completionRate', totalAssignments > 0 ? 
+               (Decimal)completedAssignments / totalAssignments * 100 : 0);
+    report.put('serviceTypeDistribution', serviceTypeCount);
+    report.put('technicianAssignments', technicianAssignmentCount);
+    report.put('totalRevenue', totalRevenue);
+    report.put('materialUsage', materialUsage);
+    
+    // Store report data
+    Report__c reportRecord = new Report__c(
+        Report_Type__c = 'Daily Operations',
+        Report_Date__c = reportDate,
+        Report_Data__c = JSON.serialize(report),
+        Status__c = 'Generated'
+    );
+    
+    insert reportRecord;
+    
+    return report;
+}
+```
+
+### 2. Financial Reports
+
+Reports focused on revenue, costs, and profitability:
+
+```apex
+/**
+ * Generate monthly financial summary
+ */
+public static Map<String, Object> generateMonthlyFinancialSummary(Integer year, Integer month) {
+    Map<String, Object> report = new Map<String, Object>();
+    
+    // Calculate date range
+    Date startDate = Date.newInstance(year, month, 1);
+    Date endDate = startDate.addMonths(1).addDays(-1);
+    
+    // Revenue by service type
+    AggregateResult[] revenueByService = [
+        SELECT Service_Type__c serviceType, SUM(Total_Amount__c) revenue
+        FROM Order__c
+        WHERE Service_Date__c >= :startDate
+        AND Service_Date__c <= :endDate
+        AND Status__c = 'Completed'
+        GROUP BY Service_Type__c
+    ];
+    
+    Map<String, Decimal> revenueByServiceType = new Map<String, Decimal>();
     Decimal totalRevenue = 0;
-    for (Order__c order : orders) {
-        if (order.Total_Amount__c != null) {
-            totalRevenue += order.Total_Amount__c;
-        }
+    
+    for (AggregateResult ar : revenueByService) {
+        String serviceType = (String)ar.get('serviceType');
+        Decimal revenue = (Decimal)ar.get('revenue');
+        revenueByServiceType.put(serviceType, revenue);
+        totalRevenue += revenue;
     }
     
-    // Group revenue by customer
-    Map<Id, CustomerRevenue> revenueByCustomer = new Map<Id, CustomerRevenue>();
-    
-    for (Order__c order : orders) {
-        Id accountId = order.Core_Contract__r.Account__c;
-        String accountName = order.Core_Contract__r.Account__r.Name;
-        
-        if (!revenueByCustomer.containsKey(accountId)) {
-            revenueByCustomer.put(accountId, new CustomerRevenue(
-                accountId,
-                accountName,
-                0,
-                0
-            ));
-        }
-        
-        CustomerRevenue revenue = revenueByCustomer.get(accountId);
-        revenue.orderCount++;
-        
-        if (order.Total_Amount__c != null) {
-            revenue.totalRevenue += order.Total_Amount__c;
-        }
-    }
-    
-    // Group revenue by month
-    Map<String, Decimal> revenueByMonth = new Map<String, Decimal>();
-    
-    for (Order__c order : orders) {
-        String monthKey = order.Service_Date__c.year() + '-' + order.Service_Date__c.month();
-        
-        if (!revenueByMonth.containsKey(monthKey)) {
-            revenueByMonth.put(monthKey, 0);
-        }
-        
-        if (order.Total_Amount__c != null) {
-            revenueByMonth.put(monthKey, revenueByMonth.get(monthKey) + order.Total_Amount__c);
-        }
-    }
-    
-    // Query material costs
-    List<AggregateResult> materialCosts = [
-        SELECT SUM(Quantity_Used__c * Material_SKU__r.Unit_Cost__c) totalCost
+    // Material costs
+    AggregateResult[] materialCosts = [
+        SELECT SUM(Total_Cost__c) materialCost
         FROM Material_Usage__c
-        WHERE Usage_Date__c >= :startDate 
-        AND Usage_Date__c <= :endDate
+        WHERE Assignment__r.Service_Date__c >= :startDate
+        AND Assignment__r.Service_Date__c <= :endDate
     ];
     
-    Decimal totalCosts = materialCosts.isEmpty() ? 0 : (Decimal)materialCosts[0].get('totalCost') ?? 0;
+    Decimal totalMaterialCost = (Decimal)materialCosts[0].get('materialCost');
+    if (totalMaterialCost == null) totalMaterialCost = 0;
     
-    // Calculate profit
-    Decimal grossProfit = totalRevenue - totalCosts;
-    Decimal profitMargin = totalRevenue > 0 ? (grossProfit / totalRevenue) * 100 : 0;
-    
-    // Create the revenue report
-    return new RevenueReport(
-        startDate,
-        endDate,
-        totalRevenue,
-        totalCosts,
-        grossProfit,
-        profitMargin,
-        revenueByCustomer.values(),
-        revenueByMonth
-    );
-}
-```
-
-### generate_cost_analysis_report
-
-Generates a detailed cost analysis report.
-
-```apex
-public static CostAnalysisReport generate_cost_analysis_report(Date startDate, Date endDate) {
-    // Query material usage data
-    List<Material_Usage__c> usages = [
-        SELECT Id, Quantity_Used__c, 
-               Material_SKU__c, Material_SKU__r.Name, 
-               Material_SKU__r.Unit_Cost__c,
-               Assignment__r.Order__c
-        FROM Material_Usage__c
-        WHERE Usage_Date__c >= :startDate 
-        AND Usage_Date__c <= :endDate
-    ];
-    
-    // Calculate material costs by category
-    Map<Id, MaterialCost> costsByMaterial = new Map<Id, MaterialCost>();
-    
-    for (Material_Usage__c usage : usages) {
-        Id materialId = usage.Material_SKU__c;
-        String materialName = usage.Material_SKU__r.Name;
-        Decimal unitCost = usage.Material_SKU__r.Unit_Cost__c ?? 0;
-        Decimal quantity = usage.Quantity_Used__c ?? 0;
-        Decimal totalCost = unitCost * quantity;
-        
-        if (!costsByMaterial.containsKey(materialId)) {
-            costsByMaterial.put(materialId, new MaterialCost(
-                materialId,
-                materialName,
-                0,
-                0
-            ));
-        }
-        
-        MaterialCost cost = costsByMaterial.get(materialId);
-        cost.totalQuantity += quantity;
-        cost.totalCost += totalCost;
-    }
-    
-    // Calculate total materials cost
-    Decimal totalMaterialsCost = 0;
-    for (MaterialCost cost : costsByMaterial.values()) {
-        totalMaterialsCost += cost.totalCost;
-    }
-    
-    // Calculate labor costs
-    List<Assignment__c> assignments = [
-        SELECT Id, Actual_Duration__c, Resource_Unit__r.Hourly_Rate__c
+    // Labor costs
+    AggregateResult[] laborCosts = [
+        SELECT SUM(Resource_Unit__r.Hourly_Rate__c * 
+                  (HOUR(End_Time__c) - HOUR(Start_Time__c))) laborCost
         FROM Assignment__c
-        WHERE Completion_Date__c >= :startDate 
-        AND Completion_Date__c <= :endDate
+        WHERE Service_Date__c >= :startDate
+        AND Service_Date__c <= :endDate
         AND Status__c = 'Completed'
     ];
     
-    Decimal totalLaborCost = 0;
-    for (Assignment__c assignment : assignments) {
-        Decimal hours = assignment.Actual_Duration__c ?? 0;
-        Decimal rate = assignment.Resource_Unit__r.Hourly_Rate__c ?? 0;
-        totalLaborCost += hours * rate;
-    }
+    Decimal totalLaborCost = (Decimal)laborCosts[0].get('laborCost');
+    if (totalLaborCost == null) totalLaborCost = 0;
     
-    // Calculate equipment costs
-    List<AggregateResult> equipmentCosts = [
-        SELECT SUM(Usage_Hours__c * Hourly_Cost__c) totalCost
-        FROM Equipment_Usage__c
-        WHERE Usage_Date__c >= :startDate 
-        AND Usage_Date__c <= :endDate
+    // Customer acquisition
+    AggregateResult[] newContracts = [
+        SELECT COUNT(Id) contractCount, SUM(Annual_Value__c) contractValue
+        FROM Core_Contract__c
+        WHERE Effective_Date__c >= :startDate
+        AND Effective_Date__c <= :endDate
     ];
     
-    Decimal totalEquipmentCost = equipmentCosts.isEmpty() ? 0 : (Decimal)equipmentCosts[0].get('totalCost') ?? 0;
+    Integer newContractCount = Integer.valueOf(newContracts[0].get('contractCount'));
+    Decimal newContractValue = (Decimal)newContracts[0].get('contractValue');
+    if (newContractValue == null) newContractValue = 0;
     
-    // Calculate total costs
-    Decimal totalCosts = totalMaterialsCost + totalLaborCost + totalEquipmentCost;
+    // Build report data
+    report.put('year', year);
+    report.put('month', month);
+    report.put('startDate', startDate);
+    report.put('endDate', endDate);
+    report.put('totalRevenue', totalRevenue);
+    report.put('revenueByServiceType', revenueByServiceType);
+    report.put('totalMaterialCost', totalMaterialCost);
+    report.put('totalLaborCost', totalLaborCost);
+    report.put('grossProfit', totalRevenue - totalMaterialCost - totalLaborCost);
+    report.put('grossMargin', totalRevenue > 0 ? 
+              (totalRevenue - totalMaterialCost - totalLaborCost) / totalRevenue * 100 : 0);
+    report.put('newContractCount', newContractCount);
+    report.put('newContractValue', newContractValue);
     
-    // Calculate cost breakdown percentages
-    Decimal materialsCostPercentage = totalCosts > 0 ? (totalMaterialsCost / totalCosts) * 100 : 0;
-    Decimal laborCostPercentage = totalCosts > 0 ? (totalLaborCost / totalCosts) * 100 : 0;
-    Decimal equipmentCostPercentage = totalCosts > 0 ? (totalEquipmentCost / totalCosts) * 100 : 0;
-    
-    // Create the cost analysis report
-    return new CostAnalysisReport(
-        startDate,
-        endDate,
-        totalCosts,
-        totalMaterialsCost,
-        materialsCostPercentage,
-        totalLaborCost,
-        laborCostPercentage,
-        totalEquipmentCost,
-        equipmentCostPercentage,
-        costsByMaterial.values()
+    // Store report
+    Report__c reportRecord = new Report__c(
+        Report_Type__c = 'Monthly Financial',
+        Report_Month__c = month,
+        Report_Year__c = year,
+        Report_Data__c = JSON.serialize(report),
+        Status__c = 'Generated'
     );
+    
+    insert reportRecord;
+    
+    return report;
 }
 ```
 
-## Helper Classes
+### 3. Customer Reports
 
-### PerformanceReport
-
-Structure to hold performance report data.
+Reports on customer satisfaction, retention, and demographics:
 
 ```apex
-public class PerformanceReport {
-    public Date startDate;
-    public Date endDate;
-    public Integer totalJobs;
-    public Integer completedJobs;
-    public Integer cancelledJobs;
-    public Decimal completionRate;
-    public Decimal avgDuration;
-    public Decimal avgPlanned;
-    public Decimal timeEfficiency;
-    public List<ResourceStatistics> resourceStats;
-    public List<MaterialUsage> materialUsage;
-    public Decimal avgCustomerRating;
+/**
+ * Generate quarterly customer analysis
+ */
+public static Map<String, Object> generateQuarterlyCustomerAnalysis(Integer year, Integer quarter) {
+    Map<String, Object> report = new Map<String, Object>();
     
-    public PerformanceReport(Date startDate, Date endDate, Integer totalJobs,
-                            Integer completedJobs, Integer cancelledJobs,
-                            Decimal avgDuration, Decimal avgPlanned, Decimal timeEfficiency,
-                            List<ResourceStatistics> resourceStats, List<MaterialUsage> materialUsage,
-                            Decimal avgCustomerRating) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalJobs = totalJobs;
-        this.completedJobs = completedJobs;
-        this.cancelledJobs = cancelledJobs;
-        this.completionRate = totalJobs > 0 ? (completedJobs / (Decimal)totalJobs) * 100 : 0;
-        this.avgDuration = avgDuration;
-        this.avgPlanned = avgPlanned;
-        this.timeEfficiency = timeEfficiency;
-        this.resourceStats = resourceStats;
-        this.materialUsage = materialUsage;
-        this.avgCustomerRating = avgCustomerRating;
+    // Calculate date range
+    Integer startMonth = ((quarter - 1) * 3) + 1;
+    Date startDate = Date.newInstance(year, startMonth, 1);
+    Date endDate = startDate.addMonths(3).addDays(-1);
+    
+    // Customer satisfaction metrics
+    AggregateResult[] satisfactionResults = [
+        SELECT AVG(Rating__c) avgRating, MIN(Rating__c) minRating, 
+               MAX(Rating__c) maxRating, COUNT(Id) ratingCount
+        FROM Customer_Feedback__c
+        WHERE Feedback_Date__c >= :startDate
+        AND Feedback_Date__c <= :endDate
+    ];
+    
+    Decimal avgRating = (Decimal)satisfactionResults[0].get('avgRating');
+    Decimal minRating = (Decimal)satisfactionResults[0].get('minRating');
+    Decimal maxRating = (Decimal)satisfactionResults[0].get('maxRating');
+    Integer ratingCount = Integer.valueOf(satisfactionResults[0].get('ratingCount'));
+    
+    // Customer retention
+    AggregateResult[] retentionResults = [
+        SELECT COUNT(Id) renewalCount
+        FROM Core_Contract__c
+        WHERE Renewal_Date__c >= :startDate
+        AND Renewal_Date__c <= :endDate
+        AND Status__c = 'Renewed'
+    ];
+    
+    AggregateResult[] expirationResults = [
+        SELECT COUNT(Id) expirationCount
+        FROM Core_Contract__c
+        WHERE End_Date__c >= :startDate
+        AND End_Date__c <= :endDate
+        AND Status__c != 'Renewed'
+    ];
+    
+    Integer renewalCount = Integer.valueOf(retentionResults[0].get('renewalCount'));
+    Integer expirationCount = Integer.valueOf(expirationResults[0].get('expirationCount'));
+    Decimal retentionRate = (renewalCount + expirationCount) > 0 ? 
+                          (Decimal)renewalCount / (renewalCount + expirationCount) * 100 : 0;
+    
+    // Service usage by customer tier
+    AggregateResult[] serviceByTier = [
+        SELECT Account__r.Customer_Tier__c customerTier, 
+               COUNT(Id) orderCount, 
+               SUM(Total_Amount__c) orderValue
+        FROM Order__c
+        WHERE Service_Date__c >= :startDate
+        AND Service_Date__c <= :endDate
+        GROUP BY Account__r.Customer_Tier__c
+    ];
+    
+    Map<String, Map<String, Object>> tierData = new Map<String, Map<String, Object>>();
+    
+    for (AggregateResult ar : serviceByTier) {
+        String tier = (String)ar.get('customerTier');
+        Integer count = Integer.valueOf(ar.get('orderCount'));
+        Decimal value = (Decimal)ar.get('orderValue');
+        
+        Map<String, Object> tierMetrics = new Map<String, Object>();
+        tierMetrics.put('orderCount', count);
+        tierMetrics.put('orderValue', value);
+        
+        tierData.put(tier, tierMetrics);
     }
+    
+    // Customer Growth
+    AggregateResult[] newCustomerResults = [
+        SELECT COUNT(Id) newCount
+        FROM Account
+        WHERE CreatedDate >= :startDate
+        AND CreatedDate <= :endDate
+    ];
+    
+    Integer newCustomerCount = Integer.valueOf(newCustomerResults[0].get('newCount'));
+    
+    // Build report data
+    report.put('year', year);
+    report.put('quarter', quarter);
+    report.put('startDate', startDate);
+    report.put('endDate', endDate);
+    report.put('customerSatisfaction', new Map<String, Object>{
+        'averageRating' => avgRating,
+        'minimumRating' => minRating,
+        'maximumRating' => maxRating,
+        'ratingCount' => ratingCount
+    });
+    report.put('customerRetention', new Map<String, Object>{
+        'renewalCount' => renewalCount,
+        'expirationCount' => expirationCount,
+        'retentionRate' => retentionRate
+    });
+    report.put('serviceByCustomerTier', tierData);
+    report.put('newCustomerCount', newCustomerCount);
+    
+    // Store report
+    Report__c reportRecord = new Report__c(
+        Report_Type__c = 'Quarterly Customer Analysis',
+        Report_Quarter__c = quarter,
+        Report_Year__c = year,
+        Report_Data__c = JSON.serialize(report),
+        Status__c = 'Generated'
+    );
+    
+    insert reportRecord;
+    
+    return report;
 }
 ```
 
-### ResourceStatistics
+## Report Scheduling
 
-Structure to hold resource statistics.
+The report scheduling system automates report generation:
 
 ```apex
-public class ResourceStatistics {
-    public Id resourceId;
-    public String resourceName;
-    public Integer assignmentCount;
-    public Decimal totalHours;
-    
-    public ResourceStatistics(Id resourceId, String resourceName,
-                             Integer assignmentCount, Decimal totalHours) {
-        this.resourceId = resourceId;
-        this.resourceName = resourceName;
-        this.assignmentCount = assignmentCount;
-        this.totalHours = totalHours;
+/**
+ * Schedule daily reports
+ */
+public class DailyReportScheduler implements Schedulable {
+    public void execute(SchedulableContext sc) {
+        // Generate yesterday's operational report
+        Date yesterday = Date.today().addDays(-1);
+        generateDailyOperationsSummary(yesterday);
     }
+}
+
+/**
+ * Schedule monthly reports
+ */
+public class MonthlyReportScheduler implements Schedulable {
+    public void execute(SchedulableContext sc) {
+        // First day of current month
+        Date today = Date.today();
+        // Generate for previous month
+        Integer previousMonth = today.month() == 1 ? 12 : today.month() - 1;
+        Integer year = today.month() == 1 ? today.year() - 1 : today.year();
+        
+        generateMonthlyFinancialSummary(year, previousMonth);
+    }
+}
+
+/**
+ * Schedule quarterly reports
+ */
+public class QuarterlyReportScheduler implements Schedulable {
+    public void execute(SchedulableContext sc) {
+        // Calculate previous quarter
+        Date today = Date.today();
+        Integer currentQuarter = ((today.month() - 1) / 3) + 1;
+        Integer previousQuarter = currentQuarter == 1 ? 4 : currentQuarter - 1;
+        Integer year = currentQuarter == 1 ? today.year() - 1 : today.year();
+        
+        generateQuarterlyCustomerAnalysis(year, previousQuarter);
+    }
+}
+
+/**
+ * Setup all report schedules
+ */
+public static void setupReportSchedules() {
+    // Schedule daily report - runs at 1 AM every day
+    String dailyCron = '0 0 1 * * ?';
+    System.schedule('Daily Operations Report', dailyCron, new DailyReportScheduler());
+    
+    // Schedule monthly report - runs on the 1st of each month at 2 AM
+    String monthlyCron = '0 0 2 1 * ?';
+    System.schedule('Monthly Financial Report', monthlyCron, new MonthlyReportScheduler());
+    
+    // Schedule quarterly report - runs on the 1st day of the first month of each quarter at 3 AM
+    String q1Cron = '0 0 3 1 1 ?';
+    String q2Cron = '0 0 3 1 4 ?';
+    String q3Cron = '0 0 3 1 7 ?';
+    String q4Cron = '0 0 3 1 10 ?';
+    
+    System.schedule('Q1 Customer Analysis', q1Cron, new QuarterlyReportScheduler());
+    System.schedule('Q2 Customer Analysis', q2Cron, new QuarterlyReportScheduler());
+    System.schedule('Q3 Customer Analysis', q3Cron, new QuarterlyReportScheduler());
+    System.schedule('Q4 Customer Analysis', q4Cron, new QuarterlyReportScheduler());
 }
 ```
 
-### MaterialUsage
+## Report Delivery
 
-Structure to hold material usage data.
+Reports can be delivered through multiple channels:
 
 ```apex
-public class MaterialUsage {
-    public Id materialId;
-    public String materialName;
-    public Decimal totalUsed;
+/**
+ * Email a report to specified recipients
+ */
+public static void emailReport(Id reportId, List<String> recipients) {
+    Report__c report = [
+        SELECT Id, Name, Report_Type__c, Report_Date__c, 
+               Report_Month__c, Report_Year__c, Report_Quarter__c,
+               Report_Data__c
+        FROM Report__c
+        WHERE Id = :reportId
+    ];
     
-    public MaterialUsage(Id materialId, String materialName, Decimal totalUsed) {
-        this.materialId = materialId;
-        this.materialName = materialName;
-        this.totalUsed = totalUsed;
+    // Generate report title
+    String reportTitle = report.Report_Type__c;
+    if (report.Report_Type__c == 'Daily Operations') {
+        reportTitle += ' - ' + report.Report_Date__c.format();
+    } else if (report.Report_Type__c == 'Monthly Financial') {
+        reportTitle += ' - ' + getMonthName(Integer.valueOf(report.Report_Month__c)) + 
+                      ' ' + report.Report_Year__c;
+    } else if (report.Report_Type__c == 'Quarterly Customer Analysis') {
+        reportTitle += ' - Q' + report.Report_Quarter__c + ' ' + report.Report_Year__c;
     }
+    
+    // Parse report data
+    Map<String, Object> reportData = (Map<String, Object>) JSON.deserializeUntyped(report.Report_Data__c);
+    
+    // Generate HTML content
+    String htmlBody = '<html><head><style>' +
+                     'body { font-family: Arial, sans-serif; }' +
+                     'h1 { color: #2E7D32; }' +
+                     'table { border-collapse: collapse; width: 100%; }' +
+                     'th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }' +
+                     'th { background-color: #f2f2f2; }' +
+                     '.metric { font-weight: bold; font-size: 16px; }' +
+                     '</style></head><body>' +
+                     '<h1>' + reportTitle + '</h1>';
+    
+    // Generate report-specific content
+    if (report.Report_Type__c == 'Daily Operations') {
+        htmlBody += generateDailyOperationsHtml(reportData);
+    } else if (report.Report_Type__c == 'Monthly Financial') {
+        htmlBody += generateMonthlyFinancialHtml(reportData);
+    } else if (report.Report_Type__c == 'Quarterly Customer Analysis') {
+        htmlBody += generateQuarterlyCustomerHtml(reportData);
+    }
+    
+    htmlBody += '</body></html>';
+    
+    // Prepare email
+    Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+    email.setSubject(reportTitle);
+    email.setHtmlBody(htmlBody);
+    email.setToAddresses(recipients);
+    
+    // Send email
+    Messaging.sendEmail(new Messaging.SingleEmailMessage[] { email });
+    
+    // Update report status
+    report.Status__c = 'Delivered';
+    report.Delivery_Date__c = Datetime.now();
+    update report;
+}
+
+/**
+ * Generate daily operations HTML content
+ */
+private static String generateDailyOperationsHtml(Map<String, Object> reportData) {
+    String html = '<h2>Summary</h2>' +
+                 '<p>Total Assignments: <span class="metric">' + reportData.get('totalAssignments') + '</span></p>' +
+                 '<p>Completed Assignments: <span class="metric">' + reportData.get('completedAssignments') + '</span></p>' +
+                 '<p>Completion Rate: <span class="metric">' + 
+                 formatDecimal((Decimal)reportData.get('completionRate')) + '%</span></p>' +
+                 '<p>Total Revenue: <span class="metric">$' + 
+                 formatDecimal((Decimal)reportData.get('totalRevenue')) + '</span></p>';
+    
+    html += '<h2>Service Type Distribution</h2><table><tr><th>Service Type</th><th>Count</th></tr>';
+    Map<String, Object> serviceTypes = (Map<String, Object>)reportData.get('serviceTypeDistribution');
+    for (String serviceType : serviceTypes.keySet()) {
+        html += '<tr><td>' + serviceType + '</td><td>' + serviceTypes.get(serviceType) + '</td></tr>';
+    }
+    html += '</table>';
+    
+    html += '<h2>Technician Assignments</h2><table><tr><th>Technician</th><th>Assignments</th></tr>';
+    Map<String, Object> techAssignments = (Map<String, Object>)reportData.get('technicianAssignments');
+    for (String tech : techAssignments.keySet()) {
+        html += '<tr><td>' + tech + '</td><td>' + techAssignments.get(tech) + '</td></tr>';
+    }
+    html += '</table>';
+    
+    return html;
 }
 ```
 
-### ResourceEfficiency
+## Dashboard Integration
 
-Structure to hold resource efficiency data.
+Reports integrate with Salesforce dashboards:
 
 ```apex
-public class ResourceEfficiency {
-    public Id resourceId;
-    public String resourceName;
-    public Integer assignmentCount;
-    public Decimal totalHours;
-    public Decimal timeEfficiency;
-    public Decimal customerRating;
+/**
+ * Refresh dashboard components with latest report data
+ */
+public static void updateReportingDashboards() {
+    // Get dashboard IDs
+    Id operationsDashboardId = [
+        SELECT Id FROM Dashboard 
+        WHERE DeveloperName = 'Operations_Dashboard'
+        LIMIT 1
+    ].Id;
     
-    public ResourceEfficiency(Id resourceId, String resourceName,
-                             Integer assignmentCount, Decimal totalHours,
-                             Decimal timeEfficiency, Decimal customerRating) {
-        this.resourceId = resourceId;
-        this.resourceName = resourceName;
-        this.assignmentCount = assignmentCount;
-        this.totalHours = totalHours;
-        this.timeEfficiency = timeEfficiency;
-        this.customerRating = customerRating;
-    }
+    Id financialDashboardId = [
+        SELECT Id FROM Dashboard 
+        WHERE DeveloperName = 'Financial_Dashboard'
+        LIMIT 1
+    ].Id;
+    
+    Id customerDashboardId = [
+        SELECT Id FROM Dashboard 
+        WHERE DeveloperName = 'Customer_Dashboard'
+        LIMIT 1
+    ].Id;
+    
+    // Update recent report data
+    Report__c recentDailyReport = [
+        SELECT Id, Report_Data__c FROM Report__c
+        WHERE Report_Type__c = 'Daily Operations'
+        ORDER BY Report_Date__c DESC
+        LIMIT 1
+    ];
+    
+    Report__c recentMonthlyReport = [
+        SELECT Id, Report_Data__c FROM Report__c
+        WHERE Report_Type__c = 'Monthly Financial'
+        ORDER BY Report_Year__c DESC, Report_Month__c DESC
+        LIMIT 1
+    ];
+    
+    Report__c recentQuarterlyReport = [
+        SELECT Id, Report_Data__c FROM Report__c
+        WHERE Report_Type__c = 'Quarterly Customer Analysis'
+        ORDER BY Report_Year__c DESC, Report_Quarter__c DESC
+        LIMIT 1
+    ];
+    
+    // Update dashboards
+    updateOperationsDashboard(operationsDashboardId, recentDailyReport);
+    updateFinancialDashboard(financialDashboardId, recentMonthlyReport);
+    updateCustomerDashboard(customerDashboardId, recentQuarterlyReport);
 }
 ```
 
-### RevenueReport
+## Benefits of the Reporting System
 
-Structure to hold revenue report data.
-
-```apex
-public class RevenueReport {
-    public Date startDate;
-    public Date endDate;
-    public Decimal totalRevenue;
-    public Decimal totalCosts;
-    public Decimal grossProfit;
-    public Decimal profitMargin;
-    public List<CustomerRevenue> customerRevenue;
-    public Map<String, Decimal> revenueByMonth;
-    
-    public RevenueReport(Date startDate, Date endDate,
-                        Decimal totalRevenue, Decimal totalCosts,
-                        Decimal grossProfit, Decimal profitMargin,
-                        List<CustomerRevenue> customerRevenue,
-                        Map<String, Decimal> revenueByMonth) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalRevenue = totalRevenue;
-        this.totalCosts = totalCosts;
-        this.grossProfit = grossProfit;
-        this.profitMargin = profitMargin;
-        this.customerRevenue = customerRevenue;
-        this.revenueByMonth = revenueByMonth;
-    }
-}
-```
-
-### CustomerRevenue
-
-Structure to hold customer revenue data.
-
-```apex
-public class CustomerRevenue {
-    public Id accountId;
-    public String accountName;
-    public Integer orderCount;
-    public Decimal totalRevenue;
-    
-    public CustomerRevenue(Id accountId, String accountName,
-                          Integer orderCount, Decimal totalRevenue) {
-        this.accountId = accountId;
-        this.accountName = accountName;
-        this.orderCount = orderCount;
-        this.totalRevenue = totalRevenue;
-    }
-}
-```
-
-### CostAnalysisReport
-
-Structure to hold cost analysis data.
-
-```apex
-public class CostAnalysisReport {
-    public Date startDate;
-    public Date endDate;
-    public Decimal totalCosts;
-    public Decimal totalMaterialsCost;
-    public Decimal materialsCostPercentage;
-    public Decimal totalLaborCost;
-    public Decimal laborCostPercentage;
-    public Decimal totalEquipmentCost;
-    public Decimal equipmentCostPercentage;
-    public List<MaterialCost> materialCosts;
-    
-    public CostAnalysisReport(Date startDate, Date endDate,
-                             Decimal totalCosts, Decimal totalMaterialsCost,
-                             Decimal materialsCostPercentage, Decimal totalLaborCost,
-                             Decimal laborCostPercentage, Decimal totalEquipmentCost,
-                             Decimal equipmentCostPercentage, List<MaterialCost> materialCosts) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalCosts = totalCosts;
-        this.totalMaterialsCost = totalMaterialsCost;
-        this.materialsCostPercentage = materialsCostPercentage;
-        this.totalLaborCost = totalLaborCost;
-        this.laborCostPercentage = laborCostPercentage;
-        this.totalEquipmentCost = totalEquipmentCost;
-        this.equipmentCostPercentage = equipmentCostPercentage;
-        this.materialCosts = materialCosts;
-    }
-}
-```
-
-### MaterialCost
-
-Structure to hold material cost data.
-
-```apex
-public class MaterialCost {
-    public Id materialId;
-    public String materialName;
-    public Decimal totalQuantity;
-    public Decimal totalCost;
-    
-    public MaterialCost(Id materialId, String materialName,
-                       Decimal totalQuantity, Decimal totalCost) {
-        this.materialId = materialId;
-        this.materialName = materialName;
-        this.totalQuantity = totalQuantity;
-        this.totalCost = totalCost;
-    }
-}
-``` 
+1. **Data-Driven Decisions**: Comprehensive metrics enable evidence-based business decisions
+2. **Performance Tracking**: Monitor KPIs across operations, finance, and customer satisfaction
+3. **Trend Analysis**: Identify patterns and anomalies through historical data comparison
+4. **Automated Delivery**: Schedule generation and distribution reduces manual effort
+5. **Multi-Format Output**: View reports in-app, via email, or through dashboards 

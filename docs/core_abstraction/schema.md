@@ -15,7 +15,7 @@ The BoxFresh App is built on a foundation of custom Salesforce objects that mode
 
 ## 1. Inventory Objects
 
-Inventory objects manage the materials and supplies used in landscaping services.
+Inventory objects manage the materials and supplies used in landscaping services, implementing capacity constraints following Eliyahu Goldratt's Theory of Constraints principles.
 
 ### Material_SKU__c
 
@@ -27,19 +27,21 @@ This is the catalog of unique stock items in the inventory.
 - `Unit_of_Measure__c`: How the item is measured (e.g., kg, liter, piece)
 - `Unit_Cost__c`: Cost per unit
 - `Category__c`: The category of material
+- `Capacity_Units_Per_Unit__c`: How many capacity units each unit of this SKU consumes
 
 **Relationships:**
 - Has many `Material_Stock__c` records
 
 ### Material_Stock__c
 
-Tracks the quantity of each material batch.
+Tracks the quantity of each material batch and its capacity consumption.
 
 **Key Fields:**
 - `Material_SKU__c`: Lookup to the material catalog
 - `Quantity__c`: The amount available
 - `Purchase_Date__c`: When the stock was acquired
-- `Expiration_Date__c`: When the stock expires (if applicable)
+- `Units_Consumed__c`: How many capacity units this stock consumes in its container
+- `Capacity_Status__c`: Current status relative to buffer thresholds
 
 **Relationships:**
 - Belongs to one `Material_SKU__c`
@@ -47,17 +49,21 @@ Tracks the quantity of each material batch.
 
 ### Inventory__c
 
-Manages storage locations and capacity limits.
+Manages storage locations and capacity constraints, representing physical containers.
 
 **Key Fields:**
 - `Name`: Identifier for the inventory location
 - `Location__c`: Physical location
-- `Capacity__c`: Maximum storage capacity
+- `Capacity_Units__c`: Maximum capacity units available in this container
+- `Available_Units__c`: Formula field showing remaining capacity
 - `Resource_Asset__c`: Lookup to associated resource asset
+- `Buffer_Status__c`: Current buffer zone status (Below Buffer/Within Buffer/Above Buffer)
+- `Is_Constraint__c`: Boolean indicating if this container is a current system constraint
 
 **Relationships:**
 - Has many `Material_Stock__c` records
 - Belongs to one `Resource_Asset__c`
+- Referenced by many `Assignment__c` records
 
 ## 2. Resource & Asset Objects
 
@@ -124,6 +130,7 @@ Represents the master agreement with a customer.
 - Belongs to one `Account` (standard object)
 - Has many `Order__c` records
 - Has many `Service_Agreement__c` records
+- Has many `Assignment__c` records (Master-Detail)
 
 ### Order__c
 
@@ -153,7 +160,7 @@ Details specific terms and conditions of the contract.
 
 ### Assignment__c
 
-Links resources to specific jobs/orders.
+Key junction object linking contracts, resources, and inventory.
 
 **Key Fields:**
 - `Order__c`: Related service order
@@ -161,10 +168,16 @@ Links resources to specific jobs/orders.
 - `Start_Time__c`: Assignment start time
 - `End_Time__c`: Assignment end time
 - `Status__c`: Current assignment status
+- `Assigned_Inventory__c`: Lookup to inventory container
+- `Total_Capacity_Required__c`: Total capacity units needed
+- `Capacity_Allocated__c`: Capacity units successfully allocated
 
 **Relationships:**
 - Belongs to one `Order__c`
 - Belongs to one `Resource_Unit__c`
+- Belongs to one `Inventory__c` (Assigned_Inventory__c)
+- Child of `Core_Contract__c` (Master-Detail)
+- Has many `Schedule__c` records
 
 ## 4. Property & Location Objects
 
@@ -184,6 +197,7 @@ Represents a physical location where services are performed.
 **Relationships:**
 - Belongs to one `Account` (standard object)
 - Has many `Service_Location__c` records
+- Has many `Core_Contract__c` records
 
 ### Service_Location__c
 
@@ -196,4 +210,37 @@ Represents specific areas within a property.
 - `Size__c`: Location size
 
 **Relationships:**
-- Belongs to one `Property__c` 
+- Belongs to one `Property__c`
+
+## 5. Schedule Objects
+
+These objects manage the execution of services.
+
+### Schedule__c
+
+Represents a specific scheduled service execution.
+
+**Key Fields:**
+- `Assignment__c`: Parent assignment
+- `Scheduled_Date__c`: When the service is scheduled
+- `Status__c`: Current schedule status
+- `Duration__c`: Expected duration
+- `Notes__c`: Schedule notes
+
+**Relationships:**
+- Belongs to one `Assignment__c`
+- Has many `Material_Usage__c` records
+
+### Material_Usage__c
+
+Tracks materials used during service execution.
+
+**Key Fields:**
+- `Schedule__c`: Parent schedule
+- `Material_Stock__c`: Source material stock
+- `Quantity_Used__c`: Amount used
+- `Usage_Date__c`: When the material was used
+
+**Relationships:**
+- Belongs to one `Schedule__c`
+- Belongs to one `Material_Stock__c` 

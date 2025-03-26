@@ -4,44 +4,52 @@ title: "Home"
 nav_order: 1
 ---
 
-# BoxFresh Gardens App
+# BoxFresh App Documentation
 
-A Salesforce-native application for automating service scheduling, inventory management, and customer communication for a landscaping business.
+Welcome to the BoxFresh App documentation. This guide provides comprehensive information about the app's architecture, implementation patterns, and utility functions.
 
-<div align="center">
-  <img src="https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/img/19-3-25-latest.png?raw=true" width="600"/>
-</div>
+## Latest Update: Documentation Consolidation Initiative
 
-## Core Abstraction
+The BoxFresh App documentation is undergoing a consolidation effort (April 3-11, 2025) to improve navigation, reduce redundancy, and enhance the overall documentation experience. During this period, all documentation remains accessible, but you may encounter "Work in Progress" notifications on documents being updated.
 
-The BoxFresh App is built on several key abstractions:
+See the [Documentation Consolidation Initiative](./consolidation/index.md) for more details.
 
-- [Object Schema](./core_abstraction/schema.md): The custom Salesforce objects that form the foundation of the application
-- [Process Flows](./core_abstraction/flows.md): The automated workflows that drive business processes
-- [Data Communication](./core_abstraction/communication.md): How different components share and update data
-- [Batch Processing](./core_abstraction/batch.md): How the app handles processing multiple records efficiently
+## Previous Update: Theory of Constraints Implementation
 
-## Utility Functions
+The BoxFresh App has implemented Eliyahu Goldratt's Theory of Constraints principles for inventory management, treating inventory containers as capacity-constrained resources, with the Assignment object serving as a central junction between contracts, inventory, and resources.
 
-The app utilizes several utility functions to handle core operations:
+## Core Documentation
 
-- [Inventory Management](./utility_function/inventory.md): Functions for tracking and managing material inventory
-- [Resource Allocation](./utility_function/resources.md): Functions for assigning and tracking resources
-- [Reporting Tools](./utility_function/reporting.md): Utilities for generating insights and analytics
+- [Object Schema](./core_abstraction/schema.md) - Object model definitions with capacity tracking fields
+- [Flow Management](./core_abstraction/flows.md) - Data flow through the system
+- [Communication](./core_abstraction/communication.md) - Communication patterns
+- [Batch Processing](./core_abstraction/batch.md) - Handling large data volumes
 
 ## Design Patterns
 
-The app implements several key design patterns:
+- [Workflow Automation](./design_pattern/workflow.md) - Constraint-based workflow automation
+- [Structure](./design_pattern/structure.md) - Structured data patterns
+- [Communication](./design_pattern/communication.md) - Customer communication patterns
+- [Agent](./design_pattern/agent.md) - Agent-based automation
 
-- [Structured Data Model](./design_pattern/structure.md): How data is organized and related
-- [Workflow Automation](./design_pattern/workflow.md): How business processes are automated
-- [Customer Communication](./design_pattern/communication.md): How the app facilitates communication with customers
-- [Resource Optimization](./design_pattern/optimization.md): How the app maximizes resource efficiency
+## Implementation Guides
 
-## [System Design Document](./design.md)
+- [Inventory Capacity Fields](./implementation/inventory_fields.md) - Implementing Inventory__c capacity fields
+- [Material Stock Capacity Fields](./implementation/material_stock_fields.md) - Implementing Material_Stock__c capacity fields
+- [Assignment Junction Relationship](./implementation/assignment_junction.md) - Enhancing Assignment__c as a junction object
+- [Capacity Check Flow](./implementation/capacity_check_flow.md) - Implementing capacity validation flows
+- [Container Update Flow](./implementation/container_update_flow.md) - Implementing container update automation
 
-The comprehensive system design document provides a detailed overview of the app's architecture, data model, and implementation plan.
+## Project Management
 
-## [Changelog](./Changelog.md)
+- [Changelog](./Changelog.md) - Recent and upcoming changes
+- [Implementation Proposal](./Proposal.md) - TOC implementation proposal
+- [Project Status](./Status.md) - Current project status
+- [Sprint Plan](./Sprint-Plan.md) - Current sprint plan
+- [Documentation Consolidation](./consolidation/index.md) - Documentation restructuring initiative
+- [Next Phase Planning](./next-phase/Proposal.md) - Planning for user access, cases, and reporting
 
-Track the development progress and updates to the BoxFresh App. 
+## Additional Resources
+
+- [GitHub Repository](https://github.com/Rwb3n/SF-Boxfresh-app)
+- [Implementation Guide](https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/03_real-build/01_mid-way_model.md) 
