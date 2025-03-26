@@ -1,16 +1,26 @@
 ---
 layout: default
 title: "Assignment Junction Relationship"
-parent: "Implementation Guides"
+parent: "Capacity Management Implementation"
+grand_parent: "Implementation Guides"
 nav_order: 3
 ---
-
-> **DEPRECATION NOTICE**: This document has been moved to [Assignment Junction Relationship](capacity/junction.md) as part of the Documentation Consolidation Initiative. Please use the new location for the most up-to-date information.
-{: .warning }
 
 # Assignment Junction Relationship Implementation Guide
 
 This guide provides detailed specifications for enhancing the Assignment__c object to serve as a junction between contracts, inventory containers, and resources, in line with the Theory of Constraints approach.
+
+## Overview
+
+In the BoxFresh capacity management system, the Assignment__c object acts as a crucial junction point that connects three key entities:
+
+1. **Core_Contract__c** - The service contract or job
+2. **Resource_Unit__c** - The resource assigned to fulfill the contract
+3. **Inventory__c** - The inventory container providing materials for the job
+
+This junction relationship enables capacity checks and material allocation as part of the TOC implementation, ensuring that inventory constraints are respected when making assignments.
+
+![Junction Relationship](../../assets/junction-model.png)
 
 ## Field Specifications
 
@@ -23,6 +33,15 @@ This guide provides detailed specifications for enhancing the Assignment__c obje
 | Capacity Allocated | Capacity_Allocated__c | Number(18, 2) | Capacity units successfully allocated | 0 |
 | Capacity Status | Capacity_Status__c | Formula (Text) | Status of capacity allocation | Based on allocation percentage |
 | Material Status | Material_Status__c | Formula (Text) | Overall material status for this assignment | Based on related material stock |
+
+## Junction Model in TOC Implementation
+
+The junction design enables:
+
+1. **Capacity Verification**: Before finalizing assignments, the system can verify sufficient capacity exists
+2. **Resource-Inventory Association**: Links resources to specific inventory containers
+3. **Contract Material Requirements**: Tracks capacity needs for each contract/job
+4. **Status Monitoring**: Provides visibility into allocation status
 
 ## Implementation Steps
 
@@ -131,50 +150,55 @@ Create a validation rule to ensure the assignment doesn't exceed available capac
 
 1. Navigate to **Setup** > **Object Manager** > **Assignment__c** > **Validation Rules** > **New**
 2. Configure as follows:
-   - **Rule Name**: Validate_Capacity_Allocation
+   - **Rule Name**: Check_Capacity_Available
    - **Active**: Checked
-   - **Error Condition Formula**: 
+   - **Error Condition Formula**:
      ```
      AND(
        NOT(ISBLANK(Assigned_Inventory__c)),
-       Capacity_Allocated__c > Assigned_Inventory__c.Available_Units__c
+       Total_Capacity_Required__c > 0,
+       Assigned_Inventory__r.Available_Units__c < Total_Capacity_Required__c - Capacity_Allocated__c
      )
      ```
-   - **Error Message**: "The capacity allocated exceeds the available capacity in the assigned inventory container."
-   - **Error Location**: Field: Capacity_Allocated__c
+   - **Error Message**: "The selected inventory container doesn't have enough available capacity for this assignment."
+   - **Error Location**: Top of Page
 
-## Automation: Capacity Allocation Flow
+### 6. Create Quick Action for Inventory Assignment
 
-Create a flow to automatically calculate and allocate capacity:
-
-1. Navigate to **Setup** > **Flow Builder** > **New Flow**
-2. Create a Record-Triggered Flow on the Assignment__c object
-3. Trigger when a record is created or updated, and when Assigned_Inventory__c or Total_Capacity_Required__c changes
-4. Implement this logic:
-   - Check if Assigned_Inventory__c has sufficient Available_Units__c
-   - If yes, set Capacity_Allocated__c = Total_Capacity_Required__c
-   - If no, set Capacity_Allocated__c to the maximum available (or leave unchanged if reducing would lose allocation)
-   - Create a Task if capacity can't be fully allocated
+1. Navigate to **Setup** > **Object Manager** > **Assignment__c** > **Buttons, Links, and Actions** > **New Action**
+2. Configure as follows:
+   - **Action Type**: Update a Record
+   - **Label**: Assign Inventory
+   - **Name**: Assign_Inventory
+   - **Fields to Include**:
+     - Assigned_Inventory__c
+     - Total_Capacity_Required__c
 
 ## Testing Steps
 
-Once implemented, verify the following:
+1. Create a test Core_Contract__c record
+2. Create a test Resource_Unit__c record
+3. Create a test Inventory__c record with 100 capacity units
+4. Create an Assignment__c record connecting the contract and resource
+5. Use the quick action to assign inventory and set capacity required to 50
+6. Verify that:
+   - Assigned_Inventory__c is set correctly
+   - Capacity_Status__c shows "Not Allocated" initially
+   - The validation rule prevents setting Total_Capacity_Required__c higher than available capacity
 
-1. Create a new Assignment__c record:
-   - Link to a Core_Contract__c
-   - Link to a Resource_Unit__c
-   - Link to an Inventory__c with available capacity
-   - Set Total_Capacity_Required__c = 50
-2. Verify that:
-   - Capacity_Allocated__c is updated via the flow
-   - Capacity_Status__c shows the correct allocation status
-   - Material_Status__c reflects the assigned inventory's buffer status
-   - The assignment appears in the related list on the Inventory__c record
+## Related Implementation Guides
+
+- [Inventory Capacity Fields](./inventory.md) - Implementing container capacity fields
+- [Material Stock Capacity Fields](./stock.md) - Implementing capacity consumption fields for materials
+- [Capacity Management Flows](./flows.md) - Implementing flows that handle capacity allocation and verification
+- [Validation Rules](./validation.md) - Additional validation rules for capacity management
 
 ## Considerations
 
-- The junction relationship allows you to track material assignments across contracts and resources
-- Consider creating a visual indicator on Assignment__c records to highlight capacity issues
-- Ensure proper security settings so that only authorized users can modify capacity allocations
-- The automated flow helps maintain data integrity but can be overridden for special cases
-- Consider adding rollup summaries on Core_Contract__c to show total capacity required across all assignments 
+- The junction model allows for flexibility in assignment and inventory allocation
+- Consider using custom list views to monitor assignments with capacity issues
+- Assignments with "At Risk" material status may require attention and potential reallocation
+
+## Documentation Consolidation
+
+This guide was migrated from the original implementation guide `assignment_junction.md` as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). 

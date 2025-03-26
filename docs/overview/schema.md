@@ -1,12 +1,9 @@
 ---
 layout: default
 title: "Object Schema"
-parent: "Core Abstraction"
-nav_order: 1
+parent: "Overview"
+nav_order: 2
 ---
-
-> **DEPRECATED**: This document has been moved to [Object Schema](../overview/schema.md) as part of the [Documentation Consolidation Initiative](../consolidation/index.md). Please use the new location.
-{: .warning }
 
 # Object Schema
 
@@ -246,4 +243,8 @@ Tracks materials used during service execution.
 
 **Relationships:**
 - Belongs to one `Schedule__c`
-- Belongs to one `Material_Stock__c` 
+- Belongs to one `Material_Stock__c`
+
+## Documentation Consolidation
+
+This content has been migrated as part of the [Documentation Consolidation Initiative](../consolidation/index.md) (April 3-11, 2025) from its original location at `core_abstraction/schema.md`. 

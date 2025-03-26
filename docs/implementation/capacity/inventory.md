@@ -1,16 +1,23 @@
 ---
 layout: default
 title: "Inventory Capacity Fields"
-parent: "Implementation Guides"
+parent: "Capacity Management Implementation"
+grand_parent: "Implementation Guides"
 nav_order: 1
 ---
-
-> **DEPRECATION NOTICE**: This document has been moved to [Inventory Capacity Fields](capacity/inventory.md) as part of the Documentation Consolidation Initiative. Please use the new location for the most up-to-date information.
-{: .warning }
 
 # Inventory Capacity Fields Implementation Guide
 
 This guide provides detailed specifications for implementing the capacity fields on the Inventory__c object to support the Theory of Constraints approach.
+
+## Overview
+
+In the BoxFresh app, inventory containers are treated as capacity-constrained resources. Each container has a defined capacity, and materials stored within consume a portion of that capacity. The capacity management system allows you to:
+
+- Track total and available capacity
+- Monitor buffer zones (red/yellow/green)
+- Identify system constraints
+- Prevent capacity overallocation
 
 ## Field Specifications
 
@@ -25,13 +32,23 @@ This guide provides detailed specifications for implementing the capacity fields
 | Is Constraint | Is_Constraint__c | Checkbox | Flag indicating if this container is a current system constraint | N/A | False |
 | Capacity Utilization % | Capacity_Utilization_Percent__c | Formula (Percent) | Percentage of capacity currently utilized | (Total_Units_Consumed__c / Capacity_Units__c) * 100 | N/A |
 
+## Buffer Management Zones
+
+The Buffer Status field implements a three-zone buffer management system based on TOC principles:
+
+- **Below Buffer (Red Zone)** - Less than 30% of capacity available. Considered at risk and requires immediate attention.
+- **Within Buffer (Yellow Zone)** - Between 30% and 70% of capacity available. Normal operating range.
+- **Above Buffer (Green Zone)** - More than 70% of capacity available. Capacity is underutilized.
+
+![Buffer Management Zones](../../assets/buffer-zones.png)
+
 ## Implementation Steps
 
 ### 1. Create Custom Fields
 
 1. Navigate to **Setup** > **Object Manager** > **Inventory__c**
 2. Click **Fields & Relationships** > **New**
-3. Create each field according to the specifications above
+3. Create each field according to the specifications below
 
 #### Capacity_Units__c (Number)
 
@@ -142,8 +159,18 @@ Once implemented, verify the following:
    - Buffer_Status__c shows the correct status based on utilization
    - Validation prevents total consumption exceeding capacity
 
+## Related Implementation Guides
+
+- [Material Stock Capacity Fields](./stock.md) - Implementing the capacity consumption fields for materials
+- [Assignment Junction Relationship](./junction.md) - Creating the junction relationship between inventory and assignments
+- [Capacity Management Flows](./flows.md) - Implementing the flows that ensure capacity constraints are maintained
+
 ## Considerations
 
 - The default capacity of 100 units can be adjusted based on your specific business needs
 - Buffer thresholds (30% and 70%) are implemented directly in the formula and may need adjustment
-- The Is_Constraint__c field is manually set and should be updated during regular constraint reviews 
+- The Is_Constraint__c field is manually set and should be updated during regular constraint reviews
+
+## Documentation Consolidation
+
+This guide was migrated from the original implementation guide `inventory_fields.md` as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). 

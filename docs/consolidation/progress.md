@@ -7,7 +7,7 @@ nav_order: 5
 
 # Consolidation Progress
 
-*Last Updated: April 3, 2025*
+*Last Updated: April 5, 2025*
 
 This document tracks the progress of the documentation consolidation effort, showing which tasks have been completed and which are still pending.
 
@@ -15,17 +15,20 @@ This document tracks the progress of the documentation consolidation effort, sho
 
 | Directory | Status | Notes |
 |-----------|--------|-------|
-| `/docs/overview/` | ✅ Created | Index file created |
-| `/docs/implementation/` | ✅ Created | Index file created |
-| `/docs/implementation/capacity/` | ✅ Created | Index file created |
-| `/docs/implementation/future/` | ⏳ Pending | |
-| `/docs/project/` | ✅ Created | Index file created |
-| `/docs/project/sprints/` | ⏳ Pending | |
-| `/docs/project/proposals/` | ⏳ Pending | |
-| `/docs/reference/` | ✅ Created | Index file created |
-| `/docs/reference/patterns/` | ⏳ Pending | |
-| `/docs/reference/utilities/` | ⏳ Pending | |
-| `/docs/consolidation/` | ✅ Created | Index file created |
+| `/docs/overview/` | ✅ Completed | Index file created |
+| `/docs/implementation/` | ✅ Completed | Index file created |
+| `/docs/implementation/capacity/` | ✅ Completed | Index file created |
+| `/docs/implementation/future/` | ✅ Completed | Index file created |
+| `/docs/implementation/security/` | ✅ Completed | Index file created with placeholder content |
+| `/docs/implementation/cases/` | ✅ Completed | Index file created with placeholder content |
+| `/docs/implementation/reporting/` | ✅ Completed | Index file created with placeholder content |
+| `/docs/project/` | ✅ Completed | Index file created |
+| `/docs/project/sprints/` | ✅ Completed | Index file created |
+| `/docs/project/proposals/` | ✅ Completed | Index file created |
+| `/docs/reference/` | ✅ Completed | Index file created |
+| `/docs/reference/patterns/` | ✅ Completed | Index file created |
+| `/docs/reference/utilities/` | ✅ Completed | Index file created |
+| `/docs/consolidation/` | ✅ Completed | Index file created |
 
 ## Document Migration Progress
 
@@ -33,17 +36,17 @@ This document tracks the progress of the documentation consolidation effort, sho
 
 | File | Status | Notes |
 |------|--------|-------|
-| `overview/schema.md` | ⏳ Pending | From `core_abstraction/schema.md` |
-| `overview/architecture.md` | ⏳ Pending | From `design.md` |
-| `overview/concepts.md` | ⏳ Pending | New file needed |
+| `overview/schema.md` | ✅ Completed | Migrated from `core_abstraction/schema.md` |
+| `overview/architecture.md` | ✅ Completed | Migrated from `design.md` |
+| `overview/concepts.md` | ✅ Completed | New file created to document TOC concepts |
 
 ### Implementation Guides
 
 | File | Status | Notes |
 |------|--------|-------|
-| `implementation/capacity/inventory.md` | ⏳ Pending | From `implementation/inventory_fields.md` |
-| `implementation/capacity/stock.md` | ⏳ Pending | From `implementation/material_stock_fields.md` |
-| `implementation/capacity/junction.md` | ⏳ Pending | From `implementation/assignment_junction.md` |
+| `implementation/capacity/inventory.md` | ✅ Completed | From `implementation/inventory_fields.md` |
+| `implementation/capacity/stock.md` | ✅ Completed | From `implementation/material_stock_fields.md` |
+| `implementation/capacity/junction.md` | ✅ Completed | From `implementation/assignment_junction.md` |
 | `implementation/capacity/flows.md` | ⏳ Pending | Merge from multiple existing flow docs |
 | `implementation/capacity/validation.md` | ⏳ Pending | New file needed |
 
@@ -75,10 +78,23 @@ This document tracks the progress of the documentation consolidation effort, sho
 
 | File | Status | Notes |
 |------|--------|-------|
-| `consolidation/index.md` | ✅ Created | Navigation for consolidation section |
-| `consolidation/consolidation-plan.md` | ✅ Created | Overall plan document |
-| `consolidation/file-mapping.md` | ✅ Created | Detailed file mapping |
-| `consolidation/progress.md` | ✅ Created | This progress tracking document |
+| `consolidation/index.md` | ✅ Completed | Navigation for consolidation section |
+| `consolidation/consolidation-plan.md` | ✅ Completed | Overall plan document |
+| `consolidation/file-mapping.md` | ✅ Completed | Detailed file mapping |
+| `consolidation/progress.md` | ✅ Completed | This progress tracking document |
+
+## Milestone Progress
+
+| Milestone | Status | Notes |
+|-----------|--------|-------|
+| Planning | ✅ Completed | Consolidation plan and file mapping completed |
+| Directory Structure | ✅ Completed | All directories created |
+| Index Files | ✅ Completed | All index files created |
+| Content Migration | 🟡 In Progress | 6/20 files migrated (30%), focusing on core and capacity guides |
+| Content Review | ⏳ Not Started | Scheduled for April 8 |
+| Gap Analysis | ⏳ Not Started | Scheduled for April 9 |
+| Deprecation | 🟡 In Progress | Deprecation notices added to all migrated files |
+| Final Review | ⏳ Not Started | Scheduled for April 11 |
 
 ## Gap Analysis
 
@@ -86,12 +102,12 @@ This document tracks the progress of the documentation consolidation effort, sho
 |----------------------|----------|--------|-------|
 | Inventory Validation Rules | High | ⏳ Pending | Need to document capacity validation rules |
 | Roadmap Document | Medium | ⏳ Pending | Need to create project roadmap |
-| Core Concepts | Medium | ⏳ Pending | Document core concepts like TOC |
-| Future Implementation Areas | Low | ⏳ Pending | Placeholder for future implementation areas |
+| Core Concepts | Medium | ✅ Completed | Created document for TOC concepts |
+| Future Implementation Areas | Low | ✅ Completed | Placeholder for future implementation areas |
 
 ## Next Steps
 
-1. **Complete Index Files Creation** - Finish creating any remaining index files
-2. **Start Core File Migration** - Begin with schema and architecture
-3. **Continue Implementation Guide Migration** - Focus on capacity implementation
-4. **Update Progress** - Update this document as tasks are completed 
+1. **Continue Content Migration (April 6)** - Complete remaining capacity implementation guides (flows, validation)
+2. **Migrate Project Files (April 7)** - Move status and sprint plans to project section
+3. **Update Internal Links** - Ensure links between documents are updated
+4. **Review and Update** - Update this progress document daily during consolidation 

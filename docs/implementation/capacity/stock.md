@@ -1,16 +1,24 @@
 ---
 layout: default
 title: "Material Stock Capacity Fields"
-parent: "Implementation Guides"
+parent: "Capacity Management Implementation"
+grand_parent: "Implementation Guides"
 nav_order: 2
 ---
-
-> **DEPRECATION NOTICE**: This document has been moved to [Material Stock Capacity Fields](capacity/stock.md) as part of the Documentation Consolidation Initiative. Please use the new location for the most up-to-date information.
-{: .warning }
 
 # Material Stock Capacity Fields Implementation Guide
 
 This guide provides detailed specifications for implementing the capacity consumption fields on the Material_Stock__c object to support the Theory of Constraints approach.
+
+## Overview
+
+In the BoxFresh app's TOC implementation, materials stored in containers consume a defined amount of capacity. The Material_Stock__c object tracks how much capacity each material consumes and monitors its status relative to the container's buffer zones.
+
+Key concepts in this implementation:
+- Each material type consumes a specific number of capacity units per quantity
+- Total capacity consumption is calculated based on quantity and consumption rate
+- Materials inherit buffer status from their parent container
+- Priority flags help identify critical materials in buffer management
 
 ## Field Specifications
 
@@ -23,6 +31,15 @@ This guide provides detailed specifications for implementing the capacity consum
 | Units Per Quantity | Units_Per_Quantity__c | Number(18, 2) | Capacity units consumed per unit of quantity | N/A | 1 |
 | Total Capacity Required | Total_Capacity_Required__c | Formula (Number) | Total capacity required for this stock | Quantity__c * Units_Per_Quantity__c | N/A |
 | Buffer Priority | Buffer_Priority__c | Picklist | Priority for buffer management | N/A | "Normal" |
+
+## Capacity Consumption Model
+
+Material stock capacity consumption follows these principles:
+
+1. **Unit-Based Consumption**: Each material type has a defined capacity consumption rate (Units_Per_Quantity__c)
+2. **Flexible Allocation**: Different materials can consume different amounts of capacity based on their characteristics
+3. **Container Inheritance**: Material stock inherits buffer status from its container
+4. **Priority Monitoring**: High-priority materials in below-buffer containers receive special attention
 
 ## Implementation Steps
 
@@ -134,42 +151,51 @@ Create a quick action to adjust capacity consumption:
 1. Navigate to **Setup** > **Object Manager** > **Material_Stock__c** > **Buttons, Links, and Actions** > **New Action**
 2. Configure as follows:
    - **Action Type**: Update a Record
-   - **Label**: Adjust Capacity
-   - **Name**: Adjust_Capacity
-   - **Include standard fields**: Units_Consumed__c, Units_Per_Quantity__c
+   - **Label**: Adjust Consumption
+   - **Name**: Adjust_Consumption
+   - **Fields to Include**:
+     - Units_Consumed__c
+     - Buffer_Priority__c
+   - **Predefined Field Values**: None
    - **Success Message**: "Capacity consumption updated successfully"
+
+### 6. Automation for Capacity Calculation
+
+Create a flow or trigger to automatically update Units_Consumed__c when Quantity__c changes:
+
+1. Create a record-triggered flow:
+   - **Object**: Material_Stock__c
+   - **Trigger**: After update
+   - **Condition**: Quantity__c is changed
+   - **Action**: Update Units_Consumed__c to Quantity__c * Units_Per_Quantity__c
 
 ## Testing Steps
 
-Once implemented, verify the following:
-
 1. Create a new Material_Stock__c record with:
+   - Inventory__c linked to a container with capacity
    - Quantity__c = 10
    - Units_Per_Quantity__c = 2
+
 2. Verify that:
-   - Total_Capacity_Required__c calculates to 20
-   - Units_Consumed__c can be manually set to match the required capacity
-   - The validation rule prevents setting Units_Consumed__c to a value that would exceed container capacity
-   - Capacity_Status__c reflects the parent container's buffer status
+   - Units_Consumed__c is updated to 20
+   - The container's Total_Units_Consumed__c increases by 20
+   - The container's Available_Units__c decreases by 20
+   - Capacity_Status__c correctly reflects the container's buffer status
 
-## Additional Workflows
+3. Test the validation rule by attempting to create a material that would exceed the container's capacity
 
-### Automatic Units Consumed Update
+## Related Implementation Guides
 
-To keep Units_Consumed__c in sync with Total_Capacity_Required__c:
-
-1. Create a Flow that updates Units_Consumed__c whenever Quantity__c or Units_Per_Quantity__c changes
-2. Trigger the flow when a Material_Stock__c record is created or updated
-3. Use the following logic:
-   ```
-   UPDATE Material_Stock__c
-   SET Units_Consumed__c = Quantity__c * Units_Per_Quantity__c
-   WHERE Id = [record ID]
-   ```
+- [Inventory Capacity Fields](./inventory.md) - Implementing container capacity fields
+- [Assignment Junction Relationship](./junction.md) - Creating the junction relationship between inventory and assignments
+- [Capacity Management Flows](./flows.md) - Implementing flows for capacity management
 
 ## Considerations
 
-- Units_Consumed__c is manually adjustable to account for special cases where consumption doesn't directly correlate with quantity
-- Material_Stock__c records directly impact container capacity through the roll-up relationship
-- Consider creating a process to regularly review and optimize storage based on Buffer_Priority__c
-- Ensure units of measurement are consistently applied across all materials 
+- Different material types may need different Units_Per_Quantity__c values based on size, weight, or other factors
+- Review Buffer_Priority__c assignments regularly to ensure critical materials are properly identified
+- Consider creating a custom report to highlight high-priority materials in below-buffer containers
+
+## Documentation Consolidation
+
+This guide was migrated from the original implementation guide `material_stock_fields.md` as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). 

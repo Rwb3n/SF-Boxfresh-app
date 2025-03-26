@@ -1,18 +1,17 @@
 ---
 layout: default
-title: "BoxFresh App Design"
+title: "System Architecture"
+parent: "Overview"
+nav_order: 1
 ---
 
-> **DEPRECATED**: This document has been moved to [System Architecture](overview/architecture.md) as part of the [Documentation Consolidation Initiative](consolidation/index.md). Please use the new location.
-{: .warning }
-
-# BoxFresh App System Design
+# BoxFresh App System Architecture
 
 ## 1. Project Requirements
 
 BoxFresh Gardens needs a Salesforce-native app to manage:
 - Service scheduling and job tracking
-- Inventory and resource management
+- Inventory and resource management using Theory of Constraints principles
 - Customer communication and contract management
 - Reporting and performance analysis
 
@@ -28,7 +27,7 @@ The BoxFresh app is suitable for an LLM system because:
 The BoxFresh app requires the following core utilities:
 
 ### Data Access Functions
-- `get_inventory_status(inventory_id)`: Retrieves current inventory levels
+- `get_inventory_status(inventory_id)`: Retrieves current inventory levels and capacity constraints
 - `get_resource_availability(date_range)`: Checks resource availability in a given period
 - `update_job_status(job_id, status)`: Updates the status of a job
 - `create_contract(customer_id, service_details)`: Creates a new service contract
@@ -65,7 +64,7 @@ The BoxFresh app requires the following core utilities:
 
 #### 2. Inventory Management Flow
 - **Node A: Stock Check**
-  - Purpose: Check current inventory levels
+  - Purpose: Check current inventory levels against capacity constraints
   - Type: Regular node
   - `exec`: `get_inventory_status()`
 
@@ -75,7 +74,7 @@ The BoxFresh app requires the following core utilities:
   - `exec`: `forecast_inventory_needs()`
 
 - **Node C: Reorder Decision**
-  - Purpose: Determine if reordering is needed
+  - Purpose: Determine if reordering is needed based on buffer status
   - Type: Regular node (with branching)
   - `exec`: `evaluate_reorder_decision()`
 
@@ -102,9 +101,10 @@ The BoxFresh app requires the following core utilities:
 ```
 shared = {
   "inventory": {
-    "material_skus": [...],  // Catalog of materials
-    "material_stock": [...],  // Current stock levels
-    "locations": [...]        // Storage locations
+    "material_skus": [...],   // Catalog of materials
+    "material_stock": [...],  // Current stock levels with capacity consumption
+    "locations": [...],       // Storage locations with capacity constraints
+    "buffer_status": [...]    // Buffer status for each container
   },
   "resources": {
     "staff": [...],           // Staff resources
@@ -121,6 +121,11 @@ shared = {
     "accounts": [...],        // Customer accounts
     "contracts": [...],       // Service contracts
     "properties": [...]       // Service locations
+  },
+  "assignments": {
+    "resources": [...],       // Resource assignments
+    "inventory": [...],       // Inventory allocations with capacity tracking
+    "schedule": [...]         // Schedule details
   }
 }
 ```
@@ -132,8 +137,8 @@ shared = {
   - `post`: Update jobs and resource availability
 
 - **Inventory Flow**:
-  - `prep`: Read current inventory and usage history
-  - `post`: Update inventory status and orders
+  - `prep`: Read current inventory, capacity constraints, and buffer status
+  - `post`: Update inventory status, buffer zones, and orders
 
 - **Job Completion Flow**:
   - `prep`: Read job details and resource assignments
@@ -141,32 +146,44 @@ shared = {
 
 ## 5. Implementation
 
-The implementation will begin with:
-1. Creating custom objects in Salesforce
+The implementation follows a phased approach:
+
+### Phase 1: Core Capacity Management (Current)
+1. Creating custom objects in Salesforce with capacity constraints
    - Material_SKU__c, Material_Stock__c, Inventory__c
    - Resource__c, Assignment__c, Job__c
    - Contract__c, Property__c
+2. Implementing capacity tracking and buffer management
+   - Capacity fields on Inventory__c and Material_Stock__c
+   - Junction relationship through Assignment__c
+   - Buffer status visualization and alerts
 
-2. Implementing core automation flows
-   - Job assignment and scheduling
-   - Inventory tracking and alerts
-   - Reporting and dashboards
-
-3. Building the user interface
-   - Custom Lightning pages
-   - Mobile optimization
+### Phase 2: User Access, Cases, and Reporting
+1. User Security Implementation
+   - Role configuration and permission sets
+   - Field-level security and sharing rules
+2. Case Management Implementation
+   - Case creation and assignment processes
+   - Escalation and SLA enforcement
+3. Reporting Implementation
+   - Capacity dashboards and operational metrics
+   - Client-facing reports
 
 ## 6. Optimization
 
-Initial optimization will focus on:
+Initial optimization focuses on:
 - Streamlining job assignment process
-- Improving inventory forecasting accuracy
+- Improving inventory forecasting accuracy based on buffer status
 - Enhancing user experience for field staff
 
 ## 7. Reliability
 
-Reliability measures will include:
-- Data validation rules
-- Comprehensive test cases
-- Error handling and notifications
-- Backup and recovery procedures 
+Reliability measures include:
+- Data validation rules for capacity constraints
+- Comprehensive test cases for allocation scenarios
+- Error handling and notifications for buffer violations
+- Backup and recovery procedures
+
+## Documentation Consolidation
+
+This content has been migrated as part of the [Documentation Consolidation Initiative](../consolidation/index.md) (April 3-11, 2025) from its original location at `design.md`. 

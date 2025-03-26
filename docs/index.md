@@ -6,13 +6,88 @@ nav_order: 1
 
 # BoxFresh App Documentation
 
-Welcome to the BoxFresh App documentation. This guide provides comprehensive information about the app's architecture, implementation patterns, and utility functions.
+**Current Initiative: [Documentation Consolidation](consolidation/index.md) (April 3-11, 2025)**
 
-## Latest Update: Documentation Consolidation Initiative
+Welcome to the BoxFresh App documentation! This site contains comprehensive information about the BoxFresh application, a Salesforce-native solution for service scheduling and inventory management.
 
-The BoxFresh App documentation is undergoing a consolidation effort (April 3-11, 2025) to improve navigation, reduce redundancy, and enhance the overall documentation experience. During this period, all documentation remains accessible, but you may encounter "Work in Progress" notifications on documents being updated.
+## Documentation Sections
 
-See the [Documentation Consolidation Initiative](./consolidation/index.md) for more details.
+### [Overview](overview/index.md)
+Understanding the core concepts and architecture of the BoxFresh App.
+- [System Architecture](overview/architecture.md)
+- [Object Schema](overview/schema.md)
+- [Core Concepts](overview/concepts.md)
+
+### [Implementation Guides](implementation/index.md)
+Step-by-step instructions for implementing and configuring the BoxFresh App.
+- **Capacity Management** - Instructions for setting up inventory, stock, and assignment management
+- **User Access** - Configuration guides for security and permissions
+- **Cases** - Setup for customer case management
+- **Reporting** - Implementation of standard and custom reports
+- **Future Implementations** - Planned expansion areas
+
+### [Project Documentation](project/index.md)
+Information related to the project management of the BoxFresh App.
+- **Sprint Plans** - Current and past sprint documentation
+- **Proposals** - Feature proposals and specification documents
+- Current implementation status
+
+### [Reference Documentation](reference/index.md)
+Technical reference materials for the BoxFresh App.
+- **Patterns** - Design patterns used in the application
+- **Utilities** - Utility functions and tools
+
+## Documentation Updates
+
+The documentation site is undergoing a comprehensive reorganization as part of our [Documentation Consolidation Initiative](consolidation/index.md). Key improvements include:
+
+- **Improved Navigation Structure** - Logical grouping of related documentation
+- **Streamlined Information Flow** - Better progression from concepts to implementation
+- **Consolidated Content** - Reduced duplication and centralized information
+- **Gap Analysis** - Identification and filling of documentation gaps
+
+See the [consolidation progress](consolidation/progress.md) for the current status of this effort.
+
+## Getting Started
+
+New to BoxFresh? Start with these key documents:
+
+1. [Core Concepts](overview/concepts.md) - Understand the Theory of Constraints approach
+2. [System Architecture](overview/architecture.md) - Learn about system design
+3. [Object Schema](overview/schema.md) - Explore the data model
+
+## Recently Updated
+
+- **April 5, 2025**: Added core overview documents (Architecture, Schema, Concepts) and capacity implementation guides ([Inventory](implementation/capacity/inventory.md), [Stock](implementation/capacity/stock.md), [Junction](implementation/capacity/junction.md))
+- **April 4, 2025**: Created directory structure and organizational framework
+- **April 3, 2025**: Launched Documentation Consolidation Initiative
+
+## Current Focus: Theory of Constraints Implementation
+
+The BoxFresh App is currently implementing inventory management based on the Theory of Constraints (TOC), treating inventory containers as capacity-constrained resources. This approach improves:
+
+- **Resource Utilization**: Optimizing the use of containers and materials
+- **Buffer Management**: Maintaining appropriate capacity buffers
+- **Allocation Efficiency**: Ensuring materials are allocated where needed most
+
+## Documentation Consolidation Initiative
+
+**April 3-11, 2025**: We are currently undergoing a documentation consolidation initiative to improve organization and navigation.
+
+**Progress Update (April 4)**: The directory structure and navigation framework have been completed. Content migration will begin on April 5. During this period:
+
+- All documentation remains accessible via the existing links
+- Some content will be gradually moved to new locations
+- Links will be updated to point to the new structure
+
+See the [Documentation Consolidation](consolidation/) section for details on this effort.
+
+## Recent Updates
+
+- **April 4, 2025**: Completed directory structure and navigation for doc consolidation
+- **April 3, 2025**: Documentation consolidation initiative launched
+- **March 27, 2025**: Completed sprint planning for TOC implementation
+- **March 25, 2025**: Added capacity fields to inventory schema
 
 ## Previous Update: Theory of Constraints Implementation
 
