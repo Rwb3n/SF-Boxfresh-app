@@ -198,4 +198,4 @@ Create a flow or trigger to automatically update Units_Consumed__c when Quantity
 
 ## Documentation Consolidation
 
-This guide was migrated from the original implementation guide `material_stock_fields.md` as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). 
+This content has been migrated as part of the [Documentation Consolidation Initiative](../../project/consolidation-status.md) (April 3-11, 2025). 

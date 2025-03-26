@@ -75,4 +75,4 @@ The TOC implementation helps BoxFresh Gardens optimize operations by:
 
 ## Documentation Consolidation
 
-This document was created as part of the [Documentation Consolidation Initiative](../consolidation/index.md) (April 3-11, 2025) to document core Theory of Constraints concepts applied in the BoxFresh app. 
+This document was created as part of the [Documentation Consolidation Initiative](../project/consolidation-status.md) (April 3-11, 2025) to document core Theory of Constraints concepts applied in the BoxFresh app. 

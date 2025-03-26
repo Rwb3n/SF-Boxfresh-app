@@ -2,112 +2,88 @@
 layout: default
 title: "Consolidation Progress"
 parent: "Documentation Consolidation"
-nav_order: 5
+nav_order: 2
 ---
 
-# Consolidation Progress
+> **DEPRECATION NOTICE**: This document is no longer being updated. The information has been harmonized with [Documentation Consolidation Status](../project/consolidation-status.md) as part of the Documentation Consolidation Initiative. Please use the new location for the most current information.
+{: .warning }
 
-*Last Updated: April 6, 2025*
+# Documentation Consolidation Progress
 
-This document tracks the progress of the documentation consolidation effort, showing which tasks have been completed and which are still pending.
+*Last Updated: April 10, 2025*
 
-## Directory Structure Setup
+This document tracks the progress of the Documentation Consolidation Initiative.
 
-| Directory | Status | Notes |
-|-----------|--------|-------|
-| `/docs/overview/` | ✅ Completed | Index file created |
-| `/docs/implementation/` | ✅ Completed | Index file created |
-| `/docs/implementation/capacity/` | ✅ Completed | Index file created |
-| `/docs/implementation/future/` | ✅ Completed | Index file created |
-| `/docs/implementation/security/` | ✅ Completed | Index file created with placeholder content |
-| `/docs/implementation/cases/` | ✅ Completed | Index file created with placeholder content |
-| `/docs/implementation/reporting/` | ✅ Completed | Index file created with placeholder content |
-| `/docs/project/` | ✅ Completed | Index file created |
-| `/docs/project/sprints/` | ✅ Completed | Index file created |
-| `/docs/project/proposals/` | ✅ Completed | Index file created |
-| `/docs/reference/` | ✅ Completed | Index file created |
-| `/docs/reference/patterns/` | ✅ Completed | Index file created |
-| `/docs/reference/utilities/` | ✅ Completed | Index file created |
-| `/docs/consolidation/` | ✅ Completed | Index file created |
-
-## Document Migration Progress
-
-### Core Files
+## Project Management
 
 | File | Status | Notes |
 |------|--------|-------|
-| `overview/schema.md` | ✅ Completed | Migrated from `core_abstraction/schema.md` |
-| `overview/architecture.md` | ✅ Completed | Migrated from `design.md` |
-| `overview/concepts.md` | ✅ Completed | New file created to document TOC concepts |
+| status.md | ✅ Completed | Migrated to project/status.md with updated formatting |
+| Sprint-Plan.md | ✅ Completed | Migrated to project/sprints/ directory |
+| next-phase/Sprint-Plan.md | ✅ Completed | Migrated to project/sprints/next-phase-plan.md |
+| consolidation-status.md | ✅ Completed | Migrated to project/consolidation-status.md |
+| toc-proposal.md | ✅ Completed | Migrated to project/proposals/toc-proposal.md |
+| next-phase-proposal.md | ✅ Completed | Migrated to project/proposals/next-phase-proposal.md |
 
-### Implementation Guides
-
-| File | Status | Notes |
-|------|--------|-------|
-| `implementation/capacity/inventory.md` | ✅ Completed | From `implementation/inventory_fields.md` |
-| `implementation/capacity/stock.md` | ✅ Completed | From `implementation/material_stock_fields.md` |
-| `implementation/capacity/junction.md` | ✅ Completed | From `implementation/assignment_junction.md` |
-| `implementation/capacity/flows.md` | ✅ Completed | From `implementation/capacity_check_flow.md` and `implementation/container_update_flow.md` |
-| `implementation/capacity/validation.md` | ✅ Completed | New file created to document validation rules |
-
-### Project Management
+## Implementation Guides
 
 | File | Status | Notes |
 |------|--------|-------|
-| `project/status.md` | ⏳ Pending | From `Status.md` |
-| `project/roadmap.md` | ⏳ Pending | New file needed |
-| `project/sprints/capacity-sprint.md` | ⏳ Pending | From `Sprint-Plan.md` |
-| `project/sprints/next-phase-sprint.md` | ⏳ Pending | From `next-phase/Sprint-Plan.md` if exists |
-| `project/proposals/toc-proposal.md` | ⏳ Pending | From `Proposal.md` |
-| `project/proposals/next-phase-proposal.md` | ⏳ Pending | From `next-phase/Proposal.md` if exists |
+| inventory_fields.md | ✅ Completed | Migrated to implementation/capacity/inventory.md |
+| material_stock_fields.md | ✅ Completed | Migrated to implementation/capacity/stock.md |
+| assignment_junction.md | ✅ Completed | Migrated to implementation/capacity/junction.md |
+| capacity_check_flow.md | ✅ Completed | Consolidated into implementation/capacity/flows.md |
+| container_update_flow.md | ✅ Completed | Consolidated into implementation/capacity/flows.md |
+| validation_rules.md | ✅ Completed | Migrated to implementation/capacity/validation.md |
 
-### Reference Documentation
-
-| File | Status | Notes |
-|------|--------|-------|
-| `reference/patterns/workflow.md` | ⏳ Pending | From `design_pattern/workflow.md` |
-| `reference/patterns/structure.md` | ⏳ Pending | From `design_pattern/structure.md` |
-| `reference/patterns/communication.md` | ⏳ Pending | From `design_pattern/communication.md` |
-| `reference/patterns/agent.md` | ⏳ Pending | From `design_pattern/agent.md` |
-| `reference/utilities/llm.md` | ⏳ Pending | From `utility_function/llm.md` |
-| `reference/utilities/reporting.md` | ⏳ Pending | From `utility_function/reporting.md` if exists |
-| `reference/utilities/resources.md` | ⏳ Pending | From `utility_function/resources.md` if exists |
-| `reference/utilities/inventory.md` | ⏳ Pending | From `utility_function/inventory.md` if exists |
-
-## Consolidation Documentation
+## Design Patterns
 
 | File | Status | Notes |
 |------|--------|-------|
-| `consolidation/index.md` | ✅ Completed | Navigation for consolidation section |
-| `consolidation/consolidation-plan.md` | ✅ Completed | Overall plan document |
-| `consolidation/file-mapping.md` | ✅ Completed | Detailed file mapping |
-| `consolidation/progress.md` | ✅ Completed | This progress tracking document |
+| structure.md | ✅ Completed | Migrated to reference/patterns/structure.md |
+| workflow.md | ✅ Completed | Migrated to reference/patterns/workflow.md |
+| communication.md | ✅ Completed | Migrated to reference/patterns/communication.md |
+| agent.md | ✅ Completed | Migrated to reference/patterns/agent.md |
+
+## Reference Documentation
+
+| File | Status | Notes |
+|------|--------|-------|
+| llm.md | ✅ Completed | Migrated to reference/utilities/llm.md |
+| reporting.md | ✅ Completed | Migrated to reference/utilities/reporting.md |
+| resources.md | ✅ Completed | Migrated to reference/utilities/resources.md |
+| inventory.md | ✅ Completed | Migrated to reference/utilities/inventory.md |
 
 ## Milestone Progress
 
 | Milestone | Status | Notes |
 |-----------|--------|-------|
-| Planning | ✅ Completed | Consolidation plan and file mapping completed |
-| Directory Structure | ✅ Completed | All directories created |
-| Index Files | ✅ Completed | All index files created |
-| Content Migration | 🟡 In Progress | 8/20 files migrated (40%), core and capacity guides completed |
-| Content Review | ⏳ Not Started | Scheduled for April 8 |
-| Gap Analysis | ⏳ Not Started | Scheduled for April 9 |
-| Deprecation | 🟡 In Progress | Deprecation notices added to all migrated files |
-| Final Review | ⏳ Not Started | Scheduled for April 11 |
+| Planning | ✅ Completed | All planning documents completed and approved |
+| Directory Structure | ✅ Completed | All required directories created |
+| Index Files | ✅ Completed | All index files created and populated |
+| Content Migration | ✅ Completed | 20/20 files migrated (100%) |
+| Content Review | ⏳ Not Started | Scheduled for April 9-10, 2025 |
+| Gap Analysis | ⏳ Not Started | Scheduled for April 9-10, 2025 |
+| Deprecation | ✅ Completed | Deprecation notices added to all original files |
+| Pruning | ✅ Completed | All deprecated files and empty directories removed |
+| Final Review | ⏳ Not Started | Scheduled for April 11, 2025 |
 
-## Gap Analysis
+## Phase Progress
 
-| Missing Documentation | Priority | Status | Notes |
-|----------------------|----------|--------|-------|
-| Inventory Validation Rules | High | ✅ Completed | Added in `implementation/capacity/validation.md` |
-| Roadmap Document | Medium | ⏳ Pending | Need to create project roadmap |
-| Core Concepts | Medium | ✅ Completed | Created document for TOC concepts |
-| Future Implementation Areas | Low | ✅ Completed | Placeholder for future implementation areas |
+| Phase | Planned Tasks | Completed | In Progress | Not Started | Completion % |
+|-------|---------------|-----------|-------------|------------|--------------|
+| Phase 1: Directory Restructuring | 10 | 10 | 0 | 0 | 100% |
+| Phase 2: Content Consolidation | 10 | 8 | 0 | 2 | 80% |
+| Phase 3: Documentation Enhancement | 10 | 0 | 0 | 10 | 0% |
+| **Total** | **30** | **18** | **0** | **12** | **60%** |
 
 ## Next Steps
 
-1. **Migrate Project Files (April 7)** - Move status and sprint plans to project section
-2. **Migrate Reference Documentation (April 7-8)** - Move design patterns and utility functions
-3. **Update Internal Links** - Ensure links between documents are updated
-4. **Review and Update** - Update this progress document daily during consolidation 
+1. Complete Content Review of all migrated documents
+2. Perform Gap Analysis to identify missing documentation
+3. Begin Phase 3 Documentation Enhancement work
+4. Schedule final review for April 11, 2025
+
+## Documentation Consolidation
+
+*This document is part of the Documentation Consolidation Initiative (April 3-11, 2025).* 

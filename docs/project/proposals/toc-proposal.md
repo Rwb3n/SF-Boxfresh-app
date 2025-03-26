@@ -1,7 +1,9 @@
 ---
 layout: default
-title: "Implementation Proposal"
-nav_order: 9
+title: "Theory of Constraints Proposal"
+parent: "Implementation Proposals"
+grand_parent: "Project Management"
+nav_order: 1
 ---
 
 # Theory of Constraints Implementation Proposal
@@ -145,4 +147,8 @@ The BoxFresh App currently faces several challenges in inventory management:
 
 By implementing Eliyahu Goldratt's Theory of Constraints principles with a focus on inventory as a capacity-constrained resource, the BoxFresh App will achieve significant improvements in operational efficiency, service delivery, and resource utilization. The proposed changes align with the existing schema structure while adding the necessary capacity tracking to optimize system throughput.
 
-This implementation will transform inventory management from a simple stock tracking system to a strategic throughput optimization engine, directly increasing the business's ability to deliver more services with the same resources. 
+This implementation will transform inventory management from a simple stock tracking system to a strategic throughput optimization engine, directly increasing the business's ability to deliver more services with the same resources.
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `Proposal.md` file.* 

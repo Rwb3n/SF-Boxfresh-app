@@ -1,9 +1,12 @@
 ---
 layout: default
-title: "File Mapping Plan"
+title: "File Mapping"
 parent: "Documentation Consolidation"
 nav_order: 4
 ---
+
+> **DEPRECATION NOTICE**: This document has been moved to [Documentation File Mapping](../project/file-mapping.md) as part of the Documentation Consolidation Initiative. Please update your bookmarks.
+{: .warning }
 
 # File Mapping Plan
 

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: "Workflow Automation"
-parent: "Design Pattern"
+parent: "Design Patterns"
+grand_parent: "Reference Documentation"
 nav_order: 2
 ---
 
@@ -203,4 +204,8 @@ workflow:
         action: "Update Assignment__c.Capacity_Allocated__c for each container"
 ```
 
-This workflow ensures inventory capacity is managed as a constraint, implementing Eliyahu Goldratt's Theory of Constraints principles to optimize throughput and reduce excess inventory while preventing shortages. 
+This workflow ensures inventory capacity is managed as a constraint, implementing Eliyahu Goldratt's Theory of Constraints principles to optimize throughput and reduce excess inventory while preventing shortages.
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `design_pattern/workflow.md` file.* 

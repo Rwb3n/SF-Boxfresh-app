@@ -5,6 +5,9 @@ parent: "Documentation Consolidation"
 nav_order: 3
 ---
 
+> **DEPRECATION NOTICE**: This document has been moved to [Documentation Consolidation Plan](../project/consolidation-plan.md) as part of the Documentation Consolidation Initiative. Please update your bookmarks.
+{: .warning }
+
 # Documentation Consolidation Plan
 
 *Last Updated: April 4, 2025*

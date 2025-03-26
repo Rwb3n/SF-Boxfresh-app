@@ -1,8 +1,9 @@
 ---
 layout: default
 title: "Resource Allocation"
-parent: "Utility Function"
-nav_order: 2
+parent: "Utility Functions"
+grand_parent: "Reference Documentation"
+nav_order: 3
 ---
 
 # Resource Allocation
@@ -77,47 +78,59 @@ public static Map<Id, ResourceAvailability> get_resource_availability(Date start
 Finds resources that are available for a specific date and time range.
 
 ```apex
-public static List<Resource_Unit__c> find_available_resources(DateTime startTime, DateTime endTime, Set<String> requiredSkills) {
-    // Get the date for the assignment
-    Date assignmentDate = startTime.date();
-    
-    // Query resource units that are not already fully booked
+public static List<Resource_Unit__c> find_available_resources(
+    Date serviceDate, 
+    Time startTime, 
+    Time endTime, 
+    String serviceLocation,
+    List<String> requiredSkills
+) {
+    // Query resource units with their assignments and associated resources
     List<Resource_Unit__c> units = [
-        SELECT Id, Name, Capacity__c,
-               (SELECT Id FROM Assignments__r WHERE Start_Time__c.date() = :assignmentDate),
-               (SELECT Id, Skill_Set__c FROM Resources__r)
+        SELECT Id, Name, Primary_Location__c, Travel_Radius__c,
+               (SELECT Id, Start_Time__c, End_Time__c 
+                FROM Assignments__r 
+                WHERE Scheduled_Date__c = :serviceDate),
+               (SELECT Id, Skill_Set__c
+                FROM Resources__r)
         FROM Resource_Unit__c
         WHERE Is_Active__c = true
     ];
     
-    // Filter units based on capacity and skills
+    // Filter units based on availability, location, and skills
     List<Resource_Unit__c> availableUnits = new List<Resource_Unit__c>();
     
     for (Resource_Unit__c unit : units) {
-        // Check capacity
-        if (unit.Assignments__r.size() >= unit.Capacity__c) {
-            continue;
-        }
-        
         // Check for time conflicts
         Boolean hasConflict = false;
-        for (Assignment__c assign : [
-            SELECT Id, Start_Time__c, End_Time__c
-            FROM Assignment__c
-            WHERE Resource_Unit__c = :unit.Id
-            AND ((Start_Time__c <= :startTime AND End_Time__c > :startTime)
-                OR (Start_Time__c < :endTime AND End_Time__c >= :endTime)
-                OR (Start_Time__c >= :startTime AND End_Time__c <= :endTime))
-        ]) {
-            hasConflict = true;
-            break;
+        for (Assignment__c assign : unit.Assignments__r) {
+            // Convert DateTime to Time for comparison
+            Time assignStart = assign.Start_Time__c.time();
+            Time assignEnd = assign.End_Time__c.time();
+            
+            // Check for overlap
+            if (!(endTime <= assignStart || startTime >= assignEnd)) {
+                hasConflict = true;
+                break;
+            }
         }
         
         if (hasConflict) {
             continue;
         }
         
-        // Check skills if required
+        // Check location constraints
+        if (serviceLocation != null && unit.Primary_Location__c != null) {
+            // This is a simplified location check
+            // In a real implementation, you would calculate distance
+            if (unit.Primary_Location__c != serviceLocation) {
+                // Check if within travel radius (simplified)
+                // In a real implementation, you would use geolocation
+                continue;
+            }
+        }
+        
+        // Check required skills
         if (requiredSkills != null && !requiredSkills.isEmpty()) {
             Boolean hasRequiredSkills = false;
             
@@ -160,32 +173,57 @@ public static List<Resource_Unit__c> find_available_resources(DateTime startTime
 Creates a new assignment for a resource unit.
 
 ```apex
-public static Assignment__c create_assignment(Id orderId, Id resourceUnitId, DateTime startTime, DateTime endTime) {
-    // Validate that the resource is available
-    List<Assignment__c> conflictingAssignments = [
-        SELECT Id
-        FROM Assignment__c
-        WHERE Resource_Unit__c = :resourceUnitId
-        AND ((Start_Time__c <= :startTime AND End_Time__c > :startTime)
-            OR (Start_Time__c < :endTime AND End_Time__c >= :endTime)
-            OR (Start_Time__c >= :startTime AND End_Time__c <= :endTime))
-    ];
+public static Assignment__c create_assignment(
+    Id resourceUnitId,
+    Id serviceOrderId,
+    Date scheduledDate,
+    Time startTime,
+    Time endTime,
+    Decimal estimatedDuration
+) {
+    // Validate resource availability
+    validateResourceAvailability(resourceUnitId, scheduledDate, startTime, endTime);
     
-    if (!conflictingAssignments.isEmpty()) {
-        throw new ResourceException('Resource is not available at the requested time');
-    }
-    
-    // Create the assignment
+    // Create new assignment
     Assignment__c assignment = new Assignment__c(
-        Order__c = orderId,
         Resource_Unit__c = resourceUnitId,
-        Start_Time__c = startTime,
-        End_Time__c = endTime,
+        Order__c = serviceOrderId,
+        Scheduled_Date__c = scheduledDate,
+        Start_Time__c = DateTime.newInstance(
+            scheduledDate, 
+            startTime
+        ),
+        End_Time__c = DateTime.newInstance(
+            scheduledDate,
+            endTime
+        ),
+        Estimated_Duration__c = estimatedDuration,
         Status__c = 'Scheduled'
     );
     
     insert assignment;
     return assignment;
+}
+
+private static void validateResourceAvailability(
+    Id resourceUnitId, 
+    Date scheduledDate,
+    Time startTime,
+    Time endTime
+) {
+    // Check for existing assignments that would conflict
+    List<Assignment__c> conflictingAssignments = [
+        SELECT Id
+        FROM Assignment__c
+        WHERE Resource_Unit__c = :resourceUnitId
+        AND Scheduled_Date__c = :scheduledDate
+        AND ((Start_Time__c.time() <= :endTime AND End_Time__c.time() >= :startTime))
+        AND Status__c != 'Cancelled'
+    ];
+    
+    if (!conflictingAssignments.isEmpty()) {
+        throw new ResourceException('Resource has conflicting assignments for the specified time');
+    }
 }
 ```
 
@@ -248,111 +286,87 @@ private static void validateStatusTransition(String currentStatus, String newSta
 Optimizes the schedule for a set of assignments.
 
 ```apex
-public static List<Assignment__c> optimize_schedule(List<Assignment__c> assignments) {
-    // Sort assignments by priority and duration
-    assignments.sort((a, b) => {
-        // Sort by priority (high to low)
-        Integer priorityA = getPriorityValue(a.Priority__c);
-        Integer priorityB = getPriorityValue(b.Priority__c);
-        
-        if (priorityA != priorityB) {
-            return priorityA > priorityB ? -1 : 1;
-        }
-        
-        // Then sort by duration (short to long)
-        Decimal durationA = a.Planned_Duration__c;
-        Decimal durationB = b.Planned_Duration__c;
-        
-        if (durationA != durationB) {
-            return durationA < durationB ? -1 : 1;
-        }
-        
-        return 0;
-    });
+public static List<Assignment__c> optimize_schedule(Date targetDate) {
+    // Get all assignments for the target date
+    List<Assignment__c> assignments = [
+        SELECT Id, Resource_Unit__c, Order__r.Service_Location__c,
+               Scheduled_Date__c, Start_Time__c, End_Time__c, Status__c
+        FROM Assignment__c
+        WHERE Scheduled_Date__c = :targetDate
+        AND Status__c = 'Scheduled'
+        ORDER BY Start_Time__c ASC
+    ];
     
-    // Create a map of resource unit ID to its assignments
+    // Group assignments by resource
     Map<Id, List<Assignment__c>> assignmentsByResource = new Map<Id, List<Assignment__c>>();
-    for (Assignment__c a : assignments) {
-        if (!assignmentsByResource.containsKey(a.Resource_Unit__c)) {
-            assignmentsByResource.put(a.Resource_Unit__c, new List<Assignment__c>());
+    
+    for (Assignment__c assignment : assignments) {
+        if (!assignmentsByResource.containsKey(assignment.Resource_Unit__c)) {
+            assignmentsByResource.put(assignment.Resource_Unit__c, new List<Assignment__c>());
         }
-        assignmentsByResource.get(a.Resource_Unit__c).add(a);
+        assignmentsByResource.get(assignment.Resource_Unit__c).add(assignment);
     }
     
-    // For each resource, schedule its assignments
-    List<Assignment__c> scheduledAssignments = new List<Assignment__c>();
+    // Optimize each resource's schedule
+    List<Assignment__c> optimizedAssignments = new List<Assignment__c>();
     
     for (Id resourceId : assignmentsByResource.keySet()) {
         List<Assignment__c> resourceAssignments = assignmentsByResource.get(resourceId);
-        List<Assignment__c> optimizedAssignments = scheduleResourceAssignments(resourceAssignments);
-        scheduledAssignments.addAll(optimizedAssignments);
+        
+        // Sort by location to minimize travel time (simplified)
+        // In a real implementation, you would use a more sophisticated algorithm
+        resourceAssignments.sort(new AssignmentLocationComparator());
+        
+        // Update start and end times to create an efficient schedule
+        Time currentTime = Time.newInstance(9, 0, 0, 0); // Start at 9 AM
+        
+        for (Assignment__c assignment : resourceAssignments) {
+            // Get estimated duration from the difference between start and end time
+            Long durationMs = assignment.End_Time__c.getTime() - assignment.Start_Time__c.getTime();
+            Integer durationMinutes = (Integer)(durationMs / (1000 * 60));
+            
+            // Set new start time
+            assignment.Start_Time__c = DateTime.newInstance(
+                targetDate,
+                currentTime
+            );
+            
+            // Calculate new end time
+            Integer endHour = currentTime.hour();
+            Integer endMinute = currentTime.minute() + durationMinutes;
+            
+            // Adjust for minute overflow
+            while (endMinute >= 60) {
+                endHour++;
+                endMinute -= 60;
+            }
+            
+            Time endTime = Time.newInstance(endHour, endMinute, 0, 0);
+            assignment.End_Time__c = DateTime.newInstance(targetDate, endTime);
+            
+            // Add travel time for next assignment (simplified: 30 minutes)
+            endMinute += 30;
+            while (endMinute >= 60) {
+                endHour++;
+                endMinute -= 60;
+            }
+            
+            currentTime = Time.newInstance(endHour, endMinute, 0, 0);
+            
+            optimizedAssignments.add(assignment);
+        }
     }
     
-    return scheduledAssignments;
+    update optimizedAssignments;
+    return optimizedAssignments;
 }
 
-private static Integer getPriorityValue(String priority) {
-    switch on priority {
-        when 'High' { return 3; }
-        when 'Medium' { return 2; }
-        when 'Low' { return 1; }
-        when else { return 0; }
+private class AssignmentLocationComparator implements Comparator<Assignment__c> {
+    public Integer compare(Assignment__c a, Assignment__c b) {
+        // Simple string comparison of locations
+        // In a real implementation, you would use geolocation
+        return a.Order__r.Service_Location__c.compareTo(b.Order__r.Service_Location__c);
     }
-}
-
-private static List<Assignment__c> scheduleResourceAssignments(List<Assignment__c> assignments) {
-    // Get the date for these assignments
-    Date assignmentDate = assignments[0].Start_Time__c.date();
-    
-    // Get the resource's availability hours
-    Resource_Unit__c unit = [
-        SELECT Id, (SELECT Availability_Start__c, Availability_End__c FROM Resources__r)
-        FROM Resource_Unit__c
-        WHERE Id = :assignments[0].Resource_Unit__c
-    ];
-    
-    // Calculate the earliest start time and latest end time
-    Time earliestStart = Time.newInstance(8, 0, 0, 0); // Default to 8 AM
-    Time latestEnd = Time.newInstance(18, 0, 0, 0); // Default to 6 PM
-    
-    for (Resource__c resource : unit.Resources__r) {
-        if (resource.Availability_Start__c != null && resource.Availability_Start__c < earliestStart) {
-            earliestStart = resource.Availability_Start__c;
-        }
-        if (resource.Availability_End__c != null && resource.Availability_End__c > latestEnd) {
-            latestEnd = resource.Availability_End__c;
-        }
-    }
-    
-    // Create a datetime for the start of the day
-    DateTime currentTime = DateTime.newInstance(assignmentDate, earliestStart);
-    DateTime endOfDay = DateTime.newInstance(assignmentDate, latestEnd);
-    
-    // Schedule each assignment
-    for (Assignment__c assignment : assignments) {
-        // Add a 30-minute gap between assignments
-        if (currentTime > DateTime.newInstance(assignmentDate, earliestStart)) {
-            currentTime = currentTime.addMinutes(30);
-        }
-        
-        // Calculate end time based on planned duration
-        DateTime endTime = currentTime.addMinutes((Integer)(assignment.Planned_Duration__c * 60));
-        
-        // Check if this would go past the end of the day
-        if (endTime > endOfDay) {
-            // Not enough time left today
-            break;
-        }
-        
-        // Update the assignment
-        assignment.Start_Time__c = currentTime;
-        assignment.End_Time__c = endTime;
-        
-        // Move current time to the end of this assignment
-        currentTime = endTime;
-    }
-    
-    return assignments;
 }
 ```
 
@@ -364,32 +378,40 @@ Structure to hold resource availability information.
 
 ```apex
 public class ResourceAvailability {
-    public Id resourceId;
+    public Id resourceUnitId;
     public String name;
     public Decimal totalCapacity;
     public Map<Date, Decimal> availableCapacityByDate;
     
-    public ResourceAvailability(Id resourceId, String name, Decimal totalCapacity,
-                               Map<Date, Decimal> availableCapacityByDate) {
-        this.resourceId = resourceId;
+    public ResourceAvailability(
+        Id resourceUnitId,
+        String name,
+        Decimal totalCapacity,
+        Map<Date, Decimal> availableCapacityByDate
+    ) {
+        this.resourceUnitId = resourceUnitId;
         this.name = name;
         this.totalCapacity = totalCapacity;
         this.availableCapacityByDate = availableCapacityByDate;
     }
     
     public Decimal getAvailableCapacity(Date date) {
-        return availableCapacityByDate.containsKey(date) ? 
-               availableCapacityByDate.get(date) : totalCapacity;
+        return availableCapacityByDate.containsKey(date) ?
+               availableCapacityByDate.get(date) : 0;
     }
 }
 ```
 
 ### ResourceException
 
-Custom exception class for resource-related errors.
+Custom exception for resource-related errors.
 
 ```apex
 public class ResourceException extends Exception {
-    // Default constructor
+    // Custom exception for resource allocation errors
 }
-``` 
+```
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `utility_function/resources.md` file.* 

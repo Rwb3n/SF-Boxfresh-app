@@ -251,4 +251,4 @@ Create flow variables:
 
 ## Documentation Consolidation
 
-This guide was consolidated from the original implementation guides `capacity_check_flow.md` and `container_update_flow.md` as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). 
+This guide was consolidated from the original implementation guides `capacity_check_flow.md` and `container_update_flow.md` as part of the [Documentation Consolidation Initiative](../../project/consolidation-status.md) (April 3-11, 2025). 

@@ -184,4 +184,4 @@ This rule ensures that Total_Capacity_Required__c is non-negative.
 
 ## Documentation Consolidation
 
-This guide was created as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025) to consolidate validation rules that were previously scattered across multiple implementation guides. 
+This guide was created as part of the [Documentation Consolidation Initiative](../../project/consolidation-status.md) (April 3-11, 2025) to consolidate validation rules that were previously scattered across multiple implementation guides. 

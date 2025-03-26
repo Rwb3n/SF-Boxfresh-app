@@ -5,6 +5,14 @@ nav_order: 6
 has_children: true
 ---
 
+> **DEPRECATION NOTICE**: The Documentation Consolidation documentation has been moved to the Project Management section. Please refer to the following documents for current information:
+> 
+> - [Consolidation Status](../project/consolidation-status.md)
+> - [Consolidation Plan](../project/consolidation-plan.md)
+> - [File Mapping](../project/file-mapping.md)
+> - [Pruning Summary](../project/pruning-summary.md)
+{: .warning }
+
 # Documentation Consolidation Initiative
 
 *Last Updated: April 4, 2025*

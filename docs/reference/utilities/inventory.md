@@ -1,8 +1,9 @@
 ---
 layout: default
 title: "Inventory Management"
-parent: "Utility Function"
-nav_order: 1
+parent: "Utility Functions"
+grand_parent: "Reference Documentation"
+nav_order: 2
 ---
 
 # Inventory Management
@@ -157,88 +158,57 @@ private static void updateMaterialStock(Map<Id, Decimal> materialsUsed) {
 Forecasts inventory requirements based on upcoming jobs.
 
 ```apex
-public static Map<Id, Decimal> forecast_inventory_needs(Integer daysAhead) {
+public static List<PurchaseRecommendation> forecast_inventory_needs(Integer daysAhead) {
+    // Get upcoming assignments
+    List<Assignment__c> assignments = [
+        SELECT Id, Scheduled_Date__c, Order__r.Core_Contract__c,
+               (SELECT Id, Material_SKU__c, Estimated_Quantity__c
+                FROM Required_Materials__r)
+        FROM Assignment__c
+        WHERE Scheduled_Date__c >= TODAY
+        AND Scheduled_Date__c <= :Date.today().addDays(daysAhead)
+        AND Status__c != 'Completed'
+        AND Status__c != 'Cancelled'
+    ];
+    
+    // Calculate total material needs
     Map<Id, Decimal> forecastedNeeds = new Map<Id, Decimal>();
     
-    // Get upcoming assignments
-    Date endDate = Date.today().addDays(daysAhead);
-    List<Assignment__c> upcomingAssignments = [
-        SELECT Id, Order__r.Core_Contract__c
-        FROM Assignment__c
-        WHERE Start_Time__c >= TODAY
-        AND Start_Time__c <= :endDate
-    ];
-    
-    // Get contracts for these assignments
-    Set<Id> contractIds = new Set<Id>();
-    for (Assignment__c assign : upcomingAssignments) {
-        contractIds.add(assign.Order__r.Core_Contract__c);
-    }
-    
-    // Get material requirements from contracts
-    List<Contract_Material__c> contractMaterials = [
-        SELECT Material_SKU__c, Quantity_Per_Service__c, Core_Contract__c
-        FROM Contract_Material__c
-        WHERE Core_Contract__c IN :contractIds
-    ];
-    
-    // Calculate forecasted needs
-    Map<Id, Map<Id, Decimal>> materialsByContract = new Map<Id, Map<Id, Decimal>>();
-    
-    for (Contract_Material__c cm : contractMaterials) {
-        if (!materialsByContract.containsKey(cm.Core_Contract__c)) {
-            materialsByContract.put(cm.Core_Contract__c, new Map<Id, Decimal>());
-        }
-        materialsByContract.get(cm.Core_Contract__c).put(cm.Material_SKU__c, cm.Quantity_Per_Service__c);
-    }
-    
-    // Calculate total forecasted needs
-    for (Assignment__c assign : upcomingAssignments) {
-        Id contractId = assign.Order__r.Core_Contract__c;
-        if (materialsByContract.containsKey(contractId)) {
-            Map<Id, Decimal> materials = materialsByContract.get(contractId);
-            for (Id materialId : materials.keySet()) {
-                Decimal currentForecast = forecastedNeeds.containsKey(materialId) ? forecastedNeeds.get(materialId) : 0;
-                forecastedNeeds.put(materialId, currentForecast + materials.get(materialId));
-            }
+    for (Assignment__c assignment : assignments) {
+        for (Required_Material__c rm : assignment.Required_Materials__r) {
+            Decimal currentNeed = forecastedNeeds.containsKey(rm.Material_SKU__c) ?
+                                 forecastedNeeds.get(rm.Material_SKU__c) : 0;
+            forecastedNeeds.put(rm.Material_SKU__c, currentNeed + rm.Estimated_Quantity__c);
         }
     }
     
-    return forecastedNeeds;
-}
-```
-
-### generate_purchase_recommendation
-
-Generates purchase recommendations based on current stock and forecasted needs.
-
-```apex
-public static List<PurchaseRecommendation> generate_purchase_recommendation(Map<Id, Decimal> forecastedNeeds) {
-    List<PurchaseRecommendation> recommendations = new List<PurchaseRecommendation>();
-    
-    // Get current stock levels
+    // Get current inventory levels
     Map<Id, Decimal> currentStock = new Map<Id, Decimal>();
+    
     List<AggregateResult> stockResults = [
         SELECT Material_SKU__c, SUM(Quantity__c) totalQuantity
         FROM Material_Stock__c
         WHERE Material_SKU__c IN :forecastedNeeds.keySet()
+        AND Expiration_Date__c = null OR Expiration_Date__c > TODAY
         GROUP BY Material_SKU__c
     ];
     
     for (AggregateResult ar : stockResults) {
         Id materialId = (Id)ar.get('Material_SKU__c');
-        Decimal totalQuantity = (Decimal)ar.get('totalQuantity');
-        currentStock.put(materialId, totalQuantity);
+        Decimal quantity = (Decimal)ar.get('totalQuantity');
+        currentStock.put(materialId, quantity);
     }
     
     // Get material details
     Map<Id, Material_SKU__c> materials = new Map<Id, Material_SKU__c>([
-        SELECT Id, Name, Reorder_Threshold__c, Reorder_Quantity__c, Unit_Cost__c
+        SELECT Id, Name, Unit_Cost__c, Reorder_Threshold__c, Reorder_Quantity__c
         FROM Material_SKU__c
         WHERE Id IN :forecastedNeeds.keySet()
     ]);
     
-    // Generate recommendations
+    // Create purchase recommendations
+    List<PurchaseRecommendation> recommendations = new List<PurchaseRecommendation>();
+    
     for (Id materialId : forecastedNeeds.keySet()) {
         Decimal needed = forecastedNeeds.get(materialId);
         Decimal available = currentStock.containsKey(materialId) ? currentStock.get(materialId) : 0;
@@ -302,19 +272,24 @@ public class PurchaseRecommendation {
     public Id materialId;
     public String materialName;
     public Decimal currentStock;
-    public Decimal forecastedNeed;
-    public Decimal recommendedQuantity;
+    public Decimal projectedNeed;
+    public Decimal recommendedPurchase;
     public Decimal estimatedCost;
     
-    public PurchaseRecommendation(Id materialId, String materialName, 
-                                 Decimal currentStock, Decimal forecastedNeed, 
-                                 Decimal recommendedQuantity, Decimal estimatedCost) {
+    public PurchaseRecommendation(
+        Id materialId, String materialName, Decimal currentStock,
+        Decimal projectedNeed, Decimal recommendedPurchase, Decimal estimatedCost
+    ) {
         this.materialId = materialId;
         this.materialName = materialName;
         this.currentStock = currentStock;
-        this.forecastedNeed = forecastedNeed;
-        this.recommendedQuantity = recommendedQuantity;
+        this.projectedNeed = projectedNeed;
+        this.recommendedPurchase = recommendedPurchase;
         this.estimatedCost = estimatedCost;
     }
 }
-``` 
+```
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `utility_function/inventory.md` file.* 

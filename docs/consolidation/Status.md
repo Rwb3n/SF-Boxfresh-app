@@ -5,6 +5,9 @@ nav_order: 3
 parent: "Documentation Consolidation"
 ---
 
+> **DEPRECATED**: This document has been moved to [Documentation Consolidation Status](../project/consolidation-status.md) as part of the Documentation Consolidation Initiative. Please update your bookmarks.
+{: .warning }
+
 # Documentation Consolidation Status
 
 *Last Updated: April 3, 2025*

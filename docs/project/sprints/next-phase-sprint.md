@@ -1,7 +1,9 @@
 ---
 layout: default
-title: "Next Phase Sprint Plan"
-nav_order: 6
+title: "User Access & Reporting Sprint"
+parent: "Sprint Plans"
+grand_parent: "Project Management"
+nav_order: 2
 ---
 
 # Next Phase Sprint Plan
@@ -123,4 +125,8 @@ The sprint will be considered successful if:
 
 - Sprint 1 Review: April 15, 2025
 - Sprint 2 Review: April 29, 2025
-- Sprint 3 Review: May 6, 2025 
+- Sprint 3 Review: May 6, 2025
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `next-phase/Sprint-Plan.md` file.* 

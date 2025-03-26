@@ -201,4 +201,4 @@ Create a validation rule to ensure the assignment doesn't exceed available capac
 
 ## Documentation Consolidation
 
-This guide was migrated from the original implementation guide `assignment_junction.md` as part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). 
+This guide was migrated as part of the [Documentation Consolidation Initiative](../../project/consolidation-status.md) (April 3-11, 2025). 

@@ -1,10 +1,12 @@
 ---
 layout: default
-title: "Sprint Plan"
-nav_order: 11
+title: "Capacity Management Sprint"
+parent: "Sprint Plans"
+grand_parent: "Project Management"
+nav_order: 1
 ---
 
-# BoxFresh App: Lightweight Sprint Plan
+# BoxFresh App: Capacity Management Sprint Plan
 
 *Sprint Duration: 2 weeks (March 27 - April 10, 2025)*
 
@@ -90,4 +92,8 @@ Implement core Theory of Constraints principles for inventory capacity managemen
 - Buffer management refinement
 - Constraint identification automation
 - Throughput measurement
-- Advanced reporting 
+- Advanced reporting
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `Sprint-Plan.md` file.* 

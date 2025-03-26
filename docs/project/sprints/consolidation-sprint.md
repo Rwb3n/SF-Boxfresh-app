@@ -1,12 +1,10 @@
 ---
 layout: default
-title: "Documentation Consolidation Sprint Plan"
-nav_order: 2
-parent: "Documentation Consolidation"
+title: "Documentation Consolidation Sprint"
+parent: "Sprint Plans"
+grand_parent: "Project Management"
+nav_order: 3
 ---
-
-> **DEPRECATED**: This document has been moved to [Documentation Consolidation Sprint](../project/sprints/consolidation-sprint.md) as part of the Documentation Consolidation Initiative. Please update your bookmarks.
-{: .warning }
 
 # Documentation Consolidation Sprint Plan
 

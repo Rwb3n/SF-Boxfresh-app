@@ -57,4 +57,4 @@ All future implementation areas will follow the same general principles:
 
 ## Documentation Consolidation
 
-This section is part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). Content placeholders are being created in preparation for Phase 2 implementation. 
+This section is part of the [Documentation Consolidation Initiative](../../project/consolidation-status.md) (April 3-11, 2025). Content placeholders are being created in preparation for Phase 2 implementation. 

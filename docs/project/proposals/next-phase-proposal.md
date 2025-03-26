@@ -1,7 +1,9 @@
 ---
 layout: default
-title: "Next Phase Proposal"
-nav_order: 4
+title: "User Access & Reporting Proposal"
+parent: "Implementation Proposals"
+grand_parent: "Project Management"
+nav_order: 2
 ---
 
 # Next Phase Implementation Proposal
@@ -100,4 +102,8 @@ We recommend proceeding with this phase immediately following the completion of 
 
 1. Review and approve this proposal
 2. Develop a detailed sprint plan
-3. Begin implementation with the highest-priority components 
+3. Begin implementation with the highest-priority components
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `next-phase/Proposal.md` file.* 

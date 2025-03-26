@@ -31,4 +31,4 @@ The capacity management implementation follows these principles:
 
 ## Documentation Consolidation
 
-This section is part of the [Documentation Consolidation Initiative](../../consolidation/index.md) (April 3-11, 2025). Content is being migrated from individual implementation guides to create a more organized and consistent documentation structure. 
+This section is part of the [Documentation Consolidation Initiative](../../project/consolidation-status.md) (April 3-11, 2025). Content is being migrated from individual implementation guides to create a more organized and consistent documentation structure. 

@@ -1,12 +1,13 @@
 ---
 layout: default
 title: "Project Status"
+parent: "Project Management"
 nav_order: 1
 ---
 
 # Project Status
 
-*Last Updated: April 4, 2025*
+*Last Updated: April 6, 2025*
 
 ## Current Focus
 
@@ -23,24 +24,24 @@ The documentation consolidation initiative is making good progress:
 | Planning | ✅ Completed | Consolidation plan and file mapping completed |
 | Directory Structure | ✅ Completed | All directories created |
 | Index Files | ✅ Completed | All index files created |
-| Content Migration | ⏳ Not Started | Scheduled for April 5-7 |
+| Content Migration | 🟡 In Progress | Capacity management guides completed; project docs in progress |
 | Content Review | ⏳ Not Started | Scheduled for April 8 |
 | Gap Analysis | ⏳ Not Started | Scheduled for April 9 |
-| Deprecation | ⏳ Not Started | Scheduled for April 10 |
+| Deprecation | 🟡 In Progress | Added notices to original files as migration occurs |
 | Final Review | ⏳ Not Started | Scheduled for April 11 |
 
-For detailed progress, see [Consolidation Progress](consolidation/progress.md).
+For detailed progress, see [Consolidation Status](consolidation-status.md).
 
 ## TOC Implementation Progress
 
 ### Completed Items
 
 #### Documentation
-- ✅ Updated `schema.md` to include capacity fields for `Inventory__c` and `Material_Stock__c`
-- ✅ Revised `workflow.md` to focus on container capacity management
+- ✅ Updated schema documentation to include capacity fields for `Inventory__c` and `Material_Stock__c`
+- ✅ Revised workflow documentation to focus on container capacity management
 - ✅ Added TOC references to `index.md` and `README.md`
-- ✅ Created `Proposal.md` for TOC implementation strategy
-- ✅ Created `Sprint-Plan.md` for implementation timeline
+- ✅ Created implementation proposal for TOC implementation strategy
+- ✅ Created sprint plan for implementation timeline
 - ✅ Created implementation guides for capacity fields
 - ✅ Created next phase planning documents
 - ✅ Created documentation consolidation plan
@@ -95,4 +96,8 @@ After completing the documentation consolidation:
 | Capacity management complexity increases development time | High | Medium | Phased approach with focus on core functionality first |
 | Integration with existing inventory processes causes conflicts | Medium | Medium | Thorough testing and validation of new workflows |
 | Complex capacity calculations may impact performance | High | Medium | Consider using Apex triggers for performance-critical operations |
-| Data migration for existing records | High | Medium | Create a data migration plan with careful validation steps | 
+| Data migration for existing records | High | Medium | Create a data migration plan with careful validation steps |
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `Status.md` file in the root directory.* 

@@ -186,4 +186,4 @@ Reliability measures include:
 
 ## Documentation Consolidation
 
-This content has been migrated as part of the [Documentation Consolidation Initiative](../consolidation/index.md) (April 3-11, 2025) from its original location at `design.md`. 
+This content has been migrated as part of the [Documentation Consolidation Initiative](../project/consolidation-status.md) (April 3-11, 2025) from its original location at `design.md`. 

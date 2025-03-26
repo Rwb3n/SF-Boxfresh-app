@@ -1,7 +1,8 @@
 ---
 layout: default
 title: "LLM Integration"
-parent: "Utility Function"
+parent: "Utility Functions"
+grand_parent: "Reference Documentation"
 nav_order: 1
 ---
 
@@ -443,3 +444,7 @@ private static List<Service_Recommendation__c> parseServiceRecommendations(
 3. **Knowledge Augmentation**: LLMs supplement staff expertise with broad gardening knowledge
 4. **Scalable Analysis**: Process large volumes of customer feedback and service issues
 5. **Continuous Improvement**: Identify patterns and opportunities across large datasets 
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `utility_function/llm.md` file.* 

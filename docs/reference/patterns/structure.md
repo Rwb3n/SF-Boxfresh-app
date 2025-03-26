@@ -1,7 +1,8 @@
 ---
 layout: default
 title: "Structured Data Model"
-parent: "Design Pattern"
+parent: "Design Patterns"
+grand_parent: "Reference Documentation"
 nav_order: 1
 ---
 
@@ -160,4 +161,8 @@ Resource_Unit__r.Capacity__c > (SELECT COUNT() FROM Assignments__r
                                WHERE Start_Time__c.date() = THIS.Start_Time__c.date())
 ```
 
-These validation rules help maintain data integrity and ensure the structured model works correctly in all scenarios. 
+These validation rules help maintain data integrity and ensure the structured model works correctly in all scenarios.
+
+## Documentation Consolidation
+
+*This document was migrated as part of the Documentation Consolidation Initiative (April 3-11, 2025) from the original `design_pattern/structure.md` file.* 
