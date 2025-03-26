@@ -5,6 +5,9 @@ parent: "Implementation Guides"
 nav_order: 5
 ---
 
+> **DEPRECATION NOTICE**: This document has been moved to [Capacity Management Flows](capacity/flows.md) as part of the Documentation Consolidation Initiative. Please use the new location for the most up-to-date information.
+{: .warning }
+
 # Container Update Flow Implementation Guide
 
 This guide provides detailed instructions for implementing a Container Update Flow that keeps the Inventory__c capacity metrics current by recalculating field values based on related Material_Stock__c records.

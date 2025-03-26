@@ -7,7 +7,7 @@ nav_order: 5
 
 # Consolidation Progress
 
-*Last Updated: April 5, 2025*
+*Last Updated: April 6, 2025*
 
 This document tracks the progress of the documentation consolidation effort, showing which tasks have been completed and which are still pending.
 
@@ -47,8 +47,8 @@ This document tracks the progress of the documentation consolidation effort, sho
 | `implementation/capacity/inventory.md` | ✅ Completed | From `implementation/inventory_fields.md` |
 | `implementation/capacity/stock.md` | ✅ Completed | From `implementation/material_stock_fields.md` |
 | `implementation/capacity/junction.md` | ✅ Completed | From `implementation/assignment_junction.md` |
-| `implementation/capacity/flows.md` | ⏳ Pending | Merge from multiple existing flow docs |
-| `implementation/capacity/validation.md` | ⏳ Pending | New file needed |
+| `implementation/capacity/flows.md` | ✅ Completed | From `implementation/capacity_check_flow.md` and `implementation/container_update_flow.md` |
+| `implementation/capacity/validation.md` | ✅ Completed | New file created to document validation rules |
 
 ### Project Management
 
@@ -90,7 +90,7 @@ This document tracks the progress of the documentation consolidation effort, sho
 | Planning | ✅ Completed | Consolidation plan and file mapping completed |
 | Directory Structure | ✅ Completed | All directories created |
 | Index Files | ✅ Completed | All index files created |
-| Content Migration | 🟡 In Progress | 6/20 files migrated (30%), focusing on core and capacity guides |
+| Content Migration | 🟡 In Progress | 8/20 files migrated (40%), core and capacity guides completed |
 | Content Review | ⏳ Not Started | Scheduled for April 8 |
 | Gap Analysis | ⏳ Not Started | Scheduled for April 9 |
 | Deprecation | 🟡 In Progress | Deprecation notices added to all migrated files |
@@ -100,14 +100,14 @@ This document tracks the progress of the documentation consolidation effort, sho
 
 | Missing Documentation | Priority | Status | Notes |
 |----------------------|----------|--------|-------|
-| Inventory Validation Rules | High | ⏳ Pending | Need to document capacity validation rules |
+| Inventory Validation Rules | High | ✅ Completed | Added in `implementation/capacity/validation.md` |
 | Roadmap Document | Medium | ⏳ Pending | Need to create project roadmap |
 | Core Concepts | Medium | ✅ Completed | Created document for TOC concepts |
 | Future Implementation Areas | Low | ✅ Completed | Placeholder for future implementation areas |
 
 ## Next Steps
 
-1. **Continue Content Migration (April 6)** - Complete remaining capacity implementation guides (flows, validation)
-2. **Migrate Project Files (April 7)** - Move status and sprint plans to project section
+1. **Migrate Project Files (April 7)** - Move status and sprint plans to project section
+2. **Migrate Reference Documentation (April 7-8)** - Move design patterns and utility functions
 3. **Update Internal Links** - Ensure links between documents are updated
 4. **Review and Update** - Update this progress document daily during consolidation 

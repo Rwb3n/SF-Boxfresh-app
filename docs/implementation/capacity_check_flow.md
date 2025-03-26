@@ -5,6 +5,9 @@ parent: "Implementation Guides"
 nav_order: 4
 ---
 
+> **DEPRECATION NOTICE**: This document has been moved to [Capacity Management Flows](capacity/flows.md) as part of the Documentation Consolidation Initiative. Please use the new location for the most up-to-date information.
+{: .warning }
+
 # Capacity Check Flow Implementation Guide
 
 This guide provides detailed instructions for implementing a Capacity Check Flow that validates material stock creation/updates against container capacity constraints, following the Theory of Constraints principles.

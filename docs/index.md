@@ -58,7 +58,8 @@ New to BoxFresh? Start with these key documents:
 
 ## Recently Updated
 
-- **April 5, 2025**: Added core overview documents (Architecture, Schema, Concepts) and capacity implementation guides ([Inventory](implementation/capacity/inventory.md), [Stock](implementation/capacity/stock.md), [Junction](implementation/capacity/junction.md))
+- **April 6, 2025**: Completed capacity implementation guides ([Flows](implementation/capacity/flows.md), [Validation](implementation/capacity/validation.md))
+- **April 5, 2025**: Added core overview documents (Architecture, Schema, Concepts) and initial capacity guides (Inventory, Stock, Junction)
 - **April 4, 2025**: Created directory structure and organizational framework
 - **April 3, 2025**: Launched Documentation Consolidation Initiative
 
