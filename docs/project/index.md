@@ -7,40 +7,40 @@ has_children: true
 
 # Project Management
 
-This section contains project management documents for the BoxFresh app, including status reports, roadmaps, sprint plans, implementation proposals, and documentation consolidation.
+This section contains project management documents for the BoxFresh app, including status reports, roadmaps, sprint plans, and implementation proposals.
 
 ## Key Documents
 
 - [Project Status](./status.md) - Current implementation status
 - [Project Roadmap](./roadmap.md) - Long-term implementation plan
-- [Sprint Plans](./sprints/) - Detailed implementation timelines
-- [Implementation Proposals](./proposals/) - Detailed implementation plans
+- [Sprint Plans](./sprints/) - Sprint plan overview and reference
 
-## Documentation Consolidation
+## Implementation Projects
 
-The Documentation Consolidation Initiative (April 3-11, 2025) has successfully restructured and improved the BoxFresh app documentation. The following documents detail this completed initiative:
+The BoxFresh app implementation is organized into distinct project phases:
 
-- [Consolidation Completion Report](./consolidation-completion.md) - Final report on the successful completion of the initiative
-- [Consolidation Status](./consolidation-status.md) - Full status of the documentation consolidation effort
-- [Consolidation Plan](./consolidation-plan.md) - Overall plan for documentation consolidation
-- [File Mapping](./file-mapping.md) - Map of file migrations during consolidation
-- [Pruning Summary](./pruning-summary.md) - Summary of pruned files and directories
+- [01-TOC Implementation](./proposals/01-toc-implementation/) - Theory of Constraints implementation for inventory management
+- [02-Next Phase Implementation](./proposals/02-next-phase/) - User access, case management, and reporting capabilities
+- [03-Documentation Consolidation](./proposals/03-consolidation/) - Documentation reorganization and improvement
 
-## Current Project Phases
+## Project Organization
 
-### Phase 1: Core Capacity Management (Completed)
-- **March 27 - April 10, 2025**: Implementation of TOC capacity fields and flows ✅
+All implementation projects follow a consistent structure:
 
-### Documentation Consolidation (Completed)
-- **April 3 - April 11, 2025**: Restructuring and enhancement of documentation ✅
-  - Phase 1: Directory Restructuring (April 3-4) ✅
-  - Phase 2: Content Consolidation (April 5-9) ✅
-  - Phase 3: Documentation Enhancement (April 10-11) ✅
+1. **Proposal** - Detailed implementation plan outlining approach, components, and timeline
+2. **Sprint** - Sprint details including tasks, resources, and deliverables
+3. **Index** - Overview of the project status and key information
 
-### Phase 2: User Access, Cases, and Reporting (Ready to Begin)
-- **April 12 - May 17, 2025**: Implementation of user security, case management, and dashboards
-  - Sprint 1: Design & Foundation (April 12-25)
-  - Sprint 2: User Security Implementation (April 26-May 9)
-  - Sprint 3: Automation & Dashboards (May 10-17)
+Projects are numbered according to their implementation sequence, with each project containing its own documentation and resources.
 
-*This section was completed as part of the Documentation Consolidation Initiative (April 3-11, 2025).* 
+## Current Project Status
+
+| Project | Status | Timeline |
+|---------|--------|----------|
+| [01-TOC Implementation](./proposals/01-toc-implementation/) | ✅ Completed | March 27 - April 10, 2025 |
+| [03-Documentation Consolidation](./proposals/03-consolidation/) | ✅ Completed | April 3 - April 11, 2025 |
+| [02-Next Phase Implementation](./proposals/02-next-phase/) | 🔄 In Progress | April 12 - May 17, 2025 |
+
+The BoxFresh app is currently in Sprint 1 of the Next Phase Implementation, focused on designing the foundation for user access controls, case management, and reporting capabilities.
+
+*Last updated: April 11, 2025* 

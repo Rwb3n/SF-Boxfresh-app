@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Implementation Proposals"
+title: "Proposals"
 parent: "Project Management"
 has_children: true
 nav_order: 4
@@ -8,35 +8,42 @@ nav_order: 4
 
 # Implementation Proposals
 
-This section contains detailed implementation proposals for the BoxFresh app. Each proposal outlines the rationale, approach, and implementation plan for a specific feature or functionality.
+This section contains detailed implementation proposals for the BoxFresh app. Each proposal outlines the rationale, approach, and implementation plan for a specific feature or component.
 
-## Current Proposals
+## Current Project Proposals
 
-- [Theory of Constraints Implementation](./toc-proposal.md) - Proposal for implementing TOC principles in inventory management
-- [Next Phase Implementation](./next-phase-proposal.md) - Proposal for user access, case management, and reporting implementation
+The BoxFresh app implementation is organized into distinct phases, each with its own implementation proposal:
+
+- [01-TOC Implementation](01-toc-implementation/) - Theory of Constraints implementation for inventory management
+- [02-Next Phase Implementation](02-next-phase/) - User access, case management, and reporting capabilities
 
 ## Proposal Structure
 
-Each implementation proposal follows a standard format:
+Each implementation proposal includes:
 
-1. **Executive Summary** - Brief overview of the proposal
-2. **Business Case** - Rationale and expected benefits
-3. **Proposed Approach** - Detailed implementation approach
-4. **Technical Requirements** - Specific technical needs and dependencies
-5. **Implementation Timeline** - Phased implementation plan
-6. **Resource Requirements** - Team composition and skill requirements
-7. **Success Criteria** - Measurable outcomes for success evaluation
-8. **Risks and Mitigations** - Identified risks and mitigation strategies
+1. **Executive Summary** - Brief overview of the proposed implementation
+2. **Business Rationale** - Explanation of the business need and expected benefits
+3. **Technical Approach** - Detailed technical implementation plan
+4. **Component Breakdown** - Outline of specific components to be developed
+5. **Timeline** - Proposed implementation timeline with key milestones
+6. **Resource Requirements** - Required development and testing resources
+7. **Risks and Mitigations** - Potential risks and mitigation strategies
 
-## Proposal Approval Process
+## Proposal Process
 
-Implementation proposals go through a standard approval process:
+New implementation proposals are developed through the following process:
 
-1. Initial draft review by technical team
-2. Refinement based on technical feedback
-3. Business stakeholder review
-4. Final approval by project sponsor
-5. Addition to project roadmap
+1. **Initial Draft** - Development team creates initial proposal based on business requirements
+2. **Technical Review** - Peer review by technical team members
+3. **Stakeholder Review** - Review and feedback from business stakeholders
+4. **Final Approval** - Final review and approval by project governance board
+5. **Implementation** - Creation of sprint plans and implementation tasks
+
+Approved proposals serve as the foundation for sprint planning and development activities.
+
+## Future Proposals
+
+Future proposals will be developed for additional features and enhancements to the BoxFresh app.
 
 ## Documentation Consolidation
 
