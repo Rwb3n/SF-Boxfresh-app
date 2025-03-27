@@ -8,6 +8,8 @@ nav_order: 8
 
 This document tracks significant changes to the BoxFresh App documentation and implementations.
 
+## March 27, 2025
+- Renamed object 'Schedule__c' to 'Scheduler__c' to better reflect it's utility
 ## March 26, 2025
 
 ### Documentation Updates

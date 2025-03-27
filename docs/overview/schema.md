@@ -1,21 +1,31 @@
 ---
 layout: default
-title: "Object Schema"
-parent: "Overview"
+title: Object Schema
+parent: Overview
 nav_order: 2
+version: "1.0"
 ---
-
 # Object Schema
 
 The BoxFresh App is built on a foundation of custom Salesforce objects that model the business domain. The schema is divided into functional groups to organize the different aspects of the business.
 
-<div align="center">
-  <img src="https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/img/19-3-25-latest.png?raw=true" width="600"/>
-</div>
-
 ## 1. Inventory Objects
 
 Inventory objects manage the materials and supplies used in landscaping services, implementing capacity constraints following Eliyahu Goldratt's Theory of Constraints principles.
+
+### Material_Category__c
+
+This object categorizes materials for budgeting and inventory management purposes.
+
+**Key Fields:**
+- `Name`: The category name (e.g., "Fertilizers", "Seeds", "Pesticides")
+- `Material_Code__c`: Auto Number field for unique category identification
+- `Unit_of_Measure__c`: Default unit of measure for materials in this category
+- `Total_SKUs_in_Category__c`: Roll-Up Summary counting the number of SKUs in this category
+
+**Relationships:**
+- Has many `Material_SKU__c` records (Master-Detail)
+- Referenced by many `Material_Budget__c` records
 
 ### Material_SKU__c
 
@@ -25,27 +35,29 @@ This is the catalog of unique stock items in the inventory.
 - `Name`: The SKU identifier
 - `Description__c`: Detailed description of the item
 - `Unit_of_Measure__c`: How the item is measured (e.g., kg, liter, piece)
+- `Unit_of_Measure_Quantity__c`: ==The amount of units in a SKU (i.e 10L compost bag = unit of measure; litre, unit of measure quantity: 10, to calculate totals for reporting. different from capacity because units of measurement equal to different capacities, need formula for capacity units....)
 - `Unit_Cost__c`: Cost per unit
-- `Category__c`: The category of material
+- `Material_SKU_Category__c`: Master-Detail relationship to Material_Category__c
 - `Capacity_Units_Per_Unit__c`: How many capacity units each unit of this SKU consumes
 
 **Relationships:**
 - Has many `Material_Stock__c` records
+- Belongs to one `Material_Category__c` (Master-Detail)
 
 ### Material_Stock__c
 
 Tracks the quantity of each material batch and its capacity consumption.
 
 **Key Fields:**
-- `Material_SKU__c`: Lookup to the material catalog
+- `Material_SKU__c`: Lookup to the material catalogue
 - `Quantity__c`: The amount available
 - `Purchase_Date__c`: When the stock was acquired
 - `Units_Consumed__c`: How many capacity units this stock consumes in its container
-- `Capacity_Status__c`: Current status relative to buffer thresholds
+- `Capacity_Status__c`: Current status relative to buffer thresholds ==**(NOT ADDED TO SF)** advise, im not sure this field is relevant here, there is no capacity threshold for individual stocks, only the total stock records held in a inventory record are important==
 
 **Relationships:**
 - Belongs to one `Material_SKU__c`
-- Belongs to one `Inventory__c`
+- Belongs in one `Inventory__c` 
 
 ### Inventory__c
 
@@ -53,6 +65,7 @@ Manages storage locations and capacity constraints, representing physical contai
 
 **Key Fields:**
 - `Name`: Identifier for the inventory location
+- `Inventory_ID__c`: Auto Number field for easy identification
 - `Location__c`: Physical location
 - `Capacity_Units__c`: Maximum capacity units available in this container
 - `Available_Units__c`: Formula field showing remaining capacity
@@ -64,6 +77,22 @@ Manages storage locations and capacity constraints, representing physical contai
 - Has many `Material_Stock__c` records
 - Belongs to one `Resource_Asset__c`
 - Referenced by many `Assignment__c` records
+
+### Material_Budget__c
+
+Tracks budgeted material quantities and costs at the category level.
+
+**Key Fields:**
+- `Name`: Budget identifier
+- `Material_Category__c`: Lookup to the material category
+- `Budgeted_Quantity__c`: Planned quantity for the category
+- `Budgeted_Cost__c`: Planned cost
+- `Date_Range_Start__c`: Budget period start
+- `Date_Range_End__c`: Budget period end
+
+**Relationships:**
+- Belongs to one `Material_Category__c`
+- Can be associated with contracts or projects as needed
 
 ## 2. Resource & Asset Objects
 
@@ -82,7 +111,7 @@ Represents a person who performs services.
 
 **Relationships:**
 - Has many `Assignment__c` records
-- Belongs to many `Resource_Unit__c` records
+- Belongs to many `Resource_Unit__c` records==this relationship could be made for historical history of assignments completed. if that makes sense... 
 
 ### Resource_Asset__c
 

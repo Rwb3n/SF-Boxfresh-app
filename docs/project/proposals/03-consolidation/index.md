@@ -1,10 +1,9 @@
 ---
 layout: default
 title: "03-Documentation Consolidation"
-parent: "Proposals"
-grand_parent: "Project Management"
+parent: "Project Management"
 nav_order: 3
-has_children: false
+has_children: true
 ---
 
 # Documentation Consolidation Initiative
@@ -17,12 +16,12 @@ The Documentation Consolidation Initiative was a structured effort to reorganize
 
 ## Key Documents
 
-- [Implementation Plan](plan.md) - Detailed plan for the documentation consolidation initiative
-- [Status Report](status.md) - Final status report for the consolidation effort
-- [Sprint Plan](sprint.md) - Sprint details for the consolidation initiative
+- [Consolidation Plan](SF-Boxfresh-app/docs/project/proposals/03-consolidation/plan.md) - Detailed plan for the documentation consolidation initiative
+- [Consolidation Status](status.md) - Final status report for the consolidation effort
 - [File Mapping](file-mapping.md) - Map of file migrations during consolidation
 - [Pruning Summary](pruning-summary.md) - Summary of pruned files and directories
 - [Completion Report](completion-report.md) - Final report on the successful completion of the initiative
+- [Sprint Plan](sprints/sprint.md) - Sprint details for the consolidation initiative
 
 ## Achievements
 

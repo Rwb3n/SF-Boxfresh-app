@@ -19,16 +19,16 @@ In parallel, we have launched the **Documentation Consolidation Initiative** to 
 
 The documentation consolidation initiative is making good progress:
 
-| Milestone | Status | Notes |
-|-----------|--------|-------|
-| Planning | ✅ Completed | Consolidation plan and file mapping completed |
-| Directory Structure | ✅ Completed | All directories created |
-| Index Files | ✅ Completed | All index files created |
-| Content Migration | 🟡 In Progress | Capacity management guides completed; project docs in progress |
-| Content Review | ⏳ Not Started | Scheduled for April 8 |
-| Gap Analysis | ⏳ Not Started | Scheduled for April 9 |
-| Deprecation | 🟡 In Progress | Added notices to original files as migration occurs |
-| Final Review | ⏳ Not Started | Scheduled for April 11 |
+| Milestone           | Status         | Notes                                                          |
+| ------------------- | -------------- | -------------------------------------------------------------- |
+| Planning            | ✅ Completed    | Consolidation plan and file mapping completed                  |
+| Directory Structure | ✅ Completed    | All directories created                                        |
+| Index Files         | ✅ Completed    | All index files created                                        |
+| Content Migration   | 🟡 In Progress | Capacity management guides completed; project docs in progress |
+| Content Review      | ⏳ Not Started  | Scheduled for April 8                                          |
+| Gap Analysis        | ⏳ Not Started  | Scheduled for April 9                                          |
+| Deprecation         | 🟡 In Progress | Added notices to original files as migration occurs            |
+| Final Review        | ⏳ Not Started  | Scheduled for April 11                                         |
 
 For detailed progress, see [Consolidation Status](consolidation-status.md).
 

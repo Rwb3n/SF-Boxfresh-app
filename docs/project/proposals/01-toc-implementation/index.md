@@ -17,7 +17,7 @@ This section contains documentation for the Theory of Constraints (TOC) implemen
 
 ## Key Documents
 
-- [Implementation Proposal](proposal.md) - Detailed implementation plan for TOC inventory management
+- [Implementation Proposal](SF-Boxfresh-app/docs/project/proposals/01-toc-implementation/proposal.md) - Detailed implementation plan for TOC inventory management
 - [Sprint Plan](sprint.md) - Sprint details for capacity management implementation
 
 ## Core Features

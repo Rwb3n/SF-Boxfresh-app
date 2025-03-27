@@ -12,11 +12,6 @@ The BoxFresh App uses Salesforce Flows to automate business processes. These flo
 ## 1. Service Request Flow
 
 This flow manages the process of receiving and fulfilling service requests.
-
-<div align="center">
-  <img src="https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/img/initial-workflow.png?raw=true" width="600"/>
-</div>
-
 ### Process Steps:
 
 1. **Request Intake**

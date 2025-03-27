@@ -13,7 +13,6 @@ This section contains project management documents for the BoxFresh app, includi
 
 - [Project Status](./status.md) - Current implementation status
 - [Project Roadmap](./roadmap.md) - Long-term implementation plan
-- [Sprint Plans](./sprints/) - Sprint plan overview and reference
 
 ## Implementation Projects
 

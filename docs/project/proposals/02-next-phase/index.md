@@ -17,7 +17,7 @@ This section contains documentation for the Next Phase implementation project fo
 
 ## Key Documents
 
-- [Implementation Proposal](proposal.md) - Detailed implementation plan for the next phase
+- [Implementation Proposal](SF-Boxfresh-app/docs/project/proposals/02-next-phase/proposal.md) - Detailed implementation plan for the next phase
 - [Sprint Plan](sprint.md) - Sprint details for the next phase implementation
 
 ## Core Features
