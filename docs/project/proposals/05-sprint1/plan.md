@@ -51,7 +51,7 @@ To respect object dependencies, we'll implement objects in the following order:
 ### Material_Category__c
 - Create custom object
 - Add fields:
-  - Name (Text)
+  - Name (Text) 
   - Material_Code__c (Auto Number)
   - Unit_of_Measure__c (Picklist)
   - Total_SKUs_in_Category__c (Roll-Up Summary) - Will be configured after Material_SKU__c creation
