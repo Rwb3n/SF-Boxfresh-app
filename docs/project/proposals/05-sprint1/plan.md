@@ -18,33 +18,35 @@ To respect object dependencies, we'll implement objects in the following order:
 1. **Material_Category__c** - No dependencies
 2. **Resource__c** - No dependencies
 3. **Resource_Asset__c** - No dependencies
-4. **Property__c** - No dependencies
-5. **Material_SKU__c** - Depends on Material_Category__c (Master-Detail)
-6. **Resource_Unit__c** - Depends on Resource__c and Resource_Asset__c (Lookups)
+4. **Resource_Gear__c** - No dependencies (New)
+5. **Service_Location__c** - No dependencies
+6. **Material_SKU__c** - Depends on Material_Category__c (Master-Detail)
+7. **Resource_Unit__c** - Depends on Resource__c and Resource_Asset__c (Lookups)
 
 ### Phase 2: Intermediate Objects (Days 5-7)
-7. **Inventory__c** - Depends on Resource_Asset__c (Lookup)
-8. **Material_Stock__c** - Depends on Material_SKU__c and Inventory__c (Lookups)
-9. **Material_Budget__c** - Depends on Material_Category__c (Lookup)
-10. **Core_Contract__c** - Depends on Property__c (Lookup)
-11. **Service_Location__c** - Depends on Property__c (Lookup)
-12. **Service_Agreement__c** - Depends on Core_Contract__c (Lookup)
-13. **Order__c** - Depends on Core_Contract__c (Lookup)
+8. **Inventory__c** - Depends on Resource_Asset__c (Lookup)
+9. **Material_Stock__c** - Depends on Material_SKU__c and Inventory__c (Lookups)
+10. **Material_Budget__c** - Depends on Material_Category__c (Lookup)
+11. **Core_Contract__c** - Depends on Service_Location__c (Lookup)
+12. **Service_Agreement_Core__c** - Depends on Core_Contract__c (Lookup)
+13. **Service_Agreement_Element__c** - Depends on Service_Agreement_Core__c (Master-Detail)
+14. **Resource_Budget__c** - Depends on Service_Agreement_Core__c (Master-Detail)
+15. **Order__c** - Depends on Core_Contract__c (Lookup)
 
 ### Phase 3: Complex Objects (Days 8-9)
-14. **Assignment__c** - Depends on Core_Contract__c (Master-Detail), Order__c, Resource_Unit__c, and Inventory__c (Lookups)
-15. **Schedule__c** - Depends on Assignment__c (Lookup)
-16. **Material_Usage__c** - Depends on Schedule__c and Material_Stock__c (Lookups)
+16. **Assignment__c** - Depends on Core_Contract__c (Master-Detail), Order__c, Resource_Unit__c, and Inventory__c (Lookups)
+17. **Schedule__c** - Depends on Assignment__c (Lookup)
+18. **Material_Usage__c** - Depends on Schedule__c and Material_Stock__c (Lookups)
 
 ### Phase 4: Formulas and Validation Rules (Days 10-12)
-17. Configure formula fields across all objects
-18. Implement validation rules
-19. Configure roll-up summary fields
+19. Configure formula fields across all objects
+20. Implement validation rules
+21. Configure roll-up summary fields
 
 ### Phase 5: Testing and Finalization (Days 13-14)
-20. Create test data
-21. Verify all relationships and validations
-22. Document implementation notes and decisions
+22. Create test data
+23. Verify all relationships and validations
+24. Document implementation notes and decisions
 
 ## Detailed Tasks Breakdown
 
@@ -72,9 +74,19 @@ To respect object dependencies, we'll implement objects in the following order:
 - Create custom object
 - Add fields:
   - Material_SKU__c (Lookup)
+  - Material_Stock_ID__c (Auto Number, format: INV-{0000})
   - Quantity__c (Number)
+  - Quantity_Remaining__c (Formula)
   - Purchase_Date__c (Date)
-  - Units_Consumed__c (Formula)
+  - Received_Date__c (Date)
+  - Days_Since_Received__c (Formula)
+  - Material_SKU_Category__c (Formula)
+  - Budget_Source__c (Lookup to Material_Budget__c)
+  - Status__c (Picklist)
+  - Status_Change_Date__c (Date)
+  - Assignment_Status__c (Picklist)
+  - Maximum_Capacity__c (Number)
+  - Available_Capacity__c (Number)
 - Configure page layouts
 
 ### Inventory__c
@@ -82,36 +94,45 @@ To respect object dependencies, we'll implement objects in the following order:
 - Add fields:
   - Name (Text)
   - Inventory_ID__c (Auto Number)
-  - Location__c (Text)
+  - Resource_Asset__c (Lookup to location)
   - Capacity_Units__c (Number)
-  - Available_Units__c (Formula)
-  - Resource_Asset__c (Lookup)
+  - Available_Capacity__c (Formula)
   - Buffer_Status__c (Formula)
   - Is_Constraint__c (Checkbox)
 - Configure page layouts
 
-### Material_Budget__c
+### Resource_Gear__c (New)
 - Create custom object
 - Add fields:
   - Name (Text)
-  - Material_Category__c (Lookup)
-  - Budgeted_Quantity__c (Number)
-  - Budgeted_Cost__c (Currency)
-  - Date_Range_Start__c (Date)
-  - Date_Range_End__c (Date)
+  - Resource_Unit__c (Lookup)
+  - Type__c (Picklist: Equipment, Tools, Uniform)
+  - Additional fields based on type
 - Configure page layouts
 
-### Resource Objects
-- Follow similar pattern for all Resource and Asset objects
-- Ensure lookup fields are configured correctly
+### Service_Agreement_Core__c
+- Create custom object
+- Add fields:
+  - Name (Text)
+  - Core_Contract__c (Lookup)
+  - Additional core agreement fields
+- Configure page layouts
 
-### Contract & Job Objects
-- Follow similar pattern for all Contract and Job objects
-- Establish Master-Detail relationship for Assignment__c to Core_Contract__c
+### Service_Agreement_Element__c
+- Create custom object
+- Add fields:
+  - Name (Text)
+  - Service_Agreement_Core__c (Master-Detail)
+  - Element specific fields
+- Configure page layouts
 
-### Property & Schedule Objects
-- Follow similar pattern for all Property and Schedule objects
-- Configure all lookup relationships
+### Resource_Budget__c
+- Create custom object
+- Add fields:
+  - Name (Text)
+  - Service_Agreement_Core__c (Master-Detail)
+  - Budget specific fields
+- Configure page layouts
 
 ### Validation Rules
 
@@ -149,7 +170,7 @@ To respect object dependencies, we'll implement objects in the following order:
 1. Create at least 3 Material Categories
 2. Create 2-3 SKUs per category
 3. Create stock records for each SKU
-4. Create test resources and assets
+4. Create test resources, assets, and gear
 5. Create test contracts and assignments
 6. Create test budgets at the category level
 7. Create test usage records
@@ -159,4 +180,8 @@ To respect object dependencies, we'll implement objects in the following order:
 - All validation rules functioning correctly
 - Roll-up summaries calculating properly
 - Formula fields displaying correct values
-- Test data demonstrates proper object relationships 
+- Test data demonstrates proper object relationships
+
+## Future Considerations
+- Unit of measure normalization function needed for Material_Category__c and Material_SKU__c
+- Consider adding "bf_" prefix to all custom objects for better namespace management 

@@ -14,22 +14,25 @@ This document tracks the progress of the BoxFresh App schema implementation in o
 
 | Object                   | Object Created | Fields Added | Relationships Configured | Page Layout | Status      | Notes                                                       |
 | ------------------------ | -------------- | ------------ | ------------------------ | ----------- | ----------- | ----------------------------------------------------------- |
-| **Material_Category__c** | - [x ]         | - [x ]       | - [ x]                   | - [ ]       | Not Started | is a lookup for material SKU & material budget              |
-| **Material_SKU__c**      | - [x ]         | - [ x]       | - [x ]                   | - [ ]       | Not Started | **material_sku**lookup** changed to **material_sku_source** |
-| **Material_Stock__c**    | - [ x]         | - [ x]       | - [x ]                   | - [ ]       | Not Started | added extra fields (see changes section)                    |
-| **Inventory__c**         | - [ x]         | - [x ]       | - [ x]                   | - [ ]       | Not Started |                                                             |
-| **Material_Budget__c**   | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Resource__c**          | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Resource_Asset__c**    | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Resource_Unit__c**     | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Core_Contract__c**     | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Order__c**             | - [x ]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Service_Agreement__c** | - [x ]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Assignment__c**        | - [x ]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Property__c**          | - [x ]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Service_Location__c**  | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Schedule__c**          | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
-| **Material_Usage__c**    | - [ x]         | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Material_Category__c** | - [x]          | - [x]        | - [x]                    | - [ ]       | In Progress | is a lookup for material SKU & material budget              |
+| **Material_SKU__c**      | - [x]          | - [x]        | - [x]                    | - [ ]       | In Progress | **material_sku**lookup** changed to **material_sku_source** |
+| **Material_Stock__c**    | - [x]          | - [x]        | - [x]                    | - [ ]       | In Progress | added extra fields (see changes section)                    |
+| **Inventory__c**         | - [x]          | - [x]        | - [x]                    | - [ ]       | In Progress |                                                             |
+| **Material_Budget__c**   | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Resource__c**          | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Resource_Asset__c**    | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Resource_Gear__c**     | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started | New object for equipment, tools, and uniforms               |
+| **Resource_Unit__c**     | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Core_Contract__c**     | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Order__c**             | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Service_Agreement_Core__c** | - [x]      | - [ ]        | - [ ]                    | - [ ]       | Not Started | Renamed from Service_Agreement__c                           |
+| **Service_Agreement_Element__c** | - [x]    | - [ ]        | - [ ]                    | - [ ]       | Not Started | New child object                                            |
+| **Resource_Budget__c**   | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started | New object for resource budgeting                           |
+| **Assignment__c**        | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Service_Location__c**  | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started | Replaces Property__c                                       |
+| **Schedule__c**          | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+| **Material_Usage__c**    | - [x]          | - [ ]        | - [ ]                    | - [ ]       | Not Started |                                                             |
+
 ## Changes
 
 - Added **Resource_Gear__c** - to segregate assets such as physical space and vehicle records with equipment and tools and uniform because these have very different field requirements. scheduled blitz stand up to realign.
@@ -64,13 +67,11 @@ This document tracks the progress of the BoxFresh App schema implementation in o
 - **Inventory_c**: made some adaptations and changes
 	- removed **location_c** as **resource_asset_c** will be the lookup to the location this inventory is instanced in. changing the lookup to have description detailing this.
 
-
 ## Future Considerations
 
 - **material_category** & **material_sku** both have their own unit of measure. reason is because material category is used to measure the quantity of materials in the material_budget. should there be a unit of measure normaliser function? why i ask: let's say the budget requires 2000 kg ( 2 ton ) of compost. I will buy a 1000kg (1 ton ) load, they arrives loose via lorry. The next 1 ton however will be interspersed in separate small bags of compost which have a different unit of measure -- litres -- so there needs to be a function that approximates, let's say 100 litres to kg which then allows us to account the usage vs budget in the same unit of measurement.
 
 - **Big Lesson Learned:** In the future, for any other custom apps, or even objects. Add up to 3 letter prefix. **Why?** Because I wanted to change **Resource Asset** to **Asset**, but of course Asset is a standard object name already, which makes sense for a platform like salesforce. What I shouldve done from the start was to have **bf_** at the start of all objects i created - i.e: **bf_Asset__c**, or **bf_Assignment__c** or **bf_Inventory__c**. You live and you learn.
-
 
 ## Validation Rules Implementation Status
 
@@ -105,6 +106,7 @@ This document tracks the progress of the BoxFresh App schema implementation in o
 | Material SKUs | - [ ] | - [ ] | Not Started | |
 | Material Stock | - [ ] | - [ ] | Not Started | |
 | Resources & Assets | - [ ] | - [ ] | Not Started | |
+| Resource Gear | - [ ] | - [ ] | Not Started | |
 | Contracts & Orders | - [ ] | - [ ] | Not Started | |
 | Assignments & Schedules | - [ ] | - [ ] | Not Started | |
 | Material Budgets | - [ ] | - [ ] | Not Started | |
@@ -113,6 +115,6 @@ This document tracks the progress of the BoxFresh App schema implementation in o
 ## Implementation Notes
 
 - **Date Started:** 28/03/2025
-- **Current Phase:** Setup
+- **Current Phase:** Foundation Objects Implementation
 - **Blockers:** None currently identified
-- **Next Steps:** Begin implementation of foundation objects
+- **Next Steps:** Complete page layouts for foundation objects and begin field implementation for intermediate objects
