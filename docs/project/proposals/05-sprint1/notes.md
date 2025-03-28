@@ -12,9 +12,9 @@ This document captures key decisions, issues, and resolutions during the impleme
 
 ## Documentation Clarifications
 
-| Date | Topic | Decision/Clarification | Impact |
-|------|-------|------------------------|--------|
-| | | | |
+| Date     | Topic   | Decision/Clarification                       | Impact |
+| -------- | ------- | -------------------------------------------- | ------ |
+| 27/03/25 | phase 1 | following protocol to the best of my ability |        |
 
 ## Implementation Decisions
 
