@@ -24,22 +24,22 @@ The first phase focused on designing a data model that I thought reflected the o
 
 Early schema diagrams were complicated and convoluted. I tried to capture all the relationships between inventory containers, material stock, assignments, contracts, and resources.
 
-![First Data Model](../historical-images/first_data_model.png)
+![First Data Model](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/first_data_model.png)
 *Early schema sketch showing object relationships and capacity fields.*
 
 As the model evolved, complexity increased even more to accommodate real-world scenarios.
 
-![Complex Schema](../historical-images/complex_schema_1.png)
+![Complex Schema](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/complex_schema_1.png)
 *A more complex schema iteration, reflecting feedback and expanded requirements.*
 
 ## Prototyping & UI Drafts
 
 Parallel to data modeling, I developed UI prototypes to visualize user flows. These drafts helped clarify requirements and informed iterative improvements.
 
-![Director Dashboard Draft](../historical-images/draft_ui_director_dashboard.png)
+![Director Dashboard Draft](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/draft_ui_director_dashboard.png)
 *Initial dashboard concept for directors.*
 
-![Service Completion Draft](../historical-images/draft_ui_service_completion.png)
+![Service Completion Draft](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/draft_ui_service_completion.png)
 *Draft of the service completion workflow.*
 
 ## Implementation Milestones
@@ -49,10 +49,10 @@ Key milestones included:
 - Establishing the Assignment object as a junction for contracts, resources, and inventory
 - Building validation and error handling flows
 
-![Latest Inventory Page](../historical-images/latest_inventory_page_section.png)
+![Latest Inventory Page](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_inventory_page_section.png)
 *Screenshot of the latest inventory management section.*
 
-![Error Validation](../historical-images/latest_error_validation.png)
+![Error Validation](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_error_validation.png)
 *Example of error validation in the capacity check flow.*
 
 A major turning point was the Documentation Consolidation Initiative, which reorganized and centralized all project documentation, making it easier for new contributors to onboard and for the team to maintain alignment.
@@ -71,10 +71,10 @@ Documentation played a crucial role in surfacing and resolving ambiguities.
 As of April 2025, the project is in Phase 1: Core Capacity Management. The focus is on completing capacity fields, validation rules, and dashboard components. The next phase will address user access, case management, and advanced reporting.
 
 ## Visual Timeline
-- March 2025: Initial schema sketches (![first_data_model.png](../historical-images/first_data_model.png))
-- Late March: Complex schema iteration (![complex_schema_1.png](../historical-images/complex_schema_1.png))
-- Early April: UI drafts (![draft_ui_director_dashboard.png](../historical-images/draft_ui_director_dashboard.png), etc.)
-- Mid-April: Inventory and validation screenshots (![latest_inventory_page_section.png](../historical-images/latest_inventory_page_section.png), ![latest_error_validation.png](../historical-images/latest_error_validation.png))
+- March 2025: Initial schema sketches (![first_data_model.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/first_data_model.png))
+- Late March: Complex schema iteration (![complex_schema_1.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/complex_schema_1.png))
+- Early April: UI drafts (![draft_ui_director_dashboard.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/draft_ui_director_dashboard.png), etc.)
+- Mid-April: Inventory and validation screenshots (![latest_inventory_page_section.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_inventory_page_section.png), ![latest_error_validation.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_error_validation.png))
 
 ## Closing Reflection
 The BoxFresh App journey demonstrates the value of combining strong methodology (TOC), iterative design, and comprehensive documentation. Each challenge has led to a more resilient and effective system, and the project continues to evolve with every sprint. The documentation and visual history ensure that lessons learned are preserved and shared as the team moves forward.
