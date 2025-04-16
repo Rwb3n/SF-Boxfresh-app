@@ -71,10 +71,10 @@ Documentation played a crucial role in surfacing and resolving ambiguities.
 As of April 2025, the project is in Phase 1: Core Capacity Management. The focus is on completing capacity fields, validation rules, and dashboard components. The next phase will address user access, case management, and advanced reporting.
 
 ## Visual Timeline
-- March 2025: Initial schema sketches ([first_data_model.png](../historical-images/first_data_model.png))
-- Late March: Complex schema iteration ([complex_schema_1.png](../historical-images/complex_schema_1.png))
-- Early April: UI drafts ([draft_ui_director_dashboard.png](../historical-images/draft_ui_director_dashboard.png), etc.)
-- Mid-April: Inventory and validation screenshots ([latest_inventory_page_section.png](../historical-images/latest_inventory_page_section.png), [latest_error_validation.png](../historical-images/latest_error_validation.png))
+- March 2025: Initial schema sketches (![first_data_model.png](../historical-images/first_data_model.png))
+- Late March: Complex schema iteration (![complex_schema_1.png](../historical-images/complex_schema_1.png))
+- Early April: UI drafts (![draft_ui_director_dashboard.png](../historical-images/draft_ui_director_dashboard.png), etc.)
+- Mid-April: Inventory and validation screenshots (![latest_inventory_page_section.png](../historical-images/latest_inventory_page_section.png), ![latest_error_validation.png](../historical-images/latest_error_validation.png))
 
 ## Closing Reflection
 The BoxFresh App journey demonstrates the value of combining strong methodology (TOC), iterative design, and comprehensive documentation. Each challenge has led to a more resilient and effective system, and the project continues to evolve with every sprint. The documentation and visual history ensure that lessons learned are preserved and shared as the team moves forward.
