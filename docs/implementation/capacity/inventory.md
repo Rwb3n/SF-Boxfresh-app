@@ -23,14 +23,14 @@ In the BoxFresh app, inventory containers are treated as capacity-constrained re
 
 ### Inventory__c Object
 
-| Field Label | API Name | Data Type | Description | Formula | Default Value |
-|-------------|----------|-----------|-------------|---------|---------------|
-| Capacity Units | Capacity_Units__c | Number(18, 0) | Total capacity units available in this container | N/A | 100 |
-| Available Units | Available_Units__c | Formula (Number) | Calculated available capacity units remaining | Capacity_Units__c - Total_Units_Consumed__c | N/A |
-| Total Units Consumed | Total_Units_Consumed__c | Roll-Up Summary | Sum of Units_Consumed__c from all related Material_Stock__c records | SUM(Material_Stock__c.Units_Consumed__c) | 0 |
-| Buffer Status | Buffer_Status__c | Formula (Text) | Current buffer zone status | IF(Available_Units__c / Capacity_Units__c <= 0.3, "Below Buffer", IF(Available_Units__c / Capacity_Units__c >= 0.7, "Above Buffer", "Within Buffer")) | N/A |
-| Is Constraint | Is_Constraint__c | Checkbox | Flag indicating if this container is a current system constraint | N/A | False |
-| Capacity Utilization % | Capacity_Utilization_Percent__c | Formula (Percent) | Percentage of capacity currently utilized | (Total_Units_Consumed__c / Capacity_Units__c) * 100 | N/A |
+| Field Label            | API Name                        | Data Type         | Description                                                         | Formula                                                                                                                                               | Default Value |
+| ---------------------- | ------------------------------- | ----------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Capacity Units         | Capacity_Units__c               | Number(18, 0)     | Total capacity units available in this container                    | N/A                                                                                                                                                   | 100           |
+| Available Units        | Available_Units__c              | Formula (Number)  | Calculated available capacity units remaining                       | Capacity_Units__c - Total_Units_Consumed__c                                                                                                           | N/A           |
+| Total Units Consumed   | Total_Units_Consumed__c         | Roll-Up Summary   | Sum of Units_Consumed__c from all related Material_Stock__c records | SUM(Material_Stock__c.Units_Consumed__c)                                                                                                              | 0             |
+| Buffer Status          | Buffer_Status__c                | Formula (Text)    | Current buffer zone status                                          | IF(Available_Units__c / Capacity_Units__c <= 0.3, "Below Buffer", IF(Available_Units__c / Capacity_Units__c >= 0.7, "Above Buffer", "Within Buffer")) | N/A           |
+| Is Constraint          | Is_Constraint__c                | Checkbox          | Flag indicating if this container is a current system constraint    | N/A                                                                                                                                                   | False         |
+| Capacity Utilization % | Capacity_Utilization_Percent__c | Formula (Percent) | Percentage of capacity currently utilized                           | (Total_Units_Consumed__c / Capacity_Units__c) * 100                                                                                                   | N/A           |
 
 ## Buffer Management Zones
 

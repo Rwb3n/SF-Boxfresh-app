@@ -24,13 +24,13 @@ Key concepts in this implementation:
 
 ### Material_Stock__c Object
 
-| Field Label | API Name | Data Type | Description | Formula | Default Value |
-|-------------|----------|-----------|-------------|---------|---------------|
-| Units Consumed | Units_Consumed__c | Number(18, 2) | Capacity units consumed by this stock | N/A | 0 |
-| Capacity Status | Capacity_Status__c | Formula (Text) | Status relative to buffer thresholds | Based on parent container's buffer status | N/A |
-| Units Per Quantity | Units_Per_Quantity__c | Number(18, 2) | Capacity units consumed per unit of quantity | N/A | 1 |
-| Total Capacity Required | Total_Capacity_Required__c | Formula (Number) | Total capacity required for this stock | Quantity__c * Units_Per_Quantity__c | N/A |
-| Buffer Priority | Buffer_Priority__c | Picklist | Priority for buffer management | N/A | "Normal" |
+| Field Label             | API Name                   | Data Type        | Description                                  | Formula                                   | Default Value |
+| ----------------------- | -------------------------- | ---------------- | -------------------------------------------- | ----------------------------------------- | ------------- |
+| Units Consumed          | Units_Consumed__c          | Number(18, 2)    | Capacity units consumed by this stock        | N/A                                       | 0             |
+| Capacity Status         | Capacity_Status__c         | Formula (Text)   | Status relative to buffer thresholds         | Based on parent container's buffer status | N/A           |
+| Units Per Quantity      | Units_Per_Quantity__c      | Number(18, 2)    | Capacity units consumed per unit of quantity | N/A                                       | 1             |
+| Total Capacity Required | Total_Capacity_Required__c | Formula (Number) | Total capacity required for this stock       | Quantity__c * Units_Per_Quantity__c       | N/A           |
+| Buffer Priority         | Buffer_Priority__c         | Picklist         | Priority for buffer management               | N/A                                       | "Normal"      |
 
 ## Capacity Consumption Model
 
@@ -94,6 +94,9 @@ Material stock capacity consumption follows these principles:
   TEXT(Inventory__c.Buffer_Status__c)
   ```
 - **Description**: Reflects the buffer status of the parent container
+
+> **Implementation Note:**
+> This formula cannot be used if Buffer_Status__c on Inventory__c is a formula referencing a roll-up summary. Instead, create a custom text field and use a Flow to keep it in sync with the parent. See [Flows Guide](./flows.md#container-update-flow) for details.
 
 #### Buffer_Priority__c (Picklist)
 

@@ -63,7 +63,8 @@ This document captures key decisions, issues, and resolutions during the impleme
 3. Plan for unit conversion scenarios early in the design phase
 
 ### Next Steps
-1. Complete page layouts for foundation objects
-2. Begin field implementation for intermediate objects
-3. Develop unit conversion function
-4. Schedule blitz stand-up for Resource_Gear__c alignment 
+1. Complete remaining objects in schema
+2. Complete page layouts for foundation objects
+3. Begin field implementation for intermediate objects
+4. Develop unit conversion function
+5. Schedule blitz stand-up for Resource_Gear__c alignment 
