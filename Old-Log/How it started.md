@@ -26,11 +26,13 @@ Early schema diagrams were complicated and convoluted. I tried to capture all th
 
 ![First Data Model](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/first_data_model.png)
 *Early schema sketch showing object relationships and capacity fields.*
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/first_data_model.png
 
 As the model evolved, complexity increased even more to accommodate real-world scenarios.
 
 ![Complex Schema](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/complex_schema_1.png)
 *A more complex schema iteration, reflecting feedback and expanded requirements.*
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/complex_schema_1.png
 
 ## Prototyping & UI Drafts
 
@@ -38,9 +40,11 @@ Parallel to data modeling, I developed UI prototypes to visualize user flows. Th
 
 ![Director Dashboard Draft](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/draft_ui_director_dashboard.png)
 *Initial dashboard concept for directors.*
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/draft_ui_director_dashboard.png
 
 ![Service Completion Draft](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/draft_ui_service_completion.png)
 *Draft of the service completion workflow.*
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/draft_ui_service_completion.png
 
 ## Implementation Milestones
 
@@ -51,9 +55,11 @@ Key milestones included:
 
 ![Latest Inventory Page](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_inventory_page_section.png)
 *Screenshot of the latest inventory management section.*
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_inventory_page_section.png
 
 ![Error Validation](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_error_validation.png)
 *Example of error validation in the capacity check flow.*
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_error_validation.png
 
 A major turning point was the Documentation Consolidation Initiative, which reorganized and centralized all project documentation, making it easier for new contributors to onboard and for the team to maintain alignment.
 
@@ -72,9 +78,14 @@ As of April 2025, the project is in Phase 1: Core Capacity Management. The focus
 
 ## Visual Timeline
 - March 2025: Initial schema sketches (![first_data_model.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/first_data_model.png))
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/first_data_model.png
 - Late March: Complex schema iteration (![complex_schema_1.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/complex_schema_1.png))
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/complex_schema_1.png
 - Early April: UI drafts (![draft_ui_director_dashboard.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/draft_ui_director_dashboard.png), etc.)
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/draft_ui_director_dashboard.png
 - Mid-April: Inventory and validation screenshots (![latest_inventory_page_section.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_inventory_page_section.png), ![latest_error_validation.png](https://github.com/Rwb3n/SF-Boxfresh-app/raw/main/historical-images/latest_error_validation.png))
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_inventory_page_section.png
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_error_validation.png
 
 ## Closing Reflection
 The BoxFresh App journey demonstrates the value of combining strong methodology (TOC), iterative design, and comprehensive documentation. Each challenge has led to a more resilient and effective system, and the project continues to evolve with every sprint. The documentation and visual history ensure that lessons learned are preserved and shared as the team moves forward.
