@@ -24,19 +24,19 @@ The first phase focused on designing a data model that I thought reflected the o
 
 Early schema diagrams were complicated and convoluted. I tried to capture all the relationships between inventory containers, material stock, assignments, contracts, and resources.
 
-@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/first_data_model.png
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-19%20first_data_model.png
 
 As the model evolved, complexity increased even more to accommodate real-world scenarios.
 
-@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/complex_schema_1.png
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-19%20complex_schema_1.png
 
 ## Prototyping & UI Drafts
 
 Parallel to data modeling, I developed UI prototypes to visualize user flows. These drafts helped clarify requirements and informed iterative improvements.
 
-@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/draft_ui_director_dashboard.png
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-21%20draft_ui_director_dashboard.png
 
-@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/draft_ui_service_completion.png
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-21%20draft_ui_service_completion.png
 
 ## Implementation Milestones
 
@@ -45,9 +45,9 @@ Key milestones included:
 - Establishing the Assignment object as a junction for contracts, resources, and inventory
 - Building validation and error handling flows
 
-@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_inventory_page_section.png
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-04-16%20latest_inventory_page_section.png
 
-@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_error_validation.png
+@https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-04-16%20latest_error_validation.png
 
 A major turning point was the Documentation Consolidation Initiative, which reorganized and centralized all project documentation, making it easier for new contributors to onboard and for the team to maintain alignment.
 
@@ -66,14 +66,14 @@ As of April 2025, the project is in Phase 1: Core Capacity Management. The focus
 
 ## Visual Timeline
 - March 2025: Initial schema sketches
-  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/first_data_model.png
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-19%20first_data_model.png
 - Late March: Complex schema iteration
-  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/complex_schema_1.png
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-19%20complex_schema_1.png
 - Early April: UI drafts
-  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/draft_ui_director_dashboard.png
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-03-21%20draft_ui_director_dashboard.png
 - Mid-April: Inventory and validation screenshots
-  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_inventory_page_section.png
-  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/latest_error_validation.png
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-04-16%20latest_inventory_page_section.png
+  @https://github.com/Rwb3n/SF-Boxfresh-app/blob/main/historical-images/Screenshot%202025-04-16%20latest_error_validation.png
 
 ## Closing Reflection
 The BoxFresh App journey demonstrates the value of combining strong methodology (TOC), iterative design, and comprehensive documentation. Each challenge has led to a more resilient and effective system, and the project continues to evolve with every sprint. The documentation and visual history ensure that lessons learned are preserved and shared as the team moves forward.
